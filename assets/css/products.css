@@ -78,3 +78,6 @@
 .product-items {
   padding: 10px;
 }
+.product-items__images {
+  width: 100%;
+}
