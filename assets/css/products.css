@@ -87,3 +87,6 @@
 .product-items__price {
   display: flex;
 }
+.product-items__price .price-old {
+  text-decoration: line-through;
+}

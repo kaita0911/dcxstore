@@ -15,5 +15,9 @@
 
     &__price {
         display: flex;
+
+        .price-old {
+            text-decoration: line-through;
+        }
     }
 }
