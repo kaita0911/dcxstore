@@ -1,3 +1,7 @@
 @use 'common/variables';
 @use 'common/mixin';
 @use 'cart';
+
+.product-items {
+    padding: 10px;
+}
