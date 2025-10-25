@@ -81,3 +81,9 @@
 .product-items__images {
   width: 100%;
 }
+.product-items__ttl {
+  font-size: 15px;
+}
+.product-items__price {
+  display: flex;
+}

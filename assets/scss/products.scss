@@ -8,4 +8,12 @@
     &__images {
         width: 100%;
     }
+
+    &__ttl {
+        font-size: 15px;
+    }
+
+    &__price {
+        display: flex;
+    }
 }
