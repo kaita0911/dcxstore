@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>Thông tin đơn hàng</title>
+   </head>
+   <body>
+      <p>
+         <style type="text/css">
+         td{ padding:5px 0;}
+         </style>
+         <table width="800" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+               <td width="100%">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                     <tr>
+                        <td><strong>Mã đơn hàng:</strong> <span style="font-size: 14px;">[ORDER_ID]</span></td>
+                     </tr>
+                     <tr>
+                        <td><strong>Họ tên:</strong> <span style="font-size:20px; font-weight: bold; text-transform: uppercase; color: blue">[NAME_SEND]</span></td>
+                     </tr>
+                     <tr>
+                        <td><strong>Điện thoại:</strong>
+                           <span style="font-weight: bold; color: red; font-size: 20px"><a href="tel:[PHONE_SEND]">[PHONE_SEND]</span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td><strong>Địa chỉ nhận hàng:</strong>
+                           <span style="font-size: 14px;">[ADDRESS_SEND], [WARD_SEND], [DISTRICT_SEND], [CITY_SEND]</span>
+                           <span style="font-size: 14px;">[TYPE_SHIPPED]</span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td><strong>Phương thức thanh toán:</strong> <span style="font-size: 15px;">[TYPE_ORDER]</span></td>
+                     </tr>
+                     <tr>
+                        <td><strong>Lời nhắn:</strong> <span style="font-size: 14px;">[CONTNET]</span></td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+         </table>
+         <table width="800" id="cart" border="1" cellspacing="0" cellpadding="5" style="BORDER-COLLAPSE: collapse;" bordercolor="#d2a971">
+            <tr>
+               <td width="10%" align="center" valign="middle"><strong style="color: #fe7500;">STT</strong></td>
+               <td align="center" valign="middle"><strong style="color: #fe7500;">Tên sản phẩm</strong></td>
+               <td width="10%" align="center" valign="middle"><strong style="color: #fe7500;">Số lượng</strong></td>
+               <td width="15%" align="center" valign="middle"><strong style="color: #fe7500;">Đơn giá</strong></td>
+               <td width="15%" align="center" valign="middle"><strong style="color: #fe7500;">Thành tiền</strong></td>
+            </tr>
+            [SAN_PHAM]
+         </table>
+      </body>
+   </html>

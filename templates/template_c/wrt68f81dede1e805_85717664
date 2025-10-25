@@ -1,0 +1,66 @@
+<?php
+/* Smarty version 4.3.1, created on 2025-10-22 01:57:33
+  from 'D:\htdocs\dcxstore\templates\tpl\main\main.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.1',
+  'unifunc' => 'content_68f81dede1df96_89715463',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '5547dd5196b7db0090d23fcbc11ce6cf577bf95a' => 
+    array (
+      0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\main\\main.tpl',
+      1 => 1760962234,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_68f81dede1df96_89715463 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.truncate.php','function'=>'smarty_modifier_truncate',),));
+?>
+<!-- <div id="post-new-sp">
+   <div class="container">
+      <div class="title-nb">
+         <h2><span>KINH NGHIỆM</span></h2>
+      </div>
+      <div class="row">
+         <div class="owlnew-home-tt">
+
+            <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['listnew']->value, 'newItem');
+$_smarty_tpl->tpl_vars['newItem']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['newItem']->value) {
+$_smarty_tpl->tpl_vars['newItem']->do_else = false;
+?>
+            <div class="news-item">
+               <a href="<?php echo $_smarty_tpl->tpl_vars['path_url']->value;?>
+/<?php echo $_smarty_tpl->tpl_vars['newItem']->value['unique_key'];?>
+.html" title="<?php echo $_smarty_tpl->tpl_vars['newItem']->value['name'];?>
+">
+                  <img src="<?php echo $_smarty_tpl->tpl_vars['path_url']->value;?>
+/<?php echo $_smarty_tpl->tpl_vars['newItem']->value['img_thumb_vn'];?>
+" alt="<?php echo $_smarty_tpl->tpl_vars['newItem']->value['name'];?>
+" class="img-responsive">
+                  <h3><?php echo $_smarty_tpl->tpl_vars['newItem']->value['name'];?>
+</h3>
+               </a>
+               <div class="news-desc">
+                  <?php echo smarty_modifier_truncate($_smarty_tpl->tpl_vars['newItem']->value['short'],100,"...",true);?>
+
+               </div>
+            </div>
+            <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+
+
+         </div>
+      </div>
+   </div>
+</div> --><?php }
+}

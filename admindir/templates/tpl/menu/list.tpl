@@ -1,0 +1,91 @@
+<div class="contentmain">
+
+   <div class="main">
+      <div class="left_sidebar padding10">
+         {include file="left.tpl"}
+      </div>
+
+      <div class="right_content">
+         <div class="divright">
+            <div class="acti2">
+               <a class="add" href="index.php?do=menu&act=add">
+                  <i class="fa fa-plus-circle"></i> Thêm mới
+               </a>
+            </div>
+            <div class="acti2">
+               <button class="add" type="button" id="btnDelete" data-comp="{$smarty.request.comp|default:0}">
+                  <i class="fa fa-trash"></i> Xóa
+               </button>
+            </div>
+            <div class="acti2">
+               <button class="add" type="button" id="saveOrderBtn" data-comp="{$smarty.request.comp|default:0}">
+                  <i class="fa fa-first-order"></i> Sắp xếp
+               </button>
+            </div>
+         </div>
+         <div class="main-content">
+            <div class="tbtitle2">
+               <form class="form-all" method="post" action="">
+                  <table class="br1" style="border-bottom:0" width="100%" cellspacing="0" cellpadding="0">
+                     <thead>
+                        <tr>
+                           <th align="center" class="width-del">
+                              <input type="checkbox" name="all" id="checkAll" />
+                           </th>
+                           <th align="center" class="width-order"><strong>Thứ tự</strong></th>
+                           <th align="left" class="width-ttl"><strong>Tiêu đề</strong></th>
+                           <th align="center" class="width-show"><strong>Show</strong></th>
+                           <th align="center" class="width-action"><strong>Action</strong></th>
+                        </tr>
+                     </thead>
+
+                     <tbody>
+                        {foreach from=$view item=row name=menuLoop}
+                        <tr data-id="{$row.id}">
+                           <td class="brbottom" align="center">
+                              <input class="c-item" type="checkbox" value="{$row.id}" name="cid[]">
+                           </td>
+
+                           <td align="center" class="brbottom">
+                              <input type="text" class="numInput" value="{$row.num}">
+                           </td>
+
+                           <td align="left" class="brbottom">
+                              {$row.name_vn}
+                           </td>
+
+                           <td align="center" class="brbottom">
+                              <button type="button"
+                                 class="btn_checks btn_toggle"
+                                 data-id="{$row.id}"
+                                 data-active="{$row.active}"
+                                 data-column="active"
+                                 data-table="menu">
+                                 <img src="images/{$row.active}.png" alt="Show/Hide">
+                              </button>
+                           </td>
+
+                           <td align="center" class="brbottom">
+                              <div class="flex-btn">
+                                 <a class="act-btn btnEdit"
+                                    href="index.php?do=menu&act=edit&id={$row.id}"
+                                    title="Sửa">
+                                    <i class="fa fa-edit"></i>
+                                 </a>
+                                 <button title="Xoá" type="button"
+                                    class="act-btn btnDeleteRow"
+                                    data-id="{$row.id}" data-comp="0">
+                                    <i class="fa fa-trash"></i>
+                                 </button>
+                              </div>
+                           </td>
+                        </tr>
+                        {/foreach}
+                     </tbody>
+                  </table>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
