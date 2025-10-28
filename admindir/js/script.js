@@ -5,7 +5,7 @@
     const currentUrl = window.location.href;
 
     // ==================== CKEditor ====================
-    ["editor1", "editor2", "short1", "short2"].forEach((id) => {
+    ["editor", "short"].forEach((id) => {
       const el = document.getElementById(id);
       if (el && el.tagName.toLowerCase() === "textarea") {
         CKEDITOR.replace(id, {
@@ -28,25 +28,17 @@
         .replace(/-+/g, "-");
     }
 
-    function updateAllSlugs() {
-      $(".title-input").each(function () {
-        const langId = this.id.split("_").pop();
-        const slugInput = $("#slug_" + langId);
-        if (slugInput.length && !slugInput.data("edited")) {
-          slugInput.val(slugify(this.value));
-        }
-      });
-    }
-
-    $(".title-input").on("input", function () {
-      const langId = this.id.split("_").pop();
-      const slugInput = $("#slug_" + langId);
-      if (slugInput.length && !slugInput.data("edited")) {
+    // Cập nhật slug khi nhập tiêu đề
+    $("#title").on("input", function () {
+      const slugInput = $("#slug");
+      // chỉ auto nếu người dùng chưa sửa tay slug
+      if (!slugInput.data("edited")) {
         slugInput.val(slugify(this.value));
       }
     });
 
-    $(".slug-input").on("input", function () {
+    // Khi người dùng tự sửa slug, gắn cờ “đã chỉnh”
+    $("#slug").on("input", function () {
       $(this).data("edited", true);
     });
 
@@ -167,16 +159,6 @@
         );
       }, 1000);
     })();
-
-    // ==================== Tab ====================
-    $(".nav-tabs li").on("click", function () {
-      const tabId = $(this).data("tab");
-      $(".nav-tabs li").removeClass("active");
-      $(this).addClass("active");
-      $(".main-tabs .tab-pane, .extra-tabs .tab-pane").each(function () {
-        $(this).toggleClass("active", $(this).data("tab") === tabId);
-      });
-    });
 
     // ==================== Button actions ====================
     function ajaxButton(selector, urlSuffix, dataMapper, onSuccess) {

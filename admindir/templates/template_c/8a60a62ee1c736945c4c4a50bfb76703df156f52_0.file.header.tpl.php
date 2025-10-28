@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-25 09:19:42
+/* Smarty version 4.3.1, created on 2025-10-28 11:11:28
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_68fc7a0e9463f5_58204390',
+  'unifunc' => 'content_690096d0554071_34436456',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8a60a62ee1c736945c4c4a50bfb76703df156f52' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\header.tpl',
-      1 => 1760768153,
+      1 => 1761623245,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,10 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68fc7a0e9463f5_58204390 (Smarty_Internal_Template $_smarty_tpl) {
-?><!DOCTYPE html>
+function content_690096d0554071_34436456 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),));
+?>
+<!DOCTYPE html>
 <html lang="vi" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -50,6 +52,26 @@ function content_68fc7a0e9463f5_58204390 (Smarty_Internal_Template $_smarty_tpl)
     </a>
     <?php }?>
 
+    <?php if (smarty_modifier_count($_smarty_tpl->tpl_vars['languages']->value) > 1) {?>
+    <!-- HTML dropdown chọn ngôn ngữ -->
+    <div class="select-languages">
+      <select name="language" id="language-select">
+        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['languages']->value, 'lang');
+$_smarty_tpl->tpl_vars['lang']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['lang']->value) {
+$_smarty_tpl->tpl_vars['lang']->do_else = false;
+?>
+        <option value="<?php echo $_smarty_tpl->tpl_vars['lang']->value['id'];?>
+" <?php if ($_smarty_tpl->tpl_vars['currentLang']->value == $_smarty_tpl->tpl_vars['lang']->value['id']) {?>selected<?php }?>>
+          <?php echo $_smarty_tpl->tpl_vars['lang']->value['name'];?>
+
+        </option>
+        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+      </select>
+    </div><?php }?>
     <div class="date linkorg">
       <span>Hi, <strong><?php echo $_SESSION['admin_artseed_username'];?>
 </strong></span>
@@ -60,5 +82,26 @@ function content_68fc7a0e9463f5_58204390 (Smarty_Internal_Template $_smarty_tpl)
   </div>
 </body>
 
-</html><?php }
+</html>
+<?php echo '<script'; ?>
+>
+  document.getElementById('language-select').addEventListener('change', function() {
+    const lang = this.value;
+    console.log(lang);
+    fetch('./set_language.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'language=' + encodeURIComponent(lang)
+    }).then(response => {
+      if (response.ok) {
+        //alert(sss);
+        // Có thể reload trang hiện tại để áp dụng ngôn ngữ
+        location.reload();
+      }
+    });
+  });
+<?php echo '</script'; ?>
+><?php }
 }

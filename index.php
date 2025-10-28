@@ -120,7 +120,7 @@ function determineRoute($cat1, $unique_key, $menu_list, $langid, $db)
                 break;
             case 'lien-he':
                 $result['do'] = 'contact';
-                $result['act'] = 'list';
+                $result['act'] = 'view';
                 $result['menu_name'] = 'Liên hệ';
                 break;
             case 'tim-kiem':
@@ -207,7 +207,6 @@ if (!file_exists($source_file)) {
     die("File {$source_file} không tồn tại!");
 }
 require($source_file);
-
 $template_body = "templates/tpl/{$do}/{$act}.tpl";
 if (!file_exists($template_body)) die("Template {$template_body} không tồn tại!");
 $smarty->assign('template_body', $template_body);

@@ -2,21 +2,22 @@
 $act = $_REQUEST['act'] ?? '';
 $comp = intval($_GET['comp'] ?? 0);
 
-// Lấy danh sách ngôn ngữ
-$languages = $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1 ORDER BY id ASC");
-$smarty->assign("languages", $languages);
+// // Lấy danh sách ngôn ngữ
+// $languages = $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1 ORDER BY id ASC");
+// $smarty->assign("languages", $languages);
 
 // ==========================
 // Xây cây danh mục dựa vào bảng categories_related
 // ==========================
 function buildCategoryTree($comp, $level = 0, $excludeId = 0)
 {
+
     // Lấy tất cả danh mục của component này
     $allCategories = $GLOBALS['sp']->getAll("
     SELECT * FROM {$GLOBALS['db_sp']}.categories 
     WHERE comp = {$comp} 
     " . ($excludeId ? "AND id <> {$excludeId}" : "") . " 
-    ORDER BY num ASC");
+    ORDER BY num DESC");
 
     // Map danh mục theo id để dễ tra
     $catMap = [];
@@ -40,23 +41,25 @@ function buildCategoryTree($comp, $level = 0, $excludeId = 0)
     $build = function ($parentIds, $level, $parent_id = 0) use (&$build, &$catMap, &$childrenMap, &$excludeId) {
         $tree = [];
         foreach ($parentIds as $pid) {
+            $language_id = $_SESSION['admin_lang'] ?? '1';
             // ❌ Bỏ qua chính danh mục đang edit
             if ($pid == $excludeId) continue;
 
             if (!isset($catMap[$pid])) continue;
             $cat = $catMap[$pid];
 
-            // Thêm thông tin ngôn ngữ
-            $details = $GLOBALS['sp']->getAll("
-                SELECT * FROM {$GLOBALS['db_sp']}.categories_detail 
-                WHERE categories_id = {$cat['id']}
-            ");
-            $cat['details'] = [];
-            foreach ($details as $d) {
-                $cat['details'][$d['languageid']] = $d;
-            }
-            $cat['name_vn'] = $cat['details'][1]['name'] ?? $cat['name'];
+            //Thêm thông tin ngôn ngữ
+            $detail = $GLOBALS['sp']->getRow("SELECT * FROM {$GLOBALS['db_sp']}.categories_detail WHERE categories_id = {$cat['id']} AND languageid = {$language_id}");
+            //$cat['details'][1]['name'] ?? $cat['name'];
 
+            if (is_array($detail)) {
+                // Lọc bỏ các key số — chỉ giữ key chữ
+                $cat['details'] = array_filter($detail, 'is_string', ARRAY_FILTER_USE_KEY);
+            } else {
+                $cat['details'] = ['name' => $cat['name']];
+            }
+            // var_dump($cat['details']);
+            // exit;
             // Thêm thông tin cấp và cha
             $cat['level'] = $level;
             $cat['parent_id'] = $parent_id; // ✅ thêm parent_id ở đây
@@ -105,13 +108,9 @@ $smarty->assign("categoryRelatedIds", $categoryRelatedIds);
 switch ($act) {
     case 'edit':
         $id = intval($_GET['id'] ?? 0);
+        $language_id = $_SESSION['admin_lang'] ?? '1';
         $category = $GLOBALS["sp"]->getRow("SELECT * FROM {$GLOBALS['db_sp']}.categories WHERE id={$id}");
-        $details = $GLOBALS["sp"]->getAll("SELECT * FROM {$GLOBALS['db_sp']}.categories_detail WHERE categories_id={$id}");
-        $categoryDetail = [];
-        foreach ($details as $d) {
-            $categoryDetail[$d['languageid']] = $d;
-        }
-
+        $categoryDetail = $GLOBALS["sp"]->getRow("SELECT * FROM {$GLOBALS['db_sp']}.categories_detail WHERE categories_id={$id} AND languageid = {$language_id}");
         $categories = buildCategoryTree($comp, 0, $id);
         $smarty->assign([
             "category" => $category,
@@ -148,6 +147,47 @@ switch ($act) {
             echo json_encode(['success' => true]);
         } else {
             echo json_encode(['success' => false]);
+        }
+        exit;
+    case 'updatenumajax':
+        ob_clean();
+        $id = intval($_POST['id'] ?? 0);
+        if ($id <= 0) {
+            echo json_encode(['success' => false, 'message' => 'ID không hợp lệ']);
+            exit;
+        }
+
+        try {
+            $row = $GLOBALS['sp']->getRow("
+                SELECT MAX(num) AS maxnum 
+                FROM {$GLOBALS['db_sp']}.categories
+            ");
+            $maxNum = intval($row['maxnum'] ?? 0);
+            $newNum = $maxNum + 1;
+
+            $GLOBALS['sp']->execute("
+                UPDATE {$GLOBALS['db_sp']}.categories 
+                SET num = {$newNum} 
+                WHERE id = {$id}
+            ");
+
+            $item = $GLOBALS['sp']->getRow("
+                SELECT id, name_vn, num, active 
+                FROM {$GLOBALS['db_sp']}.categories 
+                WHERE id = {$id}
+            ");
+
+            echo json_encode([
+                'success' => true,
+                'newNum' => $newNum,
+                'item' => $item
+            ]);
+        } catch (Exception $e) {
+            error_log("updatenumajax error: " . $e->getMessage());
+            echo json_encode([
+                'success' => false,
+                'message' => 'Lỗi server: ' . $e->getMessage()
+            ]);
         }
         exit;
 
@@ -213,10 +253,10 @@ function saveCategory()
 
 
     global $act, $languages;
-
+    $language_id = $_SESSION['admin_lang'] ?? '1';
     $id = intval($_POST['id'] ?? 0);
     $comp = intval($_POST['comp'] ?? 0);
-    $name_vn = trim($_POST["name_1"] ?? '');
+    $name_vn = trim($_POST["name"] ?? '');
 
     // 1️⃣ Tính num tự động nếu thêm mới
     if ($act === 'addsm') {
@@ -265,36 +305,46 @@ function saveCategory()
         vaUpdate('categories', $arr, "id=$id");
     }
 
-    // Lưu chi tiết ngôn ngữ (chỉ khi nhập name)
-    foreach ($languages as $lang) {
-        $lang_id = $lang['id'];
-        $name = trim($_POST["name_" . $lang_id] ?? '');
-        if ($name === '') continue; // bỏ qua nếu không nhập tên
 
-        $unique_key = trim($_POST["unique_key_" . $lang_id] ?? '') ?: StripUnicode($name);
-        $exists = $GLOBALS["sp"]->getOne(
-            "SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.categories_detail WHERE unique_key='{$unique_key}'"
-                . ($id ? " AND categories_id<>$id" : '')
-        );
-        $unique_key_final = $exists ? $unique_key . "-$id" : $unique_key;
-
-        $arrDetail = [
-            'categories_id' => $id,
-            'languageid'    => $lang_id,
-            'name'          => $name,
-            'unique_key'    => $unique_key_final,
-            'content'       => trim($_POST["content_" . $lang_id] ?? ''),
-            'keyword'       => trim($_POST["keyword_" . $lang_id] ?? ''),
-            'des'           => trim($_POST["des_" . $lang_id] ?? '')
-        ];
-
-        $detail = $GLOBALS["sp"]->getRow("SELECT * FROM {$GLOBALS['db_sp']}.categories_detail WHERE categories_id=$id AND languageid=$lang_id");
-        if ($detail) {
-            vaUpdate('categories_detail', $arrDetail, "id={$detail['id']}");
-        } else {
-            vaInsert('categories_detail', $arrDetail);
-        }
+    // Lưu ngon ngu tu session
+    $language_id = $_SESSION['admin_lang'] ?? '1';
+    // Lấy thông tin từ form
+    $name        = trim($_POST['name'] ?? '');
+    $content     = trim($_POST['content'] ?? '');
+    $keyword     = trim($_POST['keyword'] ?? '');
+    $des         = trim($_POST['des'] ?? '');
+    // Bỏ qua nếu không có tên
+    if ($name === '') {
+        // xử lý lỗi hoặc return
+        exit('Tên bài viết không được để trống');
     }
+    // Tạo unique_key
+    $unique_key = trim($_POST['unique_key'] ?? '') ?: StripUnicode($name);
+    $exists = $GLOBALS["sp"]->getOne(
+        "SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.categories_detail WHERE unique_key='{$unique_key}'"
+            . ($id ? " AND categories_id<>$id" : '')
+    );
+    $unique_key_final = $exists ? $unique_key . "-$id" : $unique_key;
+    // Mảng lưu dữ liệu
+    $arrDetail = [
+        'categories_id' => $id,
+        'languageid'     => $language_id,
+        'name'           => $name,
+        'unique_key'     => $unique_key_final,
+        'content'        => $content,
+        'keyword'        => $keyword,
+        'des'            => $des
+    ];
+    // Kiểm tra đã tồn tại bản ghi cho categories_id + languageid chưa
+    $detail = $GLOBALS["sp"]->getRow(
+        "SELECT * FROM {$GLOBALS['db_sp']}.categories_detail WHERE categories_id=$id AND languageid=$language_id"
+    );
+    if ($detail) {
+        vaUpdate('categories_detail', $arrDetail, "id={$detail['id']}");
+    } else {
+        vaInsert('categories_detail', $arrDetail);
+    }
+
     $parentIds = $_POST['parentids'] ?? [];
 
     // 1️⃣ Xóa toàn bộ quan hệ cũ

@@ -1,13 +1,41 @@
-<div class="contentmain">
+<?php
+/* Smarty version 4.3.1, created on 2025-10-28 02:48:35
+  from 'D:\htdocs\dcxstore\admindir\templates\tpl\articlelist\create.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.1',
+  'unifunc' => 'content_690020f39a3fc4_00222519',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'a47cdb00175386fcc82ab713ed6583ae3873a54c' => 
+    array (
+      0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\articlelist\\create.tpl',
+      1 => 1761613658,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:left.tpl' => 1,
+    'file:articlelist/category_tree.tpl' => 1,
+  ),
+),false)) {
+function content_690020f39a3fc4_00222519 (Smarty_Internal_Template $_smarty_tpl) {
+?><div class="contentmain">
    <div class="main">
       <div class="left_sidebar padding10">
-         {include file="left.tpl"}
+         <?php $_smarty_tpl->_subTemplateRender("file:left.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
       </div>
       <div class="right_content">
          <form name="allsubmit" id="ArticleForm"
-            action="index.php?do=articlelist&act={if $smarty.request.act eq 'add'}addsm{else}editsm{/if}&comp={$smarty.request.comp}"
+            action="index.php?do=articlelist&act=<?php if ($_REQUEST['act'] == 'add') {?>addsm<?php } else { ?>editsm<?php }?>&comp=<?php echo $_REQUEST['comp'];?>
+"
             method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" id="id" value="{$edit.id|default:0}" />
+            <input type="hidden" name="id" id="id" value="<?php echo (($tmp = $_smarty_tpl->tpl_vars['edit']->value['id'] ?? null)===null||$tmp==='' ? 0 ?? null : $tmp);?>
+" />
             <div class="divright">
                <div class="acti2">
                   <button class="add" type="submit"><i class="fa fa-save"></i> Save</button>
@@ -17,6 +45,7 @@
                </div>
             </div>
             <div class="main-content">
+
                <div class="wrap-main">
                   <div class="left100">
                      <div class="item">
@@ -35,21 +64,21 @@
                      </div>
 
 
-                     {if $tinhnang.short == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['short'] == 1) {?>
                      <div class="item">
                         <div class="title">Mô tả ngắn</div>
                         <textarea name="short" id="short"></textarea>
                      </div>
-                     {/if}
+                     <?php }?>
 
-                     {if $tinhnang.des == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['des'] == 1) {?>
                      <div class="item">
                         <div class="title">Mô tả chi tiết</div>
                         <textarea name="content" id="editor"></textarea>
                      </div>
-                     {/if}
+                     <?php }?>
 
-                     {if $tinhnang.metatag == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['metatag'] == 1) {?>
                      <div class="item">
                         <div class="title">Meta Keywords</div>
                         <input type="text" name="keyword" data-role="tagsinput" class="InputText">
@@ -59,32 +88,33 @@
                         <textarea name="des" class="InputTextarea" id="inputDesc"></textarea>
                         <span id="showNumDesc" style="color:#ed1b24;">0</span>
                      </div>
-                     {/if}
+                     <?php }?>
 
 
                   </div>
                   <div class="right100">
-                     {if $tinhnang.masp == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['masp'] == 1) {?>
                      <div class="item">
                         <div class="title">Mã sản phẩm</div>
                         <input type="text" name="code" class="InputText">
                      </div>
-                     {/if}
-                     {if $tinhnang.link_out == 1}
+                     <?php }?>
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['link_out'] == 1) {?>
                      <div class="item">
                         <div class="title">Link</div>
                         <input type="text" name="link_out" class="InputText">
                      </div>
-                     {/if}
+                     <?php }?>
 
-                     {if $tinhnang.hinhanh == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['hinhanh'] == 1) {?>
                      <div class="item">
                         <div class="title">Hình ảnh</div>
                         <div class="info-title">
-                           {if $edit.img_thumb_vn neq ""}
+                           <?php if ($_smarty_tpl->tpl_vars['edit']->value['img_thumb_vn'] != '') {?>
                            <!-- Ảnh cũ -->
-                           <img id="current-img" src="../{$edit.img_thumb_vn}" height="60" style="display:block; margin-bottom:8px;">
-                           {/if}
+                           <img id="current-img" src="../<?php echo $_smarty_tpl->tpl_vars['edit']->value['img_thumb_vn'];?>
+" height="60" style="display:block; margin-bottom:8px;">
+                           <?php }?>
 
                            <label for="img_thumb_vn" class="custom-upload">
                               <i class="fa fa-upload"></i> Upload image
@@ -101,9 +131,9 @@
                            </p>
                         </div>
                      </div>
-                     {/if}
+                     <?php }?>
 
-                     {if $tinhnang.nhieuhinh == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['nhieuhinh'] == 1) {?>
                      <div class="item">
                         <div class="title">Upload multi images</div>
                         <label for="multiimages" class="custom-upload">
@@ -113,63 +143,78 @@
                         <div class="preview-gallery"></div>
 
                      </div>
-                     {/if}
-                     {if $tinhnang.price == 1}
+                     <?php }?>
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['price'] == 1) {?>
                      <div class="item">
                         <div class="title">Giá</div>
                         <input type="text" name="price" class="InputPrice" />
                      </div>
-                     {/if}
+                     <?php }?>
 
-                     {if $tinhnang.priceold == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['priceold'] == 1) {?>
                      <div class="item">
                         <div class="title">Giá cũ</div>
                         <input type="text" name="priceold" class="InputPrice" />
                      </div>
-                     {/if}
+                     <?php }?>
 
-                     {if $tinhnang.nhomcon == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['nhomcon'] == 1) {?>
                      <div class="item">
                         <div class="title">Danh mục sản phẩm</div>
                         <div class="selectlist extra-tabs">
-                           {foreach $languages as $lang}
-                           <div class="tab-pane {if $lang.id == 1}active{/if}" data-tab="tab">
+                           <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['languages']->value, 'lang');
+$_smarty_tpl->tpl_vars['lang']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['lang']->value) {
+$_smarty_tpl->tpl_vars['lang']->do_else = false;
+?>
+                           <div class="tab-pane <?php if ($_smarty_tpl->tpl_vars['lang']->value['id'] == 1) {?>active<?php }?>" data-tab="tab">
                               <ul class="category-tree">
-                                 {foreach $categories as $node}
-                                 {include file="articlelist/category_tree.tpl" node=$node selected=$categoryRelatedIds|default:[] level=0}
-                                 {/foreach}
+                                 <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['categories']->value, 'node');
+$_smarty_tpl->tpl_vars['node']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['node']->value) {
+$_smarty_tpl->tpl_vars['node']->do_else = false;
+?>
+                                 <?php $_smarty_tpl->_subTemplateRender("file:articlelist/category_tree.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('node'=>$_smarty_tpl->tpl_vars['node']->value,'selected'=>(($tmp = $_smarty_tpl->tpl_vars['categoryRelatedIds']->value ?? null)===null||$tmp==='' ? array() ?? null : $tmp),'level'=>0), 0, true);
+?>
+                                 <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                               </ul>
                            </div>
-                           {/foreach}
+                           <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         </div>
                      </div>
-                     {/if}
+                     <?php }?>
 
-                     {if $tinhnang.new == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['new'] == 1) {?>
                      <div class="item">
                         <div class="title">
                            Mới <input type="checkbox" class="CheckBox" name="new" />
                         </div>
                      </div>
-                     {/if}
+                     <?php }?>
 
-                     {if $tinhnang.hot == 1}
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['hot'] == 1) {?>
                      <div class="item">
                         <div class="title">
                            Nổi bật <input type="checkbox" class="CheckBox" name="hot" />
                         </div>
                      </div>
-                     {/if}
-                     {if $tinhnang.mostview == 1}
+                     <?php }?>
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['mostview'] == 1) {?>
                      <div class="item">
                         <div class="title">
                            Xem nhiều <input type="checkbox" class="CheckBox" name="mostview" />
                         </div>
                      </div>
-                     {/if}
+                     <?php }?>
                      <div class="item">
                         <div class="title">Show</div>
-                        <input type="checkbox" name="active" value="active" {if $edit.active eq 1 || $smarty.request.act eq 'add' }checked{/if}>
+                        <input type="checkbox" name="active" value="active" <?php if ($_smarty_tpl->tpl_vars['edit']->value['active'] == 1 || $_REQUEST['act'] == 'add') {?>checked<?php }?>>
                      </div>
                   </div>
                </div>
@@ -178,4 +223,5 @@
          </form>
       </div>
    </div>
-</div>
+</div><?php }
+}

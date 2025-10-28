@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-22 03:42:28
+/* Smarty version 4.3.1, created on 2025-10-28 08:24:38
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\articlelist\category_tree.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_68f836842282d2_15914325',
+  'unifunc' => 'content_69006fb6bfe608_88188208',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:articlelist/category_tree.tpl' => 2,
   ),
 ),false)) {
-function content_68f836842282d2_15914325 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69006fb6bfe608_88188208 (Smarty_Internal_Template $_smarty_tpl) {
 ?><li>
     <label>
         <input type="checkbox"

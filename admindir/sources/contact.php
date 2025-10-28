@@ -1,13 +1,11 @@
 <?php
+require_once "functions/pagination.php"; // ✅ gọi phan trang
 // ==========================
 // Contact Controller
 // ==========================
 $act  = $_REQUEST['act'] ?? '';
 $type = intval($_REQUEST['type'] ?? 0);
-$city = intval($_REQUEST['city'] ?? 1);
-$page = intval($_GET['p'] ?? 1);
-
-global $db_sp, $sp, $numPageAll, $smarty;
+global $db_sp, $sp, $smarty;
 
 switch ($act) {
 	// ==========================
@@ -26,41 +24,35 @@ switch ($act) {
 	// ==========================
 	// DELETE MULTIPLE CONTACTS
 	// ==========================
-	case 'dellist':
+	case 'dellistajax':
+		ob_clean(); // Xóa mọi thứ đã in ra trước đó
+		$ids = $_POST['cid'] ?? '';
+		if ($ids !== '') {
+			$idList = implode(',', array_map('intval', explode(',', $ids)));
 
+			$GLOBALS["sp"]->query("DELETE FROM {$GLOBALS['db_sp']}.contact WHERE id IN ($idList)");
 
-		$ids = $_POST['iddel'] ?? [];
-		if (!empty($ids)) {
-			foreach ($ids as $id) {
-				$id = intval($id);
-				$sql = "DELETE FROM {$db_sp}.contact WHERE id = {$id}";
-				$sp->execute($sql);
-			}
+			echo json_encode(['success' => true]);
+		} else {
+			echo json_encode(['success' => false]);
 		}
+		exit;
 
-		$url = "index.php?do=contact&cid=" . ($_GET['cid'] ?? 0) . "&p=" . ($page ?? 1);
-		page_transfer2($url);
-		break;
-
-	// ==========================
-	// DEFAULT: LIST CONTACTS
-	// ==========================
+		// ==========================
+		// DEFAULT: LIST CONTACTS
+		// ==========================
 	default:
-		$sql = "SELECT * FROM {$db_sp}.contact ORDER BY id DESC";
-		$allContacts = $sp->getAll($sql);
-		$total = count($allContacts);
-
-		$num_rows_page = $numPageAll ?? 20;
-		$num_page = max(1, ceil($total / $num_rows_page));
-		$begin = max(0, ($page - 1) * $num_rows_page);
-
-		$url = 'index.php?do=contact';
-		$iSEGSIZE = 50;
-		$link_url = ($num_page > 1) ? paginator($num_page, $page, $iSEGSIZE, $url) : '';
-
-		// Lấy dữ liệu phân trang
-		$sql .= " LIMIT {$begin}, {$num_rows_page}";
-		$rs = $sp->getAll($sql);
+		// ===== Điều kiện lọc cơ bản =====
+		$where = "";
+		$join = ""; // nếu cần JOIN bảng khác thì thêm
+		$order = "ORDER BY id DESC";
+		// ==== Tham số phân trang ====
+		$page = intval($_GET['page'] ?? 1);
+		$per_page = 20;
+		// ==== Gọi hàm paginate ====
+		$result = paginate($GLOBALS["sp"], "{$GLOBALS['db_sp']}.contact AS a", $join, $where, $order, $page, $per_page);
+		$articles = $result['data'];
+		$pagination = $result['pagination'];
 
 		// $smarty->assign([
 		// 	'link_url' => $link_url,
@@ -69,7 +61,8 @@ switch ($act) {
 		// 	'checkPer2' => checkPermision($idpem, 2) ? 'true' : 'false',
 		// 	'checkPer3' => checkPermision($idpem, 3) ? 'true' : 'false',
 		// ]);
-
+		$smarty->assign('pagination', $pagination);
+		$smarty->assign('view', $articles);
 		$template = 'contact/list.tpl';
 		break;
 }

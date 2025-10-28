@@ -1,6 +1,6 @@
 <?php
-include_once("../#include/config.php"); // hoặc "../includes/config.php" nếu bạn để trong thư mục đó
-include_once("../functions/sendOrderEmails.php"); // hoặc "../includes/config.php" nếu bạn để trong thư mục đó
+include_once(__DIR__ . "/../#include/config.php");
+include_once(__DIR__ . "/../functions/sendContactEmail.php");
 
 session_start();
 //include_once('../#include/config.php'); // config, db, Smarty...

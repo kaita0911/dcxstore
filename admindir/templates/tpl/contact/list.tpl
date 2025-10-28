@@ -24,31 +24,28 @@
                         <th class="width-del" align="center">
                            <input type="checkbox" name="all" id="checkAll" />
                         </th>
-                        <th class="width-order" align="center">Thứ tự</th>
                         <th class="width-ttl" align="left">Tiêu đề</th>
                         <th class="width-image" align="center">Ngày tháng</th>
-                        <th class="width-show" align="center">Chi tiết</th>
+                        <th class="width-action" align="center">Action</th>
                      </tr>
                   </thead>
 
                   <tbody>
-                     {foreach $view as $i => $item}
+                     {foreach $view as $item}
                      <tr data-id="{$item.id}">
                         <td align="center" class="brbottom">
-                           <input type="checkbox" name="cid[]" value="{$item.id}">
+                           <input class="c-item" type="checkbox" name="cid[]" value="{$item.id}">
                         </td>
-                        <td align="center" class="brbottom">
-                           {$i+1+$number}
-                        </td>
-                        <td align="left" class="paleft brbottom">
+
+                        <td align="left" class=" brbottom">
                            {$item.name|escape}
                         </td>
                         <td align="center" class="brbottom">
                            {$item.dated|escape}
                         </td>
                         <td align="center" class="brbottom">
-                           <img src="images/icon3.gif" alt="Chi tiết" />
-                           <a href="index.php?do=contact&act=edit&id={$item.id}&city={$smarty.request.city}&type={$smarty.request.type}">
+
+                           <a href="index.php?do=contact&act=edit&id={$item.id}&comp={$smarty.request.comp}">
                               Chi tiết
                            </a>
                         </td>
@@ -58,6 +55,9 @@
                </table>
 
             </form>
+            <div class="pagination-wrapper">
+               {$pagination nofilter}
+            </div>
          </div>
 
       </div>

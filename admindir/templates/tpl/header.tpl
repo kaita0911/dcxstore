@@ -27,6 +27,17 @@
     </a>
     {/if}
 
+    {if $languages|@count > 1}
+    <!-- HTML dropdown chọn ngôn ngữ -->
+    <div class="select-languages">
+      <select name="language" id="language-select">
+        {foreach $languages as $lang}
+        <option value="{$lang.id}" {if $currentLang==$lang.id}selected{/if}>
+          {$lang.name}
+        </option>
+        {/foreach}
+      </select>
+    </div>{/if}
     <div class="date linkorg">
       <span>Hi, <strong>{$smarty.session.admin_artseed_username}</strong></span>
       <a target="_blank" href="/">Xem trang chủ</a>
@@ -37,3 +48,22 @@
 </body>
 
 </html>
+<script>
+  document.getElementById('language-select').addEventListener('change', function() {
+    const lang = this.value;
+    console.log(lang);
+    fetch('./set_language.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'language=' + encodeURIComponent(lang)
+    }).then(response => {
+      if (response.ok) {
+        //alert(sss);
+        // Có thể reload trang hiện tại để áp dụng ngôn ngữ
+        location.reload();
+      }
+    });
+  });
+</script>

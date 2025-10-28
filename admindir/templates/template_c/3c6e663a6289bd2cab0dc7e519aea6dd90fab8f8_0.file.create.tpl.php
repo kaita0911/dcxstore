@@ -1,14 +1,42 @@
-<div class="contentmain">
+<?php
+/* Smarty version 4.3.1, created on 2025-10-28 08:24:10
+  from 'D:\htdocs\dcxstore\admindir\templates\tpl\categories\create.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.1',
+  'unifunc' => 'content_69006f9a394d91_84996402',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '3c6e663a6289bd2cab0dc7e519aea6dd90fab8f8' => 
+    array (
+      0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\categories\\create.tpl',
+      1 => 1761636194,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:left.tpl' => 1,
+    'file:categories/category_tree.tpl' => 1,
+  ),
+),false)) {
+function content_69006f9a394d91_84996402 (Smarty_Internal_Template $_smarty_tpl) {
+?><div class="contentmain">
    <div class="main">
       <div class="left_sidebar padding10">
-         {include file="left.tpl"}
+         <?php $_smarty_tpl->_subTemplateRender("file:left.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
       </div>
 
       <div class="right_content conten">
          <form name="allsubmit" id="frmEdit"
-            action="index.php?do=categories&act={if $smarty.request.act eq 'add'}addsm{else}editsm{/if}&comp={$smarty.request.comp}"
+            action="index.php?do=categories&act=<?php if ($_REQUEST['act'] == 'add') {?>addsm<?php } else { ?>editsm<?php }?>&comp=<?php echo $_REQUEST['comp'];?>
+"
             method="post" enctype="multipart/form-data">
-            <input type="hidden" name="comp" value="{$smarty.request.comp|default:0}">
+            <input type="hidden" name="comp" value="<?php echo (($tmp = $_REQUEST['comp'] ?? null)===null||$tmp==='' ? 0 ?? null : $tmp);?>
+">
             <div class="divright">
                <div class="acti2">
                   <button type="submit" class="add">
@@ -48,7 +76,8 @@
                      <div class="item">
                         <div class="title">Meta Keywords</div>
                         <div class="meta">
-                           <input name="keyword" value="{$edit.keyword|default:''}" data-role="tagsinput" class="InputText">
+                           <input name="keyword" value="<?php echo (($tmp = $_smarty_tpl->tpl_vars['edit']->value['keyword'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+" data-role="tagsinput" class="InputText">
                         </div>
                      </div>
 
@@ -66,20 +95,29 @@
                         <div class="title">Danh mục liên quan</div>
                         <div class="selectlist">
                            <ul class="category-tree">
-                              {foreach $categories as $node}
-                              {include file="categories/category_tree.tpl" node=$node selected=$categoryRelatedIds|default:[] level=0}
-                              {/foreach}
+                              <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['categories']->value, 'node');
+$_smarty_tpl->tpl_vars['node']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['node']->value) {
+$_smarty_tpl->tpl_vars['node']->do_else = false;
+?>
+                              <?php $_smarty_tpl->_subTemplateRender("file:categories/category_tree.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('node'=>$_smarty_tpl->tpl_vars['node']->value,'selected'=>(($tmp = $_smarty_tpl->tpl_vars['categoryRelatedIds']->value ?? null)===null||$tmp==='' ? array() ?? null : $tmp),'level'=>0), 0, true);
+?>
+                              <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                            </ul>
                         </div>
                      </div>
-                     {if $showanhdanhmuc.open eq 1}
+                     <?php if ($_smarty_tpl->tpl_vars['showanhdanhmuc']->value['open'] == 1) {?>
                      <div class="item">
                         <div class="title">Hình ảnh</div>
                         <div class="info-title">
-                           {if $edit.img_vn neq ""}
+                           <?php if ($_smarty_tpl->tpl_vars['edit']->value['img_vn'] != '') {?>
                            <!-- Hiển thị ảnh cũ -->
-                           <img id="current-img" height="50" src="../{$edit.img_vn}" /><br />
-                           {/if}
+                           <img id="current-img" height="50" src="../<?php echo $_smarty_tpl->tpl_vars['edit']->value['img_vn'];?>
+" /><br />
+                           <?php }?>
 
                            <!-- Input chọn file -->
                            <input type="file"
@@ -93,18 +131,19 @@
                            <p class="previewimg"><img id="output" style="max-height:150px; margin-top:5px;" /></p>
                         </div>
                      </div>
-                     {/if}
+                     <?php }?>
 
                      <div class="item">
                         <div class="title">Thứ tự
-                           <input type="text" name="num" value="{$numkai.num|default:0}" class="InputNum num-order" />
+                           <input type="text" name="num" value="<?php echo (($tmp = $_smarty_tpl->tpl_vars['numkai']->value['num'] ?? null)===null||$tmp==='' ? 0 ?? null : $tmp);?>
+" class="InputNum num-order" />
                         </div>
                      </div>
 
                      <div class="item">
                         <div class="title">
                            Show <input type="checkbox" class="CheckBox" name="active" value="active"
-                              {if $edit.active eq 1 || $smarty.request.act eq 'add' }checked{/if} />
+                              <?php if ($_smarty_tpl->tpl_vars['edit']->value['active'] == 1 || $_REQUEST['act'] == 'add') {?>checked<?php }?> />
                         </div>
                      </div>
                   </div>
@@ -114,4 +153,5 @@
          </form>
       </div>
    </div>
-</div>
+</div><?php }
+}

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-25 09:50:43
+/* Smarty version 4.3.1, created on 2025-10-28 11:15:11
   from 'D:\htdocs\dcxstore\templates\tpl\categories_tree.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_68fc81537ec0c7_53889247',
+  'unifunc' => 'content_690097af0be997_29377563',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:categories_tree.tpl' => 2,
   ),
 ),false)) {
-function content_68fc81537ec0c7_53889247 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690097af0be997_29377563 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),));
 $_smarty_tpl->_assignInScope('level', (($tmp = $_smarty_tpl->tpl_vars['level']->value ?? null)===null||$tmp==='' ? 1 ?? null : $tmp));?>
 <ul class="level_<?php echo $_smarty_tpl->tpl_vars['level']->value;?>

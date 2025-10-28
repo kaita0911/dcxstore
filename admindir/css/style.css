@@ -126,10 +126,10 @@ img {
   margin-left: 245px;
 }
 a.c-cart {
-  background: rgb(58 196 125 / 30%);
+  background: #007bff;
   padding: 7px 10px;
   border-radius: 5px;
-  color: #3ac47d;
+  color: #fff;
   font-weight: bold;
 }
 
@@ -2209,7 +2209,6 @@ textarea {
 .act-btn.btnView {
   background: #dcedfb;
   color: #188ae2;
-  padding-top: 3px;
 }
 .act-btn.btnDeleteRow,
 .act-btn.btnDeleteRownoComp {
@@ -2523,4 +2522,44 @@ input#img_thumb_vn,input#multiimages {
   width: 100%;
   font-size: 13px;
   padding: 3px;
+}
+.select-languages {
+  display: inline-block;
+  position: relative;
+}
+
+#language-select {
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px 36px 8px 12px;
+  font-size: 14px;
+  color: #111827;
+  appearance: none; /* ẩn mũi tên mặc định */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* hiệu ứng hover/focus */
+#language-select:hover {
+  border-color: #2563eb;
+  background-color: #f0f7ff;
+}
+
+#language-select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* tạo icon mũi tên custom */
+.select-languages::after {
+  content: "▼";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #6b7280;
+  pointer-events: none;
 }

@@ -22,9 +22,9 @@ $id = intval($_GET['id'] ?? 0);
 $tinhnang = $sp->getRow("SELECT * FROM {$GLOBALS['db_sp']}.component WHERE id = {$comp}");
 $smarty->assign('tinhnang', $tinhnang);
 
-// Lấy danh sách ngôn ngữ
-$languages = $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1 ORDER BY id ASC");
-$smarty->assign("languages", $languages);
+// // Lấy danh sách ngôn ngữ
+// $languages = $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1 ORDER BY id ASC");
+// $smarty->assign("languages", $languages);
 
 // Lấy ID bài viết (edit)
 $id = intval($_GET['id'] ?? 0);
@@ -79,13 +79,9 @@ $smarty->assign('selected', $selected);
 $categories = buildCategoryTree($comp, 0, $id);
 $smarty->assign('categories', $categories);
 
-
-
-
 // Lấy danh mục
 $categories = buildCategoryTree($comp, 0, $id);
 $smarty->assign('categories', $categories);
-
 
 
 // ============================
@@ -112,7 +108,7 @@ switch ($act) {
 
     case 'edit':
         $id = intval($_GET['id'] ?? 0);
-
+        $language_id = $_SESSION['admin_lang'] ?? '1';
         // thuộc tính
         $rs_properties = $sp->getAll("SELECT * FROM {$GLOBALS['db_sp']}.properties_component WHERE comp_id = {$comp} ORDER BY properties_id ASC");
         $smarty->assign('namethuoctinh', $rs_properties);
@@ -130,14 +126,9 @@ switch ($act) {
         ///Chi tiet////
         $id = intval($_GET['id'] ?? 0);
         $articlelist = $GLOBALS["sp"]->getRow("SELECT * FROM {$GLOBALS['db_sp']}.articlelist WHERE id={$id}");
-        $details = $GLOBALS["sp"]->getAll("SELECT * FROM {$GLOBALS['db_sp']}.articlelist_detail WHERE articlelist_id={$id}");
+        $articlelistDetail = $GLOBALS['sp']->getRow("SELECT * FROM {$GLOBALS['db_sp']}.articlelist_detail WHERE articlelist_id = {$id} AND languageid = {$language_id}");
         $priceRow = $GLOBALS["sp"]->getRow("SELECT * FROM {$GLOBALS['db_sp']}.articlelist_price WHERE articlelist_id={$id}");
 
-
-        $articlelistDetail = [];
-        foreach ($details as $d) {
-            $articlelistDetail[$d['languageid']] = $d;
-        }
         // ✅ Format giá khi ra smarty
         if ($priceRow) {
             $priceRow['price']     = number_format($priceRow['price'] ?? 0, 0, ',', '.');
@@ -154,7 +145,6 @@ switch ($act) {
 
 
     case 'add':
-
         $template = 'articlelist/create.tpl';
         break;
 
@@ -355,7 +345,7 @@ switch ($act) {
         break;
 
     default:
-
+        $language_id = $_SESSION['admin_lang'] ?? '1';
         // ===== Điều kiện lọc cơ bản =====
         $where = "WHERE a.comp = {$comp}";
         $join = ""; // nếu cần JOIN bảng khác thì thêm
@@ -372,12 +362,12 @@ switch ($act) {
         $pagination = $result['pagination'];
 
         // ==== Gộp chi tiết và giá ====
-        $details = $GLOBALS["sp"]->getAll("SELECT * FROM {$GLOBALS['db_sp']}.articlelist_detail");
+        $details = $GLOBALS["sp"]->getAll("SELECT * FROM {$GLOBALS['db_sp']}.articlelist_detail WHERE languageid = {$language_id}");
         $prices = $GLOBALS["sp"]->getAll("SELECT * FROM {$GLOBALS['db_sp']}.articlelist_price");
 
         $articlelistDetail = [];
         foreach ($details as $d) {
-            $articlelistDetail[$d['articlelist_id']][$d['languageid']] = $d;
+            $articlelistDetail[$d['articlelist_id']] = $d;
         }
 
         $articlelistPrice = [];
@@ -418,7 +408,7 @@ function saveArticle(): void
 
     $id  = intval($_POST['id'] ?? 0);
     $now = date("Y-m-d H:i:s");
-    $name_vn = trim($_POST["name_1"] ?? '');
+
 
 
     // ==== 1️⃣ Xử lý num tự động ====
@@ -436,7 +426,6 @@ function saveArticle(): void
         'comp'      => $comp,
         'dated_edit' => $now,
         'dated' => $now,
-        'name_vn'   => $name_vn,
         'code'       => trim($_POST["code"] ?? ''),
         'link_out'       => trim($_POST["link_out"] ?? ''),
     ];
@@ -472,7 +461,7 @@ function saveArticle(): void
 
         $file = $_FILES['img_thumb_vn'];
         $ext  = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        $name_vn = trim($_POST['name_1'] ?? '');
+        $name_vn = trim($_POST['name'] ?? '');
         $slug = StripUnicode($name_vn);
         $filename = $slug . '-' . time() . '.' . $ext;
         $uploadPath = $uploadDir . $filename;
@@ -497,8 +486,6 @@ function saveArticle(): void
     } else {
         vaUpdate('articlelist', $arr, "id=$id");
     }
-
-    // ==== Lưu nhiều hình ====
 
     // ==== Cập nhật num của ảnh cũ nếu kéo thả đổi vị trí ====
     $idsOld = $_POST['id_old'] ?? []; // mảng id ảnh cũ
@@ -540,36 +527,45 @@ function saveArticle(): void
     }
 
 
-    // Lưu chi tiết ngôn ngữ (chỉ khi nhập name)
-    foreach ($languages as $lang) {
-        $lang_id = $lang['id'];
-        $name = trim($_POST["name_" . $lang_id] ?? '');
-        if ($name === '') continue; // bỏ qua nếu không nhập tên
-
-        $unique_key = trim($_POST["unique_key_" . $lang_id] ?? '') ?: StripUnicode($name);
-        $exists = $GLOBALS["sp"]->getOne(
-            "SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.articlelist_detail WHERE unique_key='{$unique_key}'"
-                . ($id ? " AND articlelist_id<>$id" : '')
-        );
-        $unique_key_final = $exists ? $unique_key . "-$id" : $unique_key;
-
-        $arrDetail = [
-            'articlelist_id' => $id,
-            'languageid'    => $lang_id,
-            'name'          => $name,
-            'unique_key'    => $unique_key_final,
-            'short'       => trim($_POST["short_" . $lang_id] ?? ''),
-            'content'       => trim($_POST["content_" . $lang_id] ?? ''),
-            'keyword'       => trim($_POST["keyword_" . $lang_id] ?? ''),
-            'des'           => trim($_POST["des_" . $lang_id] ?? '')
-        ];
-
-        $detail = $GLOBALS["sp"]->getRow("SELECT * FROM {$GLOBALS['db_sp']}.articlelist_detail WHERE articlelist_id=$id AND languageid=$lang_id");
-        if ($detail) {
-            vaUpdate('articlelist_detail', $arrDetail, "id={$detail['id']}");
-        } else {
-            vaInsert('articlelist_detail', $arrDetail);
-        }
+    // Lưu ngon ngu tu session
+    $language_id = $_SESSION['admin_lang'] ?? '1';
+    // Lấy thông tin từ form
+    $name        = trim($_POST['name'] ?? '');
+    $short       = trim($_POST['short'] ?? '');
+    $content     = trim($_POST['content'] ?? '');
+    $keyword     = trim($_POST['keyword'] ?? '');
+    $des         = trim($_POST['des'] ?? '');
+    // Bỏ qua nếu không có tên
+    if ($name === '') {
+        // xử lý lỗi hoặc return
+        exit('Tên bài viết không được để trống');
+    }
+    // Tạo unique_key
+    $unique_key = trim($_POST['unique_key'] ?? '') ?: StripUnicode($name);
+    $exists = $GLOBALS["sp"]->getOne(
+        "SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.articlelist_detail WHERE unique_key='{$unique_key}'"
+            . ($id ? " AND articlelist_id<>$id" : '')
+    );
+    $unique_key_final = $exists ? $unique_key . "-$id" : $unique_key;
+    // Mảng lưu dữ liệu
+    $arrDetail = [
+        'articlelist_id' => $id,
+        'languageid'     => $language_id,
+        'name'           => $name,
+        'unique_key'     => $unique_key_final,
+        'short'          => $short,
+        'content'        => $content,
+        'keyword'        => $keyword,
+        'des'            => $des
+    ];
+    // Kiểm tra đã tồn tại bản ghi cho articlelist_id + languageid chưa
+    $detail = $GLOBALS["sp"]->getRow(
+        "SELECT * FROM {$GLOBALS['db_sp']}.articlelist_detail WHERE articlelist_id=$id AND languageid=$language_id"
+    );
+    if ($detail) {
+        vaUpdate('articlelist_detail', $arrDetail, "id={$detail['id']}");
+    } else {
+        vaInsert('articlelist_detail', $arrDetail);
     }
 
     // ==== 6️⃣ Lưu giá vào bảng articlelist_price ====

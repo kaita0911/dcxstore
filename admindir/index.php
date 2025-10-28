@@ -1,9 +1,18 @@
 <?php
-@session_start();
+
+
 include_once("#include/config.php");
+include_once("#include/set_language.php");
 include_once("functions/function.php");
 include_once("functions/categories.class.php");
+@session_start();
 
+$languages = $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1 ORDER BY id ASC");
+$smarty->assign("languages", $languages);
+
+$currentLang = $_SESSION['admin_lang'] ?? 'vi';
+// Assign cho Smarty để dùng trong header.tpl
+$smarty->assign('currentLang', $currentLang);
 // -----------------------------
 // ⚙️ Lấy dữ liệu cấu hình cơ bản
 // -----------------------------

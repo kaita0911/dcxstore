@@ -1,11 +1,37 @@
-<div class="main">
+<?php
+/* Smarty version 4.3.1, created on 2025-10-28 10:47:47
+  from 'D:\htdocs\dcxstore\templates\tpl\contact\view.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.1',
+  'unifunc' => 'content_690091431787c2_66734167',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'bf9deeb923c53ba20a2fb5397310247541d925b5' => 
+    array (
+      0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\contact\\view.tpl',
+      1 => 1761644828,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:../breadcumb.tpl' => 1,
+  ),
+),false)) {
+function content_690091431787c2_66734167 (Smarty_Internal_Template $_smarty_tpl) {
+?><div class="main">
    <div class="container">
-      <div class="breadcumb">{include file='../breadcumb.tpl'}</div>
+      <div class="breadcumb"><?php $_smarty_tpl->_subTemplateRender('file:../breadcumb.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?></div>
       <div class="pagecontact">
          <div class="row">
             <div class="conent-news-main col-md-6 col-sm-6 col-xs-12">
                <div class="title-page">
-                  <h1>{$contact|escape:'html'}</h1>
+                  <h1><?php echo htmlspecialchars((string)$_smarty_tpl->tpl_vars['contact']->value, ENT_QUOTES, 'UTF-8', true);?>
+</h1>
                </div>
                <div class="contact-form">
                   <div class="form-right">
@@ -32,22 +58,24 @@
                </div>
             </div>
             <div class="map col-md-6 col-sm-6 col-xs-12">
-               {$map.googlemap nofilter}
+               <?php echo $_smarty_tpl->tpl_vars['map']->value['googlemap'];?>
+
             </div>
          </div>
       </div>
    </div>
 </div>
-{if $smarty.session.contact_success}
-<div id="contactPopup" class="popup {if $smarty.session.contact_success} show{/if}">
+<?php if ($_SESSION['contact_success']) {?>
+<div id="contactPopup" class="popup <?php if ($_SESSION['contact_success']) {?> show<?php }?>">
    <div class="popup-content">
       <span id="close-popup">&times;</span>
       <p>Gửi liên hệ thành công!</p>
    </div>
 </div>
-{/if}
-{literal}
-<script>
+<?php }?>
+
+<?php echo '<script'; ?>
+>
    // Chỉ cho phép nhập số và dấu + đầu
    document.getElementById('phone').addEventListener('input', function(e) {
       let value = this.value;
@@ -91,8 +119,10 @@
 
       // Nếu hợp lệ, form sẽ submit bình thường
    });
-</script>
-<script>
+<?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+>
    // Lấy các phần tử
    const popup = document.getElementById('contactPopup');
    const closeBtn = document.getElementById('close-popup');
@@ -111,5 +141,7 @@
          closePopup();
       }
    });
-</script>
-{/literal}
+<?php echo '</script'; ?>
+>
+<?php }
+}
