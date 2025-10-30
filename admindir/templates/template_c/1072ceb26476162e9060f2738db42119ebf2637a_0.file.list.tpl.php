@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 11:07:01
+/* Smarty version 4.3.1, created on 2025-10-30 11:21:00
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\articlelist\list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690095c5a50b81_53347151',
+  'unifunc' => 'content_69033c0cb93307_41679096',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1072ceb26476162e9060f2738db42119ebf2637a' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\articlelist\\list.tpl',
-      1 => 1761617234,
+      1 => 1761749942,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:left.tpl' => 1,
   ),
 ),false)) {
-function content_690095c5a50b81_53347151 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69033c0cb93307_41679096 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <div class="contentmain">
@@ -235,13 +235,15 @@ $_smarty_tpl->tpl_vars['item']->do_else = false;
 
                         <td align="center">
                            <div class="flex-btn extra-tabs">
+                              <?php if ($_REQUEST['comp'] == 3 || $_REQUEST['comp'] == 2 || $_REQUEST['comp'] == 1 || $_REQUEST['comp'] == 25) {?>
                               <a class="act-btn btnView" href="<?php echo $_smarty_tpl->tpl_vars['web_base_url']->value;?>
-/<?php echo $_smarty_tpl->tpl_vars['detail']->value['unique_key'];?>
-/"
+/<?php echo $_smarty_tpl->tpl_vars['item']->value['details']['unique_key'];?>
+.html"
                                  target="_blank"
                                  title="Xem nhanh">
                                  <i class="fa fa-eye"></i>
                               </a>
+                              <?php }?>
                               <a title="Chỉnh sửa" class="act-btn btnEdit" href="index.php?do=articlelist&act=edit&id=<?php echo $_smarty_tpl->tpl_vars['item']->value['id'];?>
 &comp=<?php echo $_REQUEST['comp'];?>
 ">

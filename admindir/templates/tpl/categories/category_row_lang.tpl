@@ -45,14 +45,12 @@
     </td>
     <td align="center">
         <div class="flex-btn extra-tabs">
-            <!-- {foreach $languages as $lang}
-            {assign var="detail" value=$category.details[$lang.id]}
-            <a data-tab="tab_{$lang.id}" class="act-btn btnView tab-pane {if $lang.id == 1}active{/if}" href="{$web_base_url}/{$detail.unique_key}/"
+            <a class="act-btn btnView" href="{$web_base_url}/{$category.details.unique_key}/"
                 target="_blank"
                 title="Xem nhanh">
                 <i class="fa fa-eye"></i>
             </a>
-            {/foreach} -->
+
             <a title="Chỉnh sửa" class="act-btn btnEdit" href="index.php?do=categories&act=edit&id={$category.id}&comp={$smarty.request.comp}">
                 <i class="fa fa-edit"></i>
             </a>

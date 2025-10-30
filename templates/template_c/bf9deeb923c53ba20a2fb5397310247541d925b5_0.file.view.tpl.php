@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 10:47:47
+/* Smarty version 4.3.1, created on 2025-10-29 09:19:34
   from 'D:\htdocs\dcxstore\templates\tpl\contact\view.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690091431787c2_66734167',
+  'unifunc' => 'content_6901ce16be3c38_11288305',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../breadcumb.tpl' => 1,
   ),
 ),false)) {
-function content_690091431787c2_66734167 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6901ce16be3c38_11288305 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main">
    <div class="container">
       <div class="breadcumb"><?php $_smarty_tpl->_subTemplateRender('file:../breadcumb.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);

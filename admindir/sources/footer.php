@@ -1,273 +1,108 @@
 <?php
 
-$act = isset($_REQUEST['act']) ? $_REQUEST['act'] : "";
+$act = $_REQUEST['act'] ?? '';
 
-$sql_lg = "select * from $GLOBALS[db_sp].language where active=1";
+// $languages = $GLOBALS["sp"]->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1");
+// $smarty->assign("languages", $languages);
 
-$rs_lg = $GLOBALS["sp"]->getAll($sql_lg);
-
-$smarty->assign("languages", $rs_lg);
-
-switch ($act)
-
-{
-
+switch ($act) {
     case "edit":
+        $id = (int)($_GET['id'] ?? 0);
 
-        $id = $_GET["id"];
+        $footerDetails = $GLOBALS["sp"]->getAll("SELECT * FROM {$GLOBALS['db_sp']}.footer_detail WHERE footer_id=$id");
+        $smarty->assign("checklang", count($footerDetails));
+        $smarty->assign("edit_name", $footerDetails);
 
-
-
-        $sql = "select * from $GLOBALS[db_sp].footer_detail where footer_id=$id";
-
-        $rs_ed = $GLOBALS["sp"]->getAll($sql);
-
-        $smarty->assign("checklang", ceil(count($rs_ed)));
-
-        $smarty->assign("edit_name", $rs_ed);
-
-
-
-
-
-        
-
-        $sql = "select * from $GLOBALS[db_sp].footer where id=$id";
-
-        $rs = $GLOBALS["sp"]->getRow($sql);
-
-        $smarty->assign("edit", $rs);
+        $footer = $GLOBALS["sp"]->getRow("SELECT * FROM {$GLOBALS['db_sp']}.footer WHERE id=$id");
+        $smarty->assign("edit", $footer);
 
         $template = "footer/edit.tpl";
-
-    break;
+        break;
 
     case "add":
-
-
-
         $template = "footer/create.tpl";
+        break;
 
-    break;
+    case 'dellistajax':
+        ob_clean(); // Xóa mọi thứ đã in ra trước đó
+        $ids = $_POST['cid'] ?? '';
+        if ($ids !== '') {
+            $idList = implode(',', array_map('intval', explode(',', $ids)));
 
-    case "dellist":
-
-
-
-        $id = $_POST["iddel"];
-
-        for ($i = 0;$i < count($id);$i++)
-
-        {
-
-            $sqlstmt = "select * from $GLOBALS[db_sp].`footer` where id=" . $id[$i];
-
-            $r = $GLOBALS["sp"]->getAll($sqlstmt);
-
-            {
-
-                foreach($r as $item)
-
-                {
-
-                    $sql = "delete from $GLOBALS[db_sp].footer_detail  where footer_id=" . $id[$i];
-
-                    $GLOBALS["sp"]->execute($sql);
-
-                    
-
-                }
-
-            }
-
-            $sql = "delete from $GLOBALS[db_sp].footer  where id=" . $id[$i];
-
-            $GLOBALS["sp"]->execute($sql);
-
+            $GLOBALS["sp"]->query("DELETE FROM {$GLOBALS['db_sp']}.footer_detail WHERE footer_id IN ($idList)");
+            $GLOBALS["sp"]->query("DELETE FROM {$GLOBALS['db_sp']}.footer WHERE id IN ($idList)");
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false]);
         }
+        exit;
 
-        $url = "index.php?do=footer";
-
-        page_transfer2($url);
-
-
-
-    break;
-
-  
-
-    
 
     case "addsm":
-
     case "editsm":
-
-        Editsm();
-
-        $url = "index.php?do=footer";
-
-        page_transfer2($url);
-
-    break;
+        saveFooter();
+        page_transfer2("index.php?do=footer");
+        exit;
 
     default:
-
-
-
-        $sql1 = "select * from $GLOBALS[db_sp].footer";
-
-        $rs = $GLOBALS["sp"]->getAll($sql1);
-
-
-
-        $smarty->assign("view", $rs);
-
-        $template = "footer/list.tpl";
-
-        ///////////////////////////
-
-        
-
-    break;
-
-}
-
-$smarty->assign("tabmenu", 0);
-
-$smarty->display("header.tpl");
-
-$smarty->display($template);
-
-$smarty->display("footer.tpl");
-
-function Editsm()
-
-{
-
-    global $path_url, $path_dir;
-
-    $act = isset($_REQUEST['act']) ? $_REQUEST['act'] : "";
-
-    $arr['hotline'] = $_POST["hotline"];
-
-    $arr['email'] = trim($_POST["email"]);
-    
-    $arr['vanphong'] = trim($_POST["vanphong"]);
-
-
-    $arr['fax'] = trim($_POST["fax"]);
-
-    $arr['tax'] = trim($_POST["tax"]);
-
-    $arr['map'] = $_POST["map"];
-
-  
-
-    if ($act == "addsm")
-
-    {
-
-
-
-        $arr['name_vn'] = $_POST["name_1"];    
-
-
-
-        $id_comp = $id = vaInsert('footer', $arr);
-
-
-
-
-
-        $sql_language = "select * from $GLOBALS[db_sp].language where active=1";
-
-        $rs_language = $GLOBALS["sp"]->getAll($sql_language);
-
-        foreach($rs_language as $languages)
-
-        {
-
-
-
-            $arrcp['footer_id'] = $id_comp;
-
-            $arrcp['languageid'] = $languages['id'];
-
-            $arrcp['name'] = trim($_POST["name_".$languages['id']]);
-
-            $arrcp['address'] = $_POST["address_".$languages['id']];
-
-            //$arrcp['vanphong'] = $_POST["vanphong_".$languages['id']];
-
-            $arrcp['content'] = $_POST["content_".$languages['id']];
-
-            vaInsert('footer_detail', $arrcp);
-
+        $language_id = $_SESSION['admin_lang'] ?? '1';
+        $footers = $GLOBALS["sp"]->getAll("SELECT * FROM {$GLOBALS['db_sp']}.footer");
+        $details = $GLOBALS["sp"]->getAll("SELECT * FROM {$GLOBALS['db_sp']}.footer_detail WHERE languageid = {$language_id}");
+        $articlelistDetail = [];
+        foreach ($details as $d) {
+            $articlelistDetail[$d['footer_id']] = $d;
+        }
+        foreach ($footers as &$item) {
+            $id = $item['id'];
+            $item['details'] = $articlelistDetail[$id] ?? [];
         }
 
-        
-
-    }
-
-    else
-
-    {
-
-            $id_comp = $id = $_POST['id'];
-
-            $arr['name_vn'] = $_POST["name_1"];
-
-      
-
-            $sql = "select * from $GLOBALS[db_sp].footer_detail where footer_id =".$id;
-
-            $rscmp = $GLOBALS["sp"]->getAll($sql);
-
-            $rscount = ceil(count($GLOBALS["sp"]->getAll($sql)));
-
-            if($rscount > 0)
-
-            {
-
-                for ($i = 0; $i <count($rscmp); $i++)
-
-                {
-
-                    $arrcp['id'] = $rscmp[$i]['id'];
-
-                    $arrcp['footer_id'] = $id_comp;
-
-                    $arrcp['name'] = trim($_POST["name_".$rscmp[$i]['languageid']]);
-
-                    $arrcp['address'] = $_POST["address_".$rscmp[$i]['languageid']];
-
-                    //$arrcp['vanphong'] = $_POST["vanphong_".$rscmp[$i]['languageid']];
-
-                    $arrcp['content'] = $_POST["content_".$rscmp[$i]['languageid']];
-
-                    vaUpdate('footer_detail', $arrcp, ' id=' .$rscmp[$i]['id']);
-
-                }
-
-            
-
-            }
-
-          
-
-        
-
-        vaUpdate('footer', $arr, ' id=' . $id);
-
-        ///////////////////////////////////
-
-
-
-    }
-
+        $smarty->assign("view", $footers);
+        $template = "footer/list.tpl";
+        break;
 }
 
+$smarty->display("header.tpl");
+$smarty->display($template);
+$smarty->display("footer.tpl");
 
+function saveFooter()
+{
+    global $act;
+    $id  = intval($_POST['id'] ?? 0);
+    // ==== 2️⃣ Lấy dữ liệu POST cơ bản ====
+    $arr = [
+        'hotline'       => trim($_POST["hotline"] ?? ''),
+        'email'       => trim($_POST["email"] ?? ''),
+        'map'       => trim($_POST["map"] ?? ''),
+    ];
+    if ($act === 'addsm') {
+        vaInsert('footer', $arr);
+        $id = $GLOBALS['sp']->Insert_ID(); // ✅ Lấy ID mới insert
+    } else {
+        vaUpdate('footer', $arr, "id=$id");
+    }
+    // Lưu ngon ngu tu session
+    $language_id = $_SESSION['admin_lang'] ?? '1';
+    // Lấy thông tin từ form
+    $name        = trim($_POST['name'] ?? '');
+    $address       = trim($_POST['address'] ?? '');
+    $content     = trim($_POST['content'] ?? '');
 
-?>
-
+    $arrDetail = [
+        'footer_id' => $id,
+        'languageid'     => $language_id,
+        'name'           => $name,
+        'content'        => $content,
+        'address'        => $address
+    ];
+    // Kiểm tra đã tồn tại bản ghi cho articlelist_id + languageid chưa
+    $detail = $GLOBALS["sp"]->getRow(
+        "SELECT * FROM {$GLOBALS['db_sp']}.footer_detail WHERE footer_id=$id AND languageid=$language_id"
+    );
+    if ($detail) {
+        vaUpdate('footer_detail', $arrDetail, "id={$detail['id']}");
+    } else {
+        vaInsert('footer_detail', $arrDetail);
+    }
+}

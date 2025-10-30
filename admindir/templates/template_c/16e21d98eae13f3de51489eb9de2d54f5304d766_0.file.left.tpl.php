@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 11:11:28
+/* Smarty version 4.3.1, created on 2025-10-30 11:21:01
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\left.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690096d0710545_79555140',
+  'unifunc' => 'content_69033c0d0d6a63_02148841',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '16e21d98eae13f3de51489eb9de2d54f5304d766' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\left.tpl',
-      1 => 1760764185,
+      1 => 1761794955,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690096d0710545_79555140 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69033c0d0d6a63_02148841 (Smarty_Internal_Template $_smarty_tpl) {
 ?><a href="/" target="_blank" class="logo">
   <img height="40" src="../<?php echo $_smarty_tpl->tpl_vars['logoadmin']->value['img_thumb_vn'];?>
 " alt="Logo" />
@@ -43,7 +43,7 @@ $_smarty_tpl->tpl_vars['menu']->do_else = false;
       <i class="fa fa-angle-down"></i>
     </div>
 
-        <?php if ((isset($_smarty_tpl->tpl_vars['menu']->value['category'])) || (isset($_smarty_tpl->tpl_vars['menu']->value['detail'])) || (isset($_smarty_tpl->tpl_vars['menu']->value['size'])) || (isset($_smarty_tpl->tpl_vars['menu']->value['color'])) || (isset($_smarty_tpl->tpl_vars['menu']->value['links']['add']))) {?>
+        <?php if ((isset($_smarty_tpl->tpl_vars['menu']->value['brand'])) || (isset($_smarty_tpl->tpl_vars['menu']->value['category'])) || (isset($_smarty_tpl->tpl_vars['menu']->value['detail'])) || (isset($_smarty_tpl->tpl_vars['menu']->value['size'])) || (isset($_smarty_tpl->tpl_vars['menu']->value['color'])) || (isset($_smarty_tpl->tpl_vars['menu']->value['links']['add']))) {?>
     <div class="list-sidebar">
       <a href="<?php echo $_smarty_tpl->tpl_vars['menu']->value['links']['list'];?>
 ">Danh sách</a>
@@ -51,6 +51,9 @@ $_smarty_tpl->tpl_vars['menu']->do_else = false;
       <?php if ((isset($_smarty_tpl->tpl_vars['menu']->value['category']))) {?>
       <a href="<?php echo $_smarty_tpl->tpl_vars['menu']->value['category'];?>
 ">Danh mục</a>
+      <?php }?>
+      <?php if ((isset($_smarty_tpl->tpl_vars['menu']->value['brand']))) {?>
+      <a href="index.php?do=categories&comp=76">Thương hiệu</a>
       <?php }?>
 
       <?php if ((isset($_smarty_tpl->tpl_vars['menu']->value['detail']))) {?>
@@ -112,6 +115,15 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <span><i class="fa fa-globe"></i></span>
     <label>Cấu hình</label>
   </a>
+
   <?php }?>
+  <a class="nav-normal" href="index.php">
+    <span><i class="fa fa-globe"></i></span>
+    <label>Thông tin chân trang</label>
+  </a>
+  <a class="nav-normal" href="index.php">
+    <span><i class="fa fa-globe"></i></span>
+    <label>Tổng quan</label>
+  </a>
 </div><?php }
 }

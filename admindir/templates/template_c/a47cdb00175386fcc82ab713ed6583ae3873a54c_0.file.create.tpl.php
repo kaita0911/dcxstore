@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 02:48:35
+/* Smarty version 4.3.1, created on 2025-10-30 08:20:01
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\articlelist\create.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690020f39a3fc4_00222519',
+  'unifunc' => 'content_690311a13af936_17430768',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a47cdb00175386fcc82ab713ed6583ae3873a54c' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\articlelist\\create.tpl',
-      1 => 1761613658,
+      1 => 1761808713,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:articlelist/category_tree.tpl' => 1,
   ),
 ),false)) {
-function content_690020f39a3fc4_00222519 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690311a13af936_17430768 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="contentmain">
    <div class="main">
       <div class="left_sidebar padding10">
@@ -45,7 +45,6 @@ function content_690020f39a3fc4_00222519 (Smarty_Internal_Template $_smarty_tpl)
                </div>
             </div>
             <div class="main-content">
-
                <div class="wrap-main">
                   <div class="left100">
                      <div class="item">
@@ -161,31 +160,43 @@ function content_690020f39a3fc4_00222519 (Smarty_Internal_Template $_smarty_tpl)
                      <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['nhomcon'] == 1) {?>
                      <div class="item">
                         <div class="title">Danh mục sản phẩm</div>
-                        <div class="selectlist extra-tabs">
-                           <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['languages']->value, 'lang');
-$_smarty_tpl->tpl_vars['lang']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['lang']->value) {
-$_smarty_tpl->tpl_vars['lang']->do_else = false;
-?>
-                           <div class="tab-pane <?php if ($_smarty_tpl->tpl_vars['lang']->value['id'] == 1) {?>active<?php }?>" data-tab="tab">
-                              <ul class="category-tree">
-                                 <?php
+                        <div class="selectlist">
+                           <ul class="category-tree">
+                              <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['categories']->value, 'node');
 $_smarty_tpl->tpl_vars['node']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['node']->value) {
 $_smarty_tpl->tpl_vars['node']->do_else = false;
 ?>
-                                 <?php $_smarty_tpl->_subTemplateRender("file:articlelist/category_tree.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('node'=>$_smarty_tpl->tpl_vars['node']->value,'selected'=>(($tmp = $_smarty_tpl->tpl_vars['categoryRelatedIds']->value ?? null)===null||$tmp==='' ? array() ?? null : $tmp),'level'=>0), 0, true);
+                              <?php $_smarty_tpl->_subTemplateRender("file:articlelist/category_tree.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('node'=>$_smarty_tpl->tpl_vars['node']->value,'selected'=>(($tmp = $_smarty_tpl->tpl_vars['categoryRelatedIds']->value ?? null)===null||$tmp==='' ? array() ?? null : $tmp),'level'=>0), 0, true);
 ?>
-                                 <?php
+                              <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-                              </ul>
-                           </div>
-                           <?php
+                           </ul>
+                        </div>
+                     </div>
+                     <?php }?>
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['brand'] == 1) {?>
+                     <div class="item">
+                        <div class="title">Thương hiệu</div>
+                        <div class="selectlist">
+                           <ul class="category-tree">
+                              <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['brands']->value, 'node');
+$_smarty_tpl->tpl_vars['node']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['node']->value) {
+$_smarty_tpl->tpl_vars['node']->do_else = false;
+?>
+                              <label> <input type="radio" name="brand_id" value="<?php echo $_smarty_tpl->tpl_vars['node']->value['id'];?>
+"
+                                    <?php if ($_smarty_tpl->tpl_vars['node']->value['id'] == $_smarty_tpl->tpl_vars['selectedBrandId']->value) {?>checked<?php }?>>
+                                 <?php echo htmlspecialchars((string)$_smarty_tpl->tpl_vars['node']->value['detail_name'], ENT_QUOTES, 'UTF-8', true);?>
+</label>
+                              <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                           </ul>
                         </div>
                      </div>
                      <?php }?>

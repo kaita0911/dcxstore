@@ -1,10 +1,10 @@
-<div class="prlist col-md-3 col-sm-6 col-xs-6">
+<div class="prlist col-md-4 col-sm-6 col-xs-6">
 
   <div class="f-prnb product_nb">
 
-    <div class="img">
 
-      <a href="<!--{$path_url}-->/<!--{$view[i].unique_key}-->.html" title="<!--{$view[i].$name}-->">
+
+      <a class="img" href="<!--{$path_url}-->/<!--{$view[i].unique_key}-->.html" title="<!--{$view[i].$name}-->">
 
       
 
@@ -14,7 +14,7 @@
 
     </a>
 
-  </div>
+
 
   <div class="meta">
 
@@ -31,7 +31,6 @@
   
 
   
-
   
   <!--{if $view[i].mostview == 1}-->
 
@@ -49,7 +48,6 @@
 
   </div>
  <!--{/if}-->
-
 
 
 

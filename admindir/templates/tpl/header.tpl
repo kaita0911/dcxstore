@@ -10,7 +10,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/font-awesome.css">
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 

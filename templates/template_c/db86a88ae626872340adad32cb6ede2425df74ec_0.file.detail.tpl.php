@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 11:15:11
+/* Smarty version 4.3.1, created on 2025-10-30 11:19:08
   from 'D:\htdocs\dcxstore\templates\tpl\products\detail.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690097af277355_32253441',
+  'unifunc' => 'content_69033b9cec0a56_40182412',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../breadcumb.tpl' => 1,
   ),
 ),false)) {
-function content_690097af277355_32253441 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69033b9cec0a56_40182412 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),));
 ?>
 <div class="main">

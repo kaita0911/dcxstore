@@ -99,6 +99,7 @@ function Editsm($act)
         'do' => trim($_POST["do"] ?? ''),
         'iconfont' => trim($_POST["iconfont"] ?? ''),
         'nhomcon' => isset($_POST['nhomcon']) ? '1' : '0',
+        'brand' => isset($_POST['brand']) ? '1' : '0',
         'nhieuhinh' => isset($_POST['nhieuhinh']) ? '1' : '0',
         'masp' => isset($_POST['masp']) ? '1' : '0',
         'price' => isset($_POST['price']) ? '1' : '0',

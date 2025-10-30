@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 11:15:09
+/* Smarty version 4.3.1, created on 2025-10-30 11:20:37
   from 'D:\htdocs\dcxstore\templates\tpl\main\main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690097ad910dc2_48292253',
+  'unifunc' => 'content_69033bf56cb573_85876682',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690097ad910dc2_48292253 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69033bf56cb573_85876682 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main p-search">
    <div class="container">
       <h1><?php echo $_smarty_tpl->tpl_vars['c_ttl']->value;?>

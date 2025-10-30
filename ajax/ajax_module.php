@@ -14,12 +14,20 @@ $start = ($page - 1) * $per_Page;
 $sort = $_GET['sort'] ?? '';
 $whereDetail = '';
 $joinSql = '';
-
+$wherecomp = "AND a.comp = {$comp_id}";
 if (!empty($cate_id)) {
-    $whereDetail = " AND ac.categories_id = {$cate_id} ";
-    $joinSql .= "
+    $wherecomp = '';
+    if ($comp_id == 76) {
+        $joinSql .= "
+        INNER JOIN {$GLOBALS['db_sp']}.articlelist_brands AS ac
+            ON ac.articlelist_id = a.id";
+        $whereDetail = " AND ac.brands_id = {$cate_id} ";
+    } else {
+        $joinSql .= "
         INNER JOIN {$GLOBALS['db_sp']}.articlelist_categories AS ac
             ON ac.articlelist_id = a.id";
+        $whereDetail = " AND ac.categories_id = {$cate_id} ";
+    }
 }
 
 switch ($comp_id) {
@@ -34,14 +42,14 @@ switch ($comp_id) {
         FROM {$GLOBALS['db_sp']}.articlelist AS a
         LEFT JOIN {$GLOBALS['db_sp']}.articlelist_detail AS d
         ON a.id = d.articlelist_id AND d.languageid = {$langid}
-        WHERE a.comp = {$comp_id} AND a.active = 1
+        WHERE a.active = 1 {$wherecomp}
         ORDER BY a.num DESC  LIMIT $start, $per_Page";
 
         $articles = $GLOBALS["sp"]->getAll($sql);
         $smarty->assign("view", $articles);
 
         // Tổng số bản ghi
-        $countSql = "SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.articlelist WHERE comp = ? AND active = 1";
+        $countSql = "SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.articlelist as a WHERE a.active = 1 {$wherecomp}";
         $total = $GLOBALS['sp']->getOne($countSql, [$comp_id]);
 
         // --- Tổng số trang ---
@@ -57,7 +65,8 @@ switch ($comp_id) {
         $pagination = $smarty->fetch("articles/pagination.tpl");
         break;
 
-    case '2':
+    case '2';
+    case '76':
         $per_Page = 12;
         $start = ($page - 1) * $per_Page;
 
@@ -81,7 +90,7 @@ switch ($comp_id) {
         {$joinSql}
         LEFT JOIN {$GLOBALS['db_sp']}.articlelist_price AS p
         ON p.articlelist_id = a.id   -- nối với bảng giá
-        WHERE a.comp = {$comp_id} AND a.active = 1 
+        WHERE a.active = 1 {$wherecomp}
         {$whereDetail}
         ORDER BY $orderBy LIMIT $start, $per_Page";
         $articles = $GLOBALS["sp"]->getAll($sql);
@@ -90,7 +99,7 @@ switch ($comp_id) {
         // Tổng số bản ghi
         $countSql = "SELECT COUNT(a.id) FROM {$GLOBALS['db_sp']}.articlelist AS a
           {$joinSql}
-         WHERE a.comp = {$comp_id} AND a.active = 1 {$whereDetail}";
+         WHERE a.active = 1 {$wherecomp} {$whereDetail}";
         $total = $GLOBALS['sp']->getOne($countSql);
 
         // --- Tổng số trang ---

@@ -2,6 +2,7 @@
 function buildCategoryTree($comp, $level = 0, $excludeId = 0)
 {
 	// Lấy tất cả danh mục của component này
+
 	$allCategories = $GLOBALS['sp']->getAll("
     SELECT * FROM {$GLOBALS['db_sp']}.categories 
     WHERE comp = {$comp} 
@@ -25,9 +26,9 @@ function buildCategoryTree($comp, $level = 0, $excludeId = 0)
 	foreach ($relations as $rel) {
 		$childrenMap[$rel['related_id']][] = $rel['category_id'];
 	}
-
+	$language_id = $_SESSION['admin_lang'] ?? '1';
 	// Hàm đệ quy dựng cây
-	$build = function ($parentIds, $level, $parent_id = 0) use (&$build, &$catMap, &$childrenMap, &$excludeId) {
+	$build = function ($parentIds, $level, $parent_id = 0) use (&$build, &$catMap, &$childrenMap, &$excludeId, $language_id) {
 		$tree = [];
 		foreach ($parentIds as $pid) {
 			// ❌ Bỏ qua chính danh mục đang edit
@@ -37,16 +38,11 @@ function buildCategoryTree($comp, $level = 0, $excludeId = 0)
 			$cat = $catMap[$pid];
 
 			// Thêm thông tin ngôn ngữ
-			$details = $GLOBALS['sp']->getAll("
+			$detail = $GLOBALS['sp']->getRow("
                 SELECT * FROM {$GLOBALS['db_sp']}.categories_detail 
-                WHERE categories_id = {$cat['id']}
+                WHERE categories_id = {$cat['id']} AND languageid = {$language_id}
             ");
-			$cat['details'] = [];
-			foreach ($details as $d) {
-				$cat['details'][$d['languageid']] = $d;
-			}
-			$cat['name_vn'] = $cat['details'][1]['name'] ?? $cat['name'];
-
+			$cat['details'] = $detail ?: [];
 			// Thêm thông tin cấp và cha
 			$cat['level'] = $level;
 			$cat['parent_id'] = $parent_id; // ✅ thêm parent_id ở đây

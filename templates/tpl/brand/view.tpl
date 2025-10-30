@@ -1,50 +1,20 @@
-<div class="bg-bred">
-   <div class="container">
-     
-      <div class="breadcrumb">
-         <ul>
-            <li>
-               <a title="Trang chủ" href="<!--{$path_url}-->"><i class="fa fa-home"></i><!--{$home}--></a>
-               
-            </li>
-            <!--{insert name="checkcatbreadcumb" idpr=$seo.categories_id }-->
-         </ul>
-      </div>
-   </div>
-</div>
-<div class="clearfix"></div>
 <div class="main">
-   
    <div class="container">
-      <div class="row">
-         <!--{include file="left_.tpl"}-->
-         <div class="col-md-12 col-sm-12">
-             <div class="title-page">
-         <h1>
-         <span>
-            <!--{$seo.name}-->
-         </span>
-         </h1>
+      <div class="breadcumb">{include file='../breadcumb.tpl'}</div>
+      <div class="clearfix"></div>
+      <h1> {$c_ttl}</h1>
+      <div class="artseed-ftn-body">
+         <form method="get" id="filterForm">
+            <select name="sort" id="sortSelect">
+               <option value="id_desc" {if $sort=='id_desc' }selected{/if}>Mới nhất</option>
+               <option value="price_asc" {if $sort=='price_asc' }selected{/if}>Giá tăng dần</option>
+               <option value="price_desc" {if $sort=='price_desc' }selected{/if}>Giá giảm dần</option>
+               <option value="name_asc" {if $sort=='name_asc' }selected{/if}>Tên A-Z</option>
+               <option value="name_desc" {if $sort=='name_desc' }selected{/if}>Tên Z-A</option>
+            </select>
+         </form>
+         <div class="p-products" id="viewlist" data-ajax-load="1" data-container="viewlist" data-pagination="viewpage" data-module="{$data_url}" data-comp="{$data_comp}" data-sort="{$sort|default:'id_desc'}" data-sub="" data-id=""></div>
+         <div id="viewpage" class="pagination" data-container="viewlist" data-module="{$data_url}" data-comp="{$data_comp}"></div>
       </div>
-            <!--{if $CheckNull eq 0}-->
-            <div class="nodate"> ##No_date## </div>
-            <!--{else}-->
-            <div id="viewlist" class="row5">
-               <!--{section name=i loop=$view}-->
-               <!--{include file="brand/list.tpl"}-->
-               <!--{/section}-->
-            </div>
-            <!--{/if}-->
-            <!--{if $Checkpg eq 1 }-->
-            <div class="clearfix"></div>
-            <div class="pagination" id="viewpage">
-               <!--{$linkpg}-->
-            </div>
-            <!--{/if}-->
-         </div>
-      </div>
-      <!--contentduan-->
    </div>
 </div>
-<!--artseed-home-pr-tab-->
-<div class="clearfix"></div>

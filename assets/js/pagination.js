@@ -10,7 +10,7 @@ $(function () {
     const cate_id = options.cate_id || "";
     const page = options.page || 1;
     const sort = options.sort || "id_desc";
-    //console.log(module);
+    console.log(comp);
     $.ajax({
       url: baseUrl + "ajax/ajax_module.php",
       data: { module, page, sort, comp, sub, cate_id },
@@ -127,12 +127,12 @@ $(function () {
     const sub = $(this).data("sub") || "";
     const cate_id = $(this).data("id") || "";
     const pathname = window.location.pathname; // ví dụ: /san-pham/page/3/sort/price_desc
+
     const segments = pathname.split("/").filter(Boolean);
     // Lấy page từ URL
     const pageIndex = segments.indexOf("page");
     const pageNumber =
       pageIndex !== -1 ? parseInt(segments[pageIndex + 1], 10) : 1;
-
     // Lấy sort từ URL
     const sortIndex = segments.indexOf("sort");
     const sortUrl = sortIndex !== -1 ? segments[sortIndex + 1] : "id_desc";
@@ -143,7 +143,6 @@ $(function () {
     // Đồng bộ select + data-sort container
     $("#sortSelect").val(sortUrl);
     $("#" + containerId).attr("data-sort", sortUrl);
-
     // Load module lần đầu
     loadModule({
       containerId,

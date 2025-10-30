@@ -177,11 +177,13 @@
 
                         <td align="center">
                            <div class="flex-btn extra-tabs">
-                              <a class="act-btn btnView" href="{$web_base_url}/{$detail.unique_key}/"
+                              {if $smarty.request.comp == 3 || $smarty.request.comp == 2 || $smarty.request.comp == 1 || $smarty.request.comp == 25}
+                              <a class="act-btn btnView" href="{$web_base_url}/{$item.details.unique_key}.html"
                                  target="_blank"
                                  title="Xem nhanh">
                                  <i class="fa fa-eye"></i>
                               </a>
+                              {/if}
                               <a title="Chỉnh sửa" class="act-btn btnEdit" href="index.php?do=articlelist&act=edit&id={$item.id}&comp={$smarty.request.comp}">
                                  <i class="fa fa-edit"></i>
                               </a>

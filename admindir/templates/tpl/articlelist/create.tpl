@@ -131,16 +131,26 @@
                      {if $tinhnang.nhomcon == 1}
                      <div class="item">
                         <div class="title">Danh mục sản phẩm</div>
-                        <div class="selectlist extra-tabs">
-                           {foreach $languages as $lang}
-                           <div class="tab-pane {if $lang.id == 1}active{/if}" data-tab="tab">
-                              <ul class="category-tree">
-                                 {foreach $categories as $node}
-                                 {include file="articlelist/category_tree.tpl" node=$node selected=$categoryRelatedIds|default:[] level=0}
-                                 {/foreach}
-                              </ul>
-                           </div>
-                           {/foreach}
+                        <div class="selectlist">
+                           <ul class="category-tree">
+                              {foreach $categories as $node}
+                              {include file="articlelist/category_tree.tpl" node=$node selected=$categoryRelatedIds|default:[] level=0}
+                              {/foreach}
+                           </ul>
+                        </div>
+                     </div>
+                     {/if}
+                     {if $tinhnang.brand == 1}
+                     <div class="item">
+                        <div class="title">Thương hiệu</div>
+                        <div class="selectlist">
+                           <ul class="category-tree">
+                              {foreach $brands as $node}
+                              <label> <input type="radio" name="brand_id" value="{$node.id}"
+                                    {if $node.id==$selectedBrandId}checked{/if}>
+                                 {$node.detail_name|escape:'html':'UTF-8'}</label>
+                              {/foreach}
+                           </ul>
                         </div>
                      </div>
                      {/if}

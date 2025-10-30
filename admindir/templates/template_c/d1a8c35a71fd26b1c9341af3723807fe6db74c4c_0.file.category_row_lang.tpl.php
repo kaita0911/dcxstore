@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 11:06:54
+/* Smarty version 4.3.1, created on 2025-10-30 10:48:38
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\categories\category_row_lang.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690095bebc3dd4_93593832',
+  'unifunc' => 'content_690334760088f8_05040597',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd1a8c35a71fd26b1c9341af3723807fe6db74c4c' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\categories\\category_row_lang.tpl',
-      1 => 1761621353,
+      1 => 1761795262,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:categories/category_row_lang.tpl' => 2,
   ),
 ),false)) {
-function content_690095bebc3dd4_93593832 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690334760088f8_05040597 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),));
 ?>
 <tr data-id="<?php echo $_smarty_tpl->tpl_vars['category']->value['id'];?>
@@ -88,24 +88,14 @@ $_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration === 
     </td>
     <td align="center">
         <div class="flex-btn extra-tabs">
-            <!-- <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['languages']->value, 'lang');
-$_smarty_tpl->tpl_vars['lang']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['lang']->value) {
-$_smarty_tpl->tpl_vars['lang']->do_else = false;
-?>
-            <?php $_smarty_tpl->_assignInScope('detail', $_smarty_tpl->tpl_vars['category']->value['details'][$_smarty_tpl->tpl_vars['lang']->value['id']]);?>
-            <a data-tab="tab_<?php echo $_smarty_tpl->tpl_vars['lang']->value['id'];?>
-" class="act-btn btnView tab-pane <?php if ($_smarty_tpl->tpl_vars['lang']->value['id'] == 1) {?>active<?php }?>" href="<?php echo $_smarty_tpl->tpl_vars['web_base_url']->value;?>
-/<?php echo $_smarty_tpl->tpl_vars['detail']->value['unique_key'];?>
+            <a class="act-btn btnView" href="<?php echo $_smarty_tpl->tpl_vars['web_base_url']->value;?>
+/<?php echo $_smarty_tpl->tpl_vars['category']->value['details']['unique_key'];?>
 /"
                 target="_blank"
                 title="Xem nhanh">
                 <i class="fa fa-eye"></i>
             </a>
-            <?php
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?> -->
+
             <a title="Chỉnh sửa" class="act-btn btnEdit" href="index.php?do=categories&act=edit&id=<?php echo $_smarty_tpl->tpl_vars['category']->value['id'];?>
 &comp=<?php echo $_REQUEST['comp'];?>
 ">

@@ -29,7 +29,6 @@ $smarty->assign("showform", getInfo(14));
 $smarty->assign("showanhdanhmuc", getInfo(19));
 $smarty->assign("showtime", getInfo(13));
 $smarty->assign("logoadmin", getInfo(1));
-
 // // -----------------------------
 // // 🧩 Danh sách ngôn ngữ
 // // -----------------------------
@@ -70,6 +69,9 @@ foreach ($components as $item) {
 
 	if ($item['nhomcon'] == 1) {
 		$menu['category'] = "index.php?do=categories&comp={$item['id']}";
+	}
+	if ($item['brand'] == 1) {
+		$menu['brand'] = "index.php?do=brands&comp={$item['id']}";
 	}
 	if ($item['hinhmodule'] == 1 || $item['motamodule'] == 1) {
 		$menu['detail'] = "index.php?do=component&act=edit&id={$item['id']}";

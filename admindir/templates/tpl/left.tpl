@@ -12,12 +12,15 @@
     </div>
 
     {* Nếu menu có link con thì hiển thị *}
-    {if isset($menu.category) || isset($menu.detail) || isset($menu.size) || isset($menu.color) || isset($menu.links.add)}
+    {if isset($menu.brand) || isset($menu.category) || isset($menu.detail) || isset($menu.size) || isset($menu.color) || isset($menu.links.add)}
     <div class="list-sidebar">
       <a href="{$menu.links.list}">Danh sách</a>
 
       {if isset($menu.category)}
       <a href="{$menu.category}">Danh mục</a>
+      {/if}
+      {if isset($menu.brand)}
+      <a href="index.php?do=categories&comp=76">Thương hiệu</a>
       {/if}
 
       {if isset($menu.detail)}
@@ -74,5 +77,14 @@
     <span><i class="fa fa-globe"></i></span>
     <label>Cấu hình</label>
   </a>
+
   {/if}
+  <a class="nav-normal" href="index.php">
+    <span><i class="fa fa-globe"></i></span>
+    <label>Thông tin chân trang</label>
+  </a>
+  <a class="nav-normal" href="index.php">
+    <span><i class="fa fa-globe"></i></span>
+    <label>Tổng quan</label>
+  </a>
 </div>

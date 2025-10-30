@@ -36,12 +36,12 @@ function buildCategoryTree($comp, $level = 0, $excludeId = 0)
     foreach ($relations as $rel) {
         $childrenMap[$rel['related_id']][] = $rel['category_id'];
     }
-
+    $language_id = $_SESSION['admin_lang'] ?? '1';
     // Hàm đệ quy dựng cây
-    $build = function ($parentIds, $level, $parent_id = 0) use (&$build, &$catMap, &$childrenMap, &$excludeId) {
+    $build = function ($parentIds, $level, $parent_id = 0) use (&$build, &$catMap, &$childrenMap, &$excludeId, $language_id) {
         $tree = [];
         foreach ($parentIds as $pid) {
-            $language_id = $_SESSION['admin_lang'] ?? '1';
+
             // ❌ Bỏ qua chính danh mục đang edit
             if ($pid == $excludeId) continue;
 
@@ -52,11 +52,11 @@ function buildCategoryTree($comp, $level = 0, $excludeId = 0)
             $detail = $GLOBALS['sp']->getRow("SELECT * FROM {$GLOBALS['db_sp']}.categories_detail WHERE categories_id = {$cat['id']} AND languageid = {$language_id}");
             //$cat['details'][1]['name'] ?? $cat['name'];
 
-            if (is_array($detail)) {
-                // Lọc bỏ các key số — chỉ giữ key chữ
-                $cat['details'] = array_filter($detail, 'is_string', ARRAY_FILTER_USE_KEY);
+            if (is_array($detail) && !empty($detail)) {
+                $cat['details'] = $detail;
             } else {
-                $cat['details'] = ['name' => $cat['name']];
+                // fallback: tạo mảng detail từ dữ liệu chính
+                $cat['details'] = $cat;
             }
             // var_dump($cat['details']);
             // exit;

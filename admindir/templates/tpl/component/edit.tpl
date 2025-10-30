@@ -113,6 +113,7 @@
                   <legend>Thuộc tính riêng</legend>
                   {assign var="attrs" value=[
                   ['name'=>'nhomcon','label'=>'Nhóm con'],
+                  ['name'=>'brand','label'=>'Thương hiệu'],
                   ['name'=>'hinhanh','label'=>'Hình ảnh'],
                   ['name'=>'short','label'=>'Mô tả vắn tắt'],
                   ['name'=>'des','label'=>'Mô tả chi tiết'],

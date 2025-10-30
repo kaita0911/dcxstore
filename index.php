@@ -3,6 +3,7 @@ include_once('#include/config.php');
 include_once('functions/function.php');
 include_once('#include/get_languages.php');
 include_once('functions/allmenu.php');
+include_once('#include/track_visit.php');
 
 $cat1       = $_GET['cat1'] ?? '';
 $unique_key = $_GET['unique_key'] ?? '';

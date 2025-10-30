@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 11:15:11
+/* Smarty version 4.3.1, created on 2025-10-30 11:20:37
   from 'D:\htdocs\dcxstore\templates\tpl\footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690097af620870_84821160',
+  'unifunc' => 'content_69033bf57382e3_55907634',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:social.tpl' => 1,
   ),
 ),false)) {
-function content_690097af620870_84821160 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69033bf57382e3_55907634 (Smarty_Internal_Template $_smarty_tpl) {
 ?><footer>
   <div class="container">
     <div class="clearfix"></div>

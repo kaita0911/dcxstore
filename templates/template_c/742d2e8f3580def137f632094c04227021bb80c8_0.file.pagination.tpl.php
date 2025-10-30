@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 11:15:09
+/* Smarty version 4.3.1, created on 2025-10-30 11:20:36
   from 'D:\htdocs\dcxstore\templates\tpl\products\pagination.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690097ad080199_06662174',
+  'unifunc' => 'content_69033bf4896b16_60338721',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690097ad080199_06662174 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69033bf4896b16_60338721 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['totalPages']->value > 1) {?>
 <ul>
     <?php if ($_smarty_tpl->tpl_vars['currentPage']->value > 1) {?>

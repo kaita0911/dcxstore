@@ -22,13 +22,61 @@ $id = intval($_GET['id'] ?? 0);
 $tinhnang = $sp->getRow("SELECT * FROM {$GLOBALS['db_sp']}.component WHERE id = {$comp}");
 $smarty->assign('tinhnang', $tinhnang);
 
-// // Lấy danh sách ngôn ngữ
-// $languages = $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1 ORDER BY id ASC");
-// $smarty->assign("languages", $languages);
-
 // Lấy ID bài viết (edit)
 $id = intval($_GET['id'] ?? 0);
 
+////get Thương hiệu
+function saveArticleBrand($article_id, $brand_id)
+{
+    // Xóa thương hiệu cũ của bài viết (nếu có)
+    $GLOBALS['sp']->execute("DELETE FROM {$GLOBALS['db_sp']}.articlelist_brands WHERE articlelist_id = ?
+          AND brands_id IN (SELECT id FROM {$GLOBALS['db_sp']}.categories WHERE comp = 76)
+    ", [$article_id]);
+
+    // Nếu người dùng chọn thương hiệu mới → lưu lại
+    if (!empty($brand_id)) {
+        $GLOBALS['sp']->execute("INSERT INTO {$GLOBALS['db_sp']}.articlelist_brands (articlelist_id, brands_id)
+            VALUES (?, ?)
+        ", [$article_id, $brand_id]);
+    }
+}
+
+function getBrandsForArticle($article_id)
+{
+    $language_id = $_SESSION['admin_lang'] ?? 1;
+
+    // Lấy tất cả thương hiệu
+    $brands = $GLOBALS['sp']->getAll("
+        SELECT c.*, cd.name AS detail_name
+        FROM {$GLOBALS['db_sp']}.categories c
+        LEFT JOIN {$GLOBALS['db_sp']}.categories_detail cd
+            ON cd.categories_id = c.id
+           AND cd.languageid = ?
+        WHERE c.comp = 76
+        ORDER BY c.num ASC
+    ", [$language_id]);
+
+    // Lấy thương hiệu mà bài viết đang chọn
+    $selectedBrandId = $GLOBALS['sp']->getOne("
+        SELECT brands_id
+        FROM {$GLOBALS['db_sp']}.articlelist_brands
+        WHERE articlelist_id = ?
+          AND brands_id IN (
+              SELECT id FROM {$GLOBALS['db_sp']}.categories WHERE comp = 76
+          )
+        LIMIT 1
+    ", [$article_id]);
+
+    return [
+        'brands' => $brands,
+        'selectedBrandId' => $selectedBrandId
+    ];
+}
+// Lấy danh sách thương hiệu + thương hiệu hiện tại
+$brandData = getBrandsForArticle($article_id);
+
+$smarty->assign('brands', $brandData['brands']);
+$smarty->assign('selectedBrandId', $brandData['selectedBrandId']);
 // ============================
 // 🔹 Lấy danh mục đã chọn (bao gồm cha)
 // ============================
@@ -79,11 +127,6 @@ $smarty->assign('selected', $selected);
 $categories = buildCategoryTree($comp, 0, $id);
 $smarty->assign('categories', $categories);
 
-// Lấy danh mục
-$categories = buildCategoryTree($comp, 0, $id);
-$smarty->assign('categories', $categories);
-
-
 // ============================
 // 🔁 Xử lý các hành động
 // ============================
@@ -108,6 +151,8 @@ switch ($act) {
 
     case 'edit':
         $id = intval($_GET['id'] ?? 0);
+        $brands = getBrandsForArticle($id);
+        $smarty->assign('selectedBrandId', $brands['selectedBrandId']);
         $language_id = $_SESSION['admin_lang'] ?? '1';
         // thuộc tính
         $rs_properties = $sp->getAll("SELECT * FROM {$GLOBALS['db_sp']}.properties_component WHERE comp_id = {$comp} ORDER BY properties_id ASC");
@@ -140,6 +185,7 @@ switch ($act) {
             "articlelist" => $articlelist,
             "articlelistPrice"   => $priceRow
         ]);
+
         $template = 'articlelist/edit.tpl';
         break;
 
@@ -165,6 +211,7 @@ switch ($act) {
             $GLOBALS["sp"]->query("DELETE FROM {$GLOBALS['db_sp']}.articlelist WHERE id IN ($idList)");
             $GLOBALS["sp"]->query("DELETE FROM {$GLOBALS['db_sp']}.articlelist_price WHERE articlelist_id IN ($idList)");
             $GLOBALS["sp"]->query("DELETE FROM {$GLOBALS['db_sp']}.articlelist_categories WHERE articlelist_id IN ($idList)");
+            $GLOBALS["sp"]->query("DELETE FROM {$GLOBALS['db_sp']}.articlelist_brands WHERE articlelist_id IN ($idList)");
 
             // Xóa hình ảnh liên quan
             $images = $GLOBALS["sp"]->getCol("SELECT img_vn FROM {$GLOBALS['db_sp']}.gallery_sp WHERE articlelist_id IN ($idList)");
@@ -402,14 +449,11 @@ $smarty->display('footer.tpl');
 
 function saveArticle(): void
 {
-    global $act, $page, $comp, $languages;
+    global $act, $comp;
     $sp    = $GLOBALS['sp'];
-    $db_sp = $GLOBALS['db_sp'];
-
     $id  = intval($_POST['id'] ?? 0);
     $now = date("Y-m-d H:i:s");
-
-
+    $brand_id = $_POST['brand_id'] ?? '';
 
     // ==== 1️⃣ Xử lý num tự động ====
     $newNum = ($act === 'addsm')
@@ -650,4 +694,6 @@ function saveArticle(): void
             $GLOBALS['sp']->query($sql);
         }
     }
+    // Lưu brand
+    saveArticleBrand($id, $brand_id);
 }
