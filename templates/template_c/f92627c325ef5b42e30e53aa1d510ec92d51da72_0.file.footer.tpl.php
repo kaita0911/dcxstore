@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 03:17:32
+/* Smarty version 4.3.1, created on 2025-10-31 11:29:41
   from 'D:\htdocs\dcxstore\templates\tpl\footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69041c3c4dbe16_34085244',
+  'unifunc' => 'content_69048f950074a8_24564930',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f92627c325ef5b42e30e53aa1d510ec92d51da72' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\footer.tpl',
-      1 => 1761376990,
+      1 => 1761900327,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:social.tpl' => 1,
   ),
 ),false)) {
-function content_69041c3c4dbe16_34085244 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69048f950074a8_24564930 (Smarty_Internal_Template $_smarty_tpl) {
 ?><footer>
   <div class="container">
     <div class="clearfix"></div>
@@ -80,6 +80,10 @@ function content_69041c3c4dbe16_34085244 (Smarty_Internal_Template $_smarty_tpl)
   </div>
 </footer>
 <div id="cart-popup"></div>
+<div id="c-loading">
+  <div id="orderLoading"><img src="<?php echo $_smarty_tpl->tpl_vars['path_url']->value;?>
+/assets/images/loading.svg"></div>
+</div>
 <?php $_smarty_tpl->_subTemplateRender("file:social.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 }
 }

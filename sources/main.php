@@ -77,7 +77,13 @@
 // $smarty->assign("seo", $cat1 ?? []); // $cat1 nếu có
 
 // ================== DISPLAY TEMPLATES ==================
-// $rs = $GLOBALS['sp']->getRow("SELECT * FROM {$GLOBALS['db_sp']}.infos WHERE id=15");
-// $smarty->assign($seo, $rs);
+function getInfoById($id)
+{
+    return $GLOBALS['sp']->getRow("SELECT * FROM {$GLOBALS['db_sp']}.infos WHERE id = " . intval($id));
+}
+$rs_info = getInfoById(14);
+$smarty->assign('get_info', $rs_info);
+
+
 $is_home = 1;
 $smarty->assign('is_home', $is_home);

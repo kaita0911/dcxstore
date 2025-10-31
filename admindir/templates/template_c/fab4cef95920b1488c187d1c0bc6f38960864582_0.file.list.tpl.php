@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-29 16:58:03
+/* Smarty version 4.3.1, created on 2025-10-31 11:11:10
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\orders\list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_6902398be90462_54484324',
+  'unifunc' => 'content_69048b3e921040_70419404',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:left.tpl' => 1,
   ),
 ),false)) {
-function content_6902398be90462_54484324 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69048b3e921040_70419404 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.date_format.php','function'=>'smarty_modifier_date_format',),1=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.number_format.php','function'=>'smarty_modifier_number_format',),));
 ?>
 <div class="contentmain">

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 03:17:23
+/* Smarty version 4.3.1, created on 2025-10-31 04:59:13
   from 'D:\htdocs\dcxstore\templates\tpl\articles\pagination.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69041c33aef481_89106262',
+  'unifunc' => 'content_69043411917778_69229851',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2b46d0c87e914856c4697dae8898b2177aec5ccb' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\articles\\pagination.tpl',
-      1 => 1761213919,
+      1 => 1761882963,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69041c33aef481_89106262 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69043411917778_69229851 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['totalPages']->value > 1) {?>
-<ul id="viewpage" class="pagination" data-container="viewlist" data-module="<?php echo $_smarty_tpl->tpl_vars['module']->value;?>
-" data-comp="<?php echo $_smarty_tpl->tpl_vars['comp']->value;?>
-">
+<ul>
     <?php if ($_smarty_tpl->tpl_vars['currentPage']->value > 1) {?>
     <li><a href="/<?php echo $_smarty_tpl->tpl_vars['module']->value;
 if ($_smarty_tpl->tpl_vars['currentPage']->value-1 > 1) {?>/page/<?php echo $_smarty_tpl->tpl_vars['currentPage']->value-1;
+}
+if ($_smarty_tpl->tpl_vars['sort']->value != 'id_desc') {?>/sort/<?php echo $_smarty_tpl->tpl_vars['sort']->value;
 }?>">
             &laquo;
         </a></li>
@@ -48,6 +48,8 @@ for ($_smarty_tpl->tpl_vars['__smarty_section_page']->value['iteration'] = 1, $_
     <?php } else { ?>
     <li> <a href="/<?php echo $_smarty_tpl->tpl_vars['module']->value;
 if ($_smarty_tpl->tpl_vars['pageNum']->value > 1) {?>/page/<?php echo $_smarty_tpl->tpl_vars['pageNum']->value;
+}
+if ($_smarty_tpl->tpl_vars['sort']->value != 'id_desc') {?>/sort/<?php echo $_smarty_tpl->tpl_vars['sort']->value;
 }?>">
             <?php echo $_smarty_tpl->tpl_vars['pageNum']->value;?>
 
@@ -60,8 +62,9 @@ if ($_smarty_tpl->tpl_vars['pageNum']->value > 1) {?>/page/<?php echo $_smarty_t
 
     <?php if ($_smarty_tpl->tpl_vars['currentPage']->value < $_smarty_tpl->tpl_vars['totalPages']->value) {?>
         <li><a href="/<?php echo $_smarty_tpl->tpl_vars['module']->value;?>
-/page/<?php echo $_smarty_tpl->tpl_vars['currentPage']->value+1;?>
-">
+/page/<?php echo $_smarty_tpl->tpl_vars['currentPage']->value+1;
+if ($_smarty_tpl->tpl_vars['sort']->value != 'id_desc') {?>/sort/<?php echo $_smarty_tpl->tpl_vars['sort']->value;
+}?>">
             &raquo;
         </a></li>
         <?php }?>

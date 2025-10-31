@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 08:40:37
+/* Smarty version 4.3.1, created on 2025-10-31 04:33:04
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\categories\create.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69031675063703_32499301',
+  'unifunc' => 'content_69042df07ccd51_76862836',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3c6e663a6289bd2cab0dc7e519aea6dd90fab8f8' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\categories\\create.tpl',
-      1 => 1761636194,
+      1 => 1761881391,
       2 => 'file',
     ),
   ),
@@ -22,8 +22,10 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:categories/category_tree.tpl' => 1,
   ),
 ),false)) {
-function content_69031675063703_32499301 (Smarty_Internal_Template $_smarty_tpl) {
-?><div class="contentmain">
+function content_69042df07ccd51_76862836 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),));
+?>
+<div class="contentmain">
    <div class="main">
       <div class="left_sidebar padding10">
          <?php $_smarty_tpl->_subTemplateRender("file:left.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
@@ -55,7 +57,7 @@ function content_69031675063703_32499301 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="title">Tiêu đề</div>
                         <div class="info-title">
                            <input type="text" name="name" id="title"
-                              class="InputText title-input" />
+                              class="InputText title-input" required />
                         </div>
                      </div>
                      <div class="item">
@@ -91,8 +93,9 @@ function content_69031675063703_32499301 (Smarty_Internal_Template $_smarty_tpl)
 
                   </div>
                   <div class="right100">
+                     <?php if (smarty_modifier_count($_smarty_tpl->tpl_vars['categories']->value) > 0) {?>
                      <div class="item">
-                        <div class="title">Danh mục liên quan</div>
+                        <div class="title">Danh mục</div>
                         <div class="selectlist">
                            <ul class="category-tree">
                               <?php
@@ -109,37 +112,34 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                            </ul>
                         </div>
                      </div>
-                     <?php if ($_smarty_tpl->tpl_vars['showanhdanhmuc']->value['open'] == 1) {?>
+                     <?php }?>
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['hinhdanhmuc'] == 1) {?>
                      <div class="item">
                         <div class="title">Hình ảnh</div>
+
                         <div class="info-title">
-                           <?php if ($_smarty_tpl->tpl_vars['edit']->value['img_vn'] != '') {?>
-                           <!-- Hiển thị ảnh cũ -->
-                           <img id="current-img" height="50" src="../<?php echo $_smarty_tpl->tpl_vars['edit']->value['img_vn'];?>
-" /><br />
+                           <?php if ($_smarty_tpl->tpl_vars['articlelist']->value['img_thumb_vn'] != '') {?>
+                           <!-- Ảnh cũ -->
+                           <img id="current-img" src="../<?php echo $_smarty_tpl->tpl_vars['edit']->value['img_vn'];?>
+" height="60" style="display:block; margin-bottom:8px;">
                            <?php }?>
 
-                           <!-- Input chọn file -->
+                           <label for="img_vn" class="custom-upload">
+                              <i class="fa fa-upload"></i> Upload image
+                           </label>
+                           <!-- Input chọn ảnh -->
                            <input type="file"
                               accept="image/png,image/gif,image/jpeg,image/jpg"
-                              name="img_vn" id="img_vn" onchange="loadFile(event)">
-
-                           <!-- Hiển thị kích thước file -->
-                           <span class="Size"></span>
+                              name="img_vn"
+                              id="img_vn" class="img-thumb-input">
 
                            <!-- Preview ảnh mới -->
-                           <p class="previewimg"><img id="output" style="max-height:150px; margin-top:5px;" /></p>
+                           <p class="previewimg" style="margin-top:8px;">
+                              <img id="preview-img" style="max-height:150px; display:none;">
+                           </p>
                         </div>
                      </div>
                      <?php }?>
-
-                     <div class="item">
-                        <div class="title">Thứ tự
-                           <input type="text" name="num" value="<?php echo (($tmp = $_smarty_tpl->tpl_vars['numkai']->value['num'] ?? null)===null||$tmp==='' ? 0 ?? null : $tmp);?>
-" class="InputNum num-order" />
-                        </div>
-                     </div>
-
                      <div class="item">
                         <div class="title">
                            Show <input type="checkbox" class="CheckBox" name="active" value="active"

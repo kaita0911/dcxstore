@@ -13,7 +13,7 @@
  * @param int $max_links Số trang hiển thị xung quanh trang hiện tại (mặc định 5)
  * @return array ['data'=>mảng bản ghi, 'pagination'=>HTML phân trang, 'total_pages'=>số trang]
  */
-function paginate($db, $table, $join = '', $where = '', $order = '', $page = 1, $per_page = 10, $max_links = 5)
+function paginate($db, $table, $join = '', $where = '', $order = '', $page = 1, $per_page = 5, $max_links = 5)
 {
     $page = max(1, intval($page));
     $start = ($page - 1) * $per_page;

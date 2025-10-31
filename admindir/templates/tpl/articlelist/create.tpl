@@ -93,7 +93,7 @@
                            <input type="file"
                               accept="image/png,image/gif,image/jpeg,image/jpg"
                               name="img_thumb_vn"
-                              id="img_thumb_vn">
+                              id="img_thumb_vn" class="img-thumb-input">
 
                            <!-- Preview ảnh mới -->
                            <p class="previewimg" style="margin-top:8px;">

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 03:16:33
+/* Smarty version 4.3.1, created on 2025-10-31 11:28:19
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\left.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69041c0198c030_41279587',
+  'unifunc' => 'content_69048f437f7260_79264721',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '16e21d98eae13f3de51489eb9de2d54f5304d766' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\left.tpl',
-      1 => 1761794955,
+      1 => 1761898081,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69041c0198c030_41279587 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69048f437f7260_79264721 (Smarty_Internal_Template $_smarty_tpl) {
 ?><a href="/" target="_blank" class="logo">
   <img height="40" src="../<?php echo $_smarty_tpl->tpl_vars['logoadmin']->value['img_thumb_vn'];?>
 " alt="Logo" />
@@ -88,7 +88,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         KH Liên hệ
       </a>
       <?php if ($_smarty_tpl->tpl_vars['showform']->value['open'] == 1) {?>
-      <a href="index.php?do=taovandon">
+      <a href="index.php?do=register_info">
         KH đăng ký Form
       </a>
       <?php }?>

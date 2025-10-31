@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 03:02:12
+/* Smarty version 4.3.1, created on 2025-10-31 06:08:31
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\articlelist\create.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690418a4815ab2_66350252',
+  'unifunc' => 'content_6904444f5fe761_99174608',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a47cdb00175386fcc82ab713ed6583ae3873a54c' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\articlelist\\create.tpl',
-      1 => 1761876117,
+      1 => 1761881426,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:articlelist/category_tree.tpl' => 1,
   ),
 ),false)) {
-function content_690418a4815ab2_66350252 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6904444f5fe761_99174608 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="contentmain">
    <div class="main">
       <div class="left_sidebar padding10">
@@ -122,7 +122,7 @@ function content_690418a4815ab2_66350252 (Smarty_Internal_Template $_smarty_tpl)
                            <input type="file"
                               accept="image/png,image/gif,image/jpeg,image/jpg"
                               name="img_thumb_vn"
-                              id="img_thumb_vn">
+                              id="img_thumb_vn" class="img-thumb-input">
 
                            <!-- Preview ảnh mới -->
                            <p class="previewimg" style="margin-top:8px;">

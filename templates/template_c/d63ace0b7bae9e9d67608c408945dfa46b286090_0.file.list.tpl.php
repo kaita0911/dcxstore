@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-23 12:11:23
+/* Smarty version 4.3.1, created on 2025-10-31 07:42:53
   from 'D:\htdocs\dcxstore\templates\tpl\search\list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_68f9ff4b7b43b7_35613531',
+  'unifunc' => 'content_69045a6dd47248_13431689',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68f9ff4b7b43b7_35613531 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69045a6dd47248_13431689 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['CheckNull']->value == 0) {?>
 <div class="nodate">Không tìm thấy kết quả</div>
 <?php } else {

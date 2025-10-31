@@ -197,6 +197,7 @@ switch ($act) {
     case 'dellistajax':
         ob_clean(); // Xóa mọi thứ đã in ra trước đó
         $ids = $_POST['cid'] ?? '';
+        $page = intval($_POST['page'] ?? 1);
         if ($ids !== '') {
             $idList = implode(',', array_map('intval', explode(',', $ids)));
 
@@ -221,7 +222,17 @@ switch ($act) {
             }
             $GLOBALS["sp"]->query("DELETE FROM {$GLOBALS['db_sp']}.gallery_sp WHERE articlelist_id IN ($idList)");
 
-            echo json_encode(['success' => true]);
+            // ✅ Kiểm tra lại tổng số bài viết còn lại
+            $total = intval($GLOBALS["sp"]->getOne("SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.articlelist WHERE comp = {$comp}"));
+            $per_page = 10; // số bài mỗi trang
+            $total_pages = max(ceil($total / $per_page), 1);
+            // Nếu trang hiện tại > tổng số trang thì giảm đi 1
+
+            if ($page > $total_pages) {
+                $page = $total_pages;
+            }
+
+            echo json_encode(['success' => true, 'new_page' => $page]);
         } else {
             echo json_encode(['success' => false]);
         }
@@ -400,7 +411,7 @@ switch ($act) {
 
         // ==== Tham số phân trang ====
         $page = intval($_GET['page'] ?? 1);
-        $per_page = 20;
+        $per_page = 10;
 
         // ==== Gọi hàm paginate ====
         $result = paginate($GLOBALS["sp"], "{$GLOBALS['db_sp']}.articlelist AS a", $join, $where, $order, $page, $per_page);

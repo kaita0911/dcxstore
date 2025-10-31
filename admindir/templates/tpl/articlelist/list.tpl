@@ -176,7 +176,7 @@
 
                         <td align="center">
                            <div class="flex-btn">
-                              {if in_array($smarty.request.comp, [1,2,3,25,27])}
+                              {if in_array($smarty.request.comp, [1,2,3,25,27,10])}
                               <a class="act-btn btnView" href="{$web_base_url}/{$item.details.unique_key}.html" target="_blank" title="Xem nhanh">
                                  <i class="fa fa-eye"></i>
                               </a>

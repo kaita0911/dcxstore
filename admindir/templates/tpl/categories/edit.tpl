@@ -75,22 +75,29 @@
                         </div>
                      </div>
 
-                     {if $showanhdanhmuc.open == 1}
+                     {if $tinhnang.hinhdanhmuc == 1}
                      <div class="item">
                         <div class="title">Hình ảnh</div>
+
                         <div class="info-title">
-                           {if $category.img_vn neq ""}
-                           <img height="50" src="../{$category.img_vn}" /><br />
+                           {if $articlelist.img_vn neq ""}
+                           <!-- Ảnh cũ -->
+                           <img id="current-img" src="../{$category.img_vn}" height="60" style="display:block; margin-bottom:8px;">
                            {/if}
-                           <input type="file" accept="image/png, image/gif, image/jpeg, image/jpg" name="img_vn" id="img_vn" onchange="loadFile(event)">
-                           <span class="Size"></span>
-                           <p class="previewimg"><img id="output" /></p>
-                           <script>
-                              var loadFile = function(event) {
-                                 var image = document.getElementById('output');
-                                 image.src = URL.createObjectURL(event.target.files[0]);
-                              };
-                           </script>
+
+                           <label for="img_vn" class="custom-upload">
+                              <i class="fa fa-upload"></i> Upload image
+                           </label>
+                           <!-- Input chọn ảnh -->
+                           <input type="file"
+                              accept="image/png,image/gif,image/jpeg,image/jpg"
+                              name="img_vn"
+                              id="img_vn" class="img-thumb-input">
+
+                           <!-- Preview ảnh mới -->
+                           <p class="previewimg" style="margin-top:8px;">
+                              <img id="preview-img" style="max-height:150px; display:none;">
+                           </p>
                         </div>
                      </div>
                      {/if}

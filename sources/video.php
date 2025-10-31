@@ -1,123 +1,70 @@
 <?php
+switch ($act) {
 
-$cat = $cat1;
+    case "detail":
+        $sql = "SELECT a.*, d.*
+                FROM {$GLOBALS['db_sp']}.articlelist AS a
+                LEFT JOIN {$GLOBALS['db_sp']}.articlelist_detail AS d
+                    ON d.articlelist_id = a.id AND d.languageid = {$langid}
+                WHERE d.unique_key = '{$unique_key}'";
+        $rs = $GLOBALS["sp"]->getRow($sql);
+        ///Tin liên quan
+        $sql_related = "SELECT a.id, a.comp, a.num, a.unique_key, a.img_thumb_vn, a.dated,
+         d.name AS name_detail, d.unique_key
+        FROM {$GLOBALS['db_sp']}.articlelist AS a
+        LEFT JOIN {$GLOBALS['db_sp']}.articlelist_detail AS d
+        ON d.articlelist_id = a.id AND d.languageid = {$langid}
+        WHERE a.id != {$rs['articlelist_id']} AND a.comp = {$rs['comp']}  AND a.active = 1
+        ORDER BY a.num DESC";
+        $rs_related = $GLOBALS["sp"]->getAll($sql_related);
+        $smarty->assign("articles_related", $rs_related);
 
-switch($act){
+        $smarty->assign("detail", $rs);
+        $smarty->assign("seo", $rs);
+        $menu_name = $rs['name'];
+        $smarty->assign('c_ttl', $menu_name);
 
-	case "detail":
+        break;
+    case "sub":
 
-		$unique_key = $_GET['unique_key'];
+        $smarty->assign('data_url', $cat1);
+        $smarty->assign('data_comp', $comp_id);
+        $smarty->assign('data_cateid', $cate_id);
+        $smarty->assign('data_sub', $act);
 
-		$sql = "select * from $GLOBALS[db_sp].articlelist where unique_key='$unique_key' ";
+        // --- AJAX Response ---
+        if (isset($_GET['ajax'])) {
+            $html = $smarty->fetch("video/list.tpl");
+            $pagination = $smarty->fetch("/pagination.tpl");
+            echo json_encode([
+                "success" => true,
+                "html" => $html,
+                "pagination" => $pagination
+            ]);
+            exit;
+        }
 
-		$rs = $GLOBALS["sp"]->getRow($sql);
+        break;
 
-		$smarty->assign("detail",$rs);
+    default:
+        //var_dump($cat1);
+        $smarty->assign('data_url', $cat1);
+        $smarty->assign('data_comp', $comp_id);
 
-		$smarty->assign("seo",$rs);
+        // --- AJAX Response ---
+        if (isset($_GET['ajax'])) {
+            $html = $smarty->fetch("video/list.tpl");
+            $pagination = $smarty->fetch("pagination.tpl");
+            echo json_encode([
+                "success" => true,
+                "html" => $html,
+                "pagination" => $pagination
+            ]);
+            exit;
+        }
+        // --- SEO & Tiêu đề ---
+        //$menu_name = $menu[$comp_id]['name'] ?? '';
+        $smarty->assign('c_ttl', $menu_name);
 
-		if(!$rs['id']){//bi rong la kg ton tai link quay ve trang chu
-
-			PageHome("");
-
-		}
-
-		$cid = $rs['cid'];
-		
-		$linkTitle = getLinkTitle($rs['cid'],1);
-		
-
-		///////cap nhap so lan xem
-
-		//$arr['view'] = ceil($rs['view']+1);
-
-		//vaUpdate('articles',$arr,' id='.$rs['id']);
-
-		
-
-		$sql_cl = " select * from $GLOBALS[db_sp].articlelist where active=1 and id <> ".$rs['id']." order by  id desc limit 50 ";
-
-		$rs_cl = $GLOBALS["sp"]->getAll($sql_cl);
-
-		$smarty->assign("view",$rs_cl);
-
-		$smarty->assign("seo",$rs);
-
-		$template = "video/detail.tpl";	
-
-		$smarty->assign("linkTitle",$linkTitle);	
-
-	break;
-
-	
-
-	default:	
-    
-		$linkTitle = getLinkTitle($cat['id'],1);
-		
-
-		$sql = " select * from $GLOBALS[db_sp].articlelist where active=1 and cid = ".$cat['id']." order by num asc, id desc ";
-
-		$total = $count = ceil(count($GLOBALS["sp"]->getAll($sql)));
-
-		
-
-		$num_rows_page = 30;
-
-		$num_page = ceil($count/$num_rows_page);
-
-		
-
-		$begin = ($page - 1)*$num_rows_page;		
-
-		$iSEGSIZE=5;
-
-		$linkpg = "";
-
-		
-
-		/*if($num_page > 1 ){
-
-			$linkpg = paginatornum($urll,1,$num_page,$iSEGSIZE,$cat['id'],'video',$path_url,$UrlLink,$idd,$num_rows_page);
-
-			$smarty->assign("Checkpg","1");
-
-		}*/
-
-		
-
-		$sql = $sql." limit $begin,$num_rows_page";
-
-		$rs = $GLOBALS["sp"]->getAll($sql);
-
-		$template = "video/view.tpl";
-
-		
-
-		$smarty->assign("linkpg",$linkpg);
-
-		$smarty->assign("CheckNull",$count);
-
-		////////////////////////////////////////
-
-		$smarty->assign("view",$rs);
-
-		$smarty->assign("seo",$cat);	
-
-			
-
-	break;
-
+        break;
 }
-
-$smarty->assign("linkTitle",$linkTitle);			
-
-$smarty->display("./header.tpl");
-
-$smarty->display($template);
-
-$smarty->display("./footer.tpl");
-
-
-
-?>

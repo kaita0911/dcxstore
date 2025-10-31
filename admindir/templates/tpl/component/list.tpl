@@ -39,7 +39,7 @@
                            <input type="hidden" name="id[]" value="{$item.id}" />
                         </td>
                         <td class="paleft">{$item.do}</td>
-                        <td class="paleft">{$item.name}</td>
+                        <td class="paleft">{$item.detail_name|escape}</td>
                         <td align="center" class="hidden-xs">
                            <button type="button"
                               class="btn_checks btn_toggle"

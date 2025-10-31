@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-29 09:19:34
+/* Smarty version 4.3.1, created on 2025-10-31 11:29:40
   from 'D:\htdocs\dcxstore\templates\tpl\contact\view.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_6901ce16be3c38_11288305',
+  'unifunc' => 'content_69048f94cedd35_27837957',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'bf9deeb923c53ba20a2fb5397310247541d925b5' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\contact\\view.tpl',
-      1 => 1761644828,
+      1 => 1761904700,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../breadcumb.tpl' => 1,
   ),
 ),false)) {
-function content_6901ce16be3c38_11288305 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69048f94cedd35_27837957 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main">
    <div class="container">
       <div class="breadcumb"><?php $_smarty_tpl->_subTemplateRender('file:../breadcumb.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
@@ -66,10 +66,10 @@ function content_6901ce16be3c38_11288305 (Smarty_Internal_Template $_smarty_tpl)
    </div>
 </div>
 <?php if ($_SESSION['contact_success']) {?>
-<div id="contactPopup" class="popup <?php if ($_SESSION['contact_success']) {?> show<?php }?>">
+<div id="popupMessage" class="popup-message <?php if ($_SESSION['contact_success']) {?> show<?php }?>">
    <div class="popup-content">
-      <span id="close-popup">&times;</span>
-      <p>Gửi liên hệ thành công!</p>
+      <span id="popupText">Cảm ơn Quý khách đã liên hệ! Chúng tôi sẽ liên lạc trong thời gian sớm nhất</span>
+      <button id="popupClose">X</button>
    </div>
 </div>
 <?php }?>
@@ -124,8 +124,8 @@ function content_6901ce16be3c38_11288305 (Smarty_Internal_Template $_smarty_tpl)
 <?php echo '<script'; ?>
 >
    // Lấy các phần tử
-   const popup = document.getElementById('contactPopup');
-   const closeBtn = document.getElementById('close-popup');
+   const popup = document.getElementById('popupMessage');
+   const closeBtn = document.getElementById('popupClose');
 
    // Hàm đóng popup
    function closePopup() {

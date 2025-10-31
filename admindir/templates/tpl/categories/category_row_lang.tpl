@@ -6,13 +6,15 @@
         <input type="text" class="numInput"
             value="{$category.num}">
     </td>
+    {if $tinhnang.hinhdanhmuc == 1}
     <td align="center" class="img-table">
-        {if $category.img_vn neq ""}
+        {if $category.img_vn}
         <div class="c-img">
             <img src="../{$category.img_vn}" alt="img">
         </div>
         {/if}
     </td>
+    {/if}
     <td align="left" class="main-tabs">
 
         <span class="c-name">

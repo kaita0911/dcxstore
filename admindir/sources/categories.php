@@ -2,10 +2,8 @@
 $act = $_REQUEST['act'] ?? '';
 $comp = intval($_GET['comp'] ?? 0);
 
-// // Lấy danh sách ngôn ngữ
-// $languages = $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1 ORDER BY id ASC");
-// $smarty->assign("languages", $languages);
-
+$tinhnang = $sp->getRow("SELECT * FROM {$GLOBALS['db_sp']}.component WHERE id = {$comp}");
+$smarty->assign('tinhnang', $tinhnang);
 // ==========================
 // Xây cây danh mục dựa vào bảng categories_related
 // ==========================

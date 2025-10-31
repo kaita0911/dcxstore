@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 08:54:26
+/* Smarty version 4.3.1, created on 2025-10-31 04:35:15
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\categories\edit.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690319b213e701_81654421',
+  'unifunc' => 'content_69042e73ed3d43_73927210',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0bd83046a902e77a590c24583e7804f2aa7efa82' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\categories\\edit.tpl',
-      1 => 1761636247,
+      1 => 1761881710,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:categories/category_tree.tpl' => 1,
   ),
 ),false)) {
-function content_690319b213e701_81654421 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69042e73ed3d43_73927210 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="contentmain">
    <div class="main">
       <div class="left_sidebar padding10">
@@ -67,7 +67,7 @@ function content_690319b213e701_81654421 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="title">URL</div>
                         <div class="info-title">
                            <input type="text" id="slug" name="unique_key" value="<?php echo $_smarty_tpl->tpl_vars['categoryDetail']->value['unique_key'];?>
-" class="InputText slug-input" />
+" class="InputText slug-input" required />
                         </div>
                      </div>
 
@@ -118,25 +118,30 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         </div>
                      </div>
 
-                     <?php if ($_smarty_tpl->tpl_vars['showanhdanhmuc']->value['open'] == 1) {?>
+                     <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['hinhdanhmuc'] == 1) {?>
                      <div class="item">
                         <div class="title">Hình ảnh</div>
+
                         <div class="info-title">
-                           <?php if ($_smarty_tpl->tpl_vars['category']->value['img_vn'] != '') {?>
-                           <img height="50" src="../<?php echo $_smarty_tpl->tpl_vars['category']->value['img_vn'];?>
-" /><br />
+                           <?php if ($_smarty_tpl->tpl_vars['articlelist']->value['img_vn'] != '') {?>
+                           <!-- Ảnh cũ -->
+                           <img id="current-img" src="../<?php echo $_smarty_tpl->tpl_vars['category']->value['img_vn'];?>
+" height="60" style="display:block; margin-bottom:8px;">
                            <?php }?>
-                           <input type="file" accept="image/png, image/gif, image/jpeg, image/jpg" name="img_vn" id="img_vn" onchange="loadFile(event)">
-                           <span class="Size"></span>
-                           <p class="previewimg"><img id="output" /></p>
-                           <?php echo '<script'; ?>
->
-                              var loadFile = function(event) {
-                                 var image = document.getElementById('output');
-                                 image.src = URL.createObjectURL(event.target.files[0]);
-                              };
-                           <?php echo '</script'; ?>
->
+
+                           <label for="img_vn" class="custom-upload">
+                              <i class="fa fa-upload"></i> Upload image
+                           </label>
+                           <!-- Input chọn ảnh -->
+                           <input type="file"
+                              accept="image/png,image/gif,image/jpeg,image/jpg"
+                              name="img_vn"
+                              id="img_vn" class="img-thumb-input">
+
+                           <!-- Preview ảnh mới -->
+                           <p class="previewimg" style="margin-top:8px;">
+                              <img id="preview-img" style="max-height:150px; display:none;">
+                           </p>
                         </div>
                      </div>
                      <?php }?>

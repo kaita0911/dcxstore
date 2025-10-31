@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-23 12:11:23
+/* Smarty version 4.3.1, created on 2025-10-31 07:42:53
   from 'D:\htdocs\dcxstore\templates\tpl\search\pagination.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_68f9ff4b92d521_82693748',
+  'unifunc' => 'content_69045a6deda984_98977725',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_68f9ff4b92d521_82693748 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69045a6deda984_98977725 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['total_pages']->value > 1) {?>
 <ul class="pagination" id="viewpage-search">
     <?php $_smarty_tpl->_assignInScope('prev_page', $_smarty_tpl->tpl_vars['current_page']->value-1);?>

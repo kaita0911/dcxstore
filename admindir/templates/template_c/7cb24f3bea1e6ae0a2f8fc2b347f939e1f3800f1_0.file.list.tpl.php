@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 02:54:18
+/* Smarty version 4.3.1, created on 2025-10-31 11:26:28
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\infos\list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690416ca87acf2_31380706',
+  'unifunc' => 'content_69048ed4833a81_84955685',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:left.tpl' => 1,
   ),
 ),false)) {
-function content_690416ca87acf2_31380706 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69048ed4833a81_84955685 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="contentmain">
    <div class="main">
       <div class="left_sidebar padding10">

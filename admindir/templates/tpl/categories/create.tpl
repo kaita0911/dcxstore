@@ -62,8 +62,9 @@
 
                   </div>
                   <div class="right100">
+                     {if $categories|@count > 0}
                      <div class="item">
-                        <div class="title">Danh mục liên quan</div>
+                        <div class="title">Danh mục</div>
                         <div class="selectlist">
                            <ul class="category-tree">
                               {foreach $categories as $node}
@@ -72,35 +73,33 @@
                            </ul>
                         </div>
                      </div>
-                     {if $showanhdanhmuc.open eq 1}
+                     {/if}
+                     {if $tinhnang.hinhdanhmuc == 1}
                      <div class="item">
                         <div class="title">Hình ảnh</div>
+
                         <div class="info-title">
-                           {if $edit.img_vn neq ""}
-                           <!-- Hiển thị ảnh cũ -->
-                           <img id="current-img" height="50" src="../{$edit.img_vn}" /><br />
+                           {if $articlelist.img_thumb_vn neq ""}
+                           <!-- Ảnh cũ -->
+                           <img id="current-img" src="../{$edit.img_vn}" height="60" style="display:block; margin-bottom:8px;">
                            {/if}
 
-                           <!-- Input chọn file -->
+                           <label for="img_vn" class="custom-upload">
+                              <i class="fa fa-upload"></i> Upload image
+                           </label>
+                           <!-- Input chọn ảnh -->
                            <input type="file"
                               accept="image/png,image/gif,image/jpeg,image/jpg"
-                              name="img_vn" id="img_vn" onchange="loadFile(event)">
-
-                           <!-- Hiển thị kích thước file -->
-                           <span class="Size"></span>
+                              name="img_vn"
+                              id="img_vn" class="img-thumb-input">
 
                            <!-- Preview ảnh mới -->
-                           <p class="previewimg"><img id="output" style="max-height:150px; margin-top:5px;" /></p>
+                           <p class="previewimg" style="margin-top:8px;">
+                              <img id="preview-img" style="max-height:150px; display:none;">
+                           </p>
                         </div>
                      </div>
                      {/if}
-
-                     <div class="item">
-                        <div class="title">Thứ tự
-                           <input type="text" name="num" value="{$numkai.num|default:0}" class="InputNum num-order" />
-                        </div>
-                     </div>
-
                      <div class="item">
                         <div class="title">
                            Show <input type="checkbox" class="CheckBox" name="active" value="active"

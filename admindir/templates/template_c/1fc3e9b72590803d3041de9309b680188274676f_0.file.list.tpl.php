@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 02:54:41
+/* Smarty version 4.3.1, created on 2025-10-31 11:23:21
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\component\list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690416e19d2f27_21788052',
+  'unifunc' => 'content_69048e19c8ac65_71464210',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1fc3e9b72590803d3041de9309b680188274676f' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\component\\list.tpl',
-      1 => 1760671050,
+      1 => 1761880050,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:left.tpl' => 1,
   ),
 ),false)) {
-function content_690416e19d2f27_21788052 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69048e19c8ac65_71464210 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="contentmain">
    <div class="main">
       <!-- Sidebar -->
@@ -73,7 +73,7 @@ $_smarty_tpl->tpl_vars['item']->do_else = false;
                         </td>
                         <td class="paleft"><?php echo $_smarty_tpl->tpl_vars['item']->value['do'];?>
 </td>
-                        <td class="paleft"><?php echo $_smarty_tpl->tpl_vars['item']->value['name'];?>
+                        <td class="paleft"><?php echo htmlspecialchars((string)$_smarty_tpl->tpl_vars['item']->value['detail_name'], ENT_QUOTES, 'UTF-8', true);?>
 </td>
                         <td align="center" class="hidden-xs">
                            <button type="button"

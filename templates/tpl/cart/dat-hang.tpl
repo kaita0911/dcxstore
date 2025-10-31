@@ -154,3 +154,6 @@
     </form>
   </div>
 </div>
+<div id="c-loading">
+  <div id="orderLoading"><img src="{$path_url}/assets/images/loading.svg"></div>
+</div>

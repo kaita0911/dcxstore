@@ -39,10 +39,10 @@
    </div>
 </div>
 {if $smarty.session.contact_success}
-<div id="contactPopup" class="popup {if $smarty.session.contact_success} show{/if}">
+<div id="popupMessage" class="popup-message {if $smarty.session.contact_success} show{/if}">
    <div class="popup-content">
-      <span id="close-popup">&times;</span>
-      <p>Gửi liên hệ thành công!</p>
+      <span id="popupText">Cảm ơn Quý khách đã liên hệ! Chúng tôi sẽ liên lạc trong thời gian sớm nhất</span>
+      <button id="popupClose">X</button>
    </div>
 </div>
 {/if}
@@ -94,8 +94,8 @@
 </script>
 <script>
    // Lấy các phần tử
-   const popup = document.getElementById('contactPopup');
-   const closeBtn = document.getElementById('close-popup');
+   const popup = document.getElementById('popupMessage');
+   const closeBtn = document.getElementById('popupClose');
 
    // Hàm đóng popup
    function closePopup() {

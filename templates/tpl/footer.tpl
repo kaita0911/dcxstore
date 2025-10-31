@@ -47,4 +47,7 @@
   </div>
 </footer>
 <div id="cart-popup"></div>
+<div id="c-loading">
+  <div id="orderLoading"><img src="{$path_url}/assets/images/loading.svg"></div>
+</div>
 {include file="social.tpl"}

@@ -1,10 +1,10 @@
 <?php
 $act = $_REQUEST['act'] ?? '';
-$db = $GLOBALS['sp'];
+global $db_sp, $sp;
 
 // Lấy properties và languages
-$smarty->assign("properties", $db->getAll("SELECT * FROM {$GLOBALS['db_sp']}.properties WHERE active=1"));
-$smarty->assign("languages", $db->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1"));
+$smarty->assign("properties", $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.properties WHERE active=1"));
+$smarty->assign("languages", $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1"));
 
 $template = null; // Init template
 
@@ -14,10 +14,15 @@ switch ($act) {
     case "edit":
         $id = (int)($_GET["id"] ?? 0);
         if ($id > 0) {
-            $editDetails = $db->getAll("SELECT * FROM {$GLOBALS['db_sp']}.component_detail WHERE component_id=$id ORDER BY id ASC");
-            $smarty->assign("checklang", count($editDetails));
-            $smarty->assign("edit_name", $editDetails);
-            $smarty->assign("edit", $db->getRow("SELECT * FROM {$GLOBALS['db_sp']}.component WHERE id=$id"));
+            $sql = "SELECT c.*, d.name FROM {$GLOBALS['db_sp']}.component AS c
+        LEFT JOIN {$GLOBALS['db_sp']}.component_detail AS d 
+        ON c.id = d.component_id 
+        WHERE c.id=$id
+        ORDER BY c.num ASC";
+            $smarty->assign("edit", $GLOBALS['sp']->GetRow($sql));
+            //$editDetails = $GLOBALS['sp']->getAll("SELECT * FROM {$GLOBALS['db_sp']}.component_detail WHERE component_id=$id ORDER BY id ASC");
+            ///$smarty->assign("edit_name", $editDetails);
+            //$smarty->assign("edit", $GLOBALS['sp']->getRow("SELECT * FROM {$GLOBALS['db_sp']}.component WHERE id=$id"));
             $template = "component/edit.tpl";
         }
         break;
@@ -66,9 +71,11 @@ switch ($act) {
     case "addsm":
     case "editsm":
         $id = $_GET["id"] ?? null;
-        Editsm($act);
+        $newId = saveComponent($act);
+        //saveComponent($act);
+        // Nếu là edit và không phải user đặc biệt → quay lại danh sách bài viết
         if ($act === "editsm" && ($_SESSION['admin_artseed_username'] ?? '') !== 'kaita') {
-            page_transfer2("index.php?do=articlelist&comp=$id");
+            page_transfer2("index.php?do=articlelist&comp=$newId");
         } else {
             page_transfer2("index.php?do=component");
         }
@@ -76,7 +83,11 @@ switch ($act) {
 
     // ==================== DEFAULT: LIST ====================
     default:
-        $smarty->assign("view", $db->getAll("SELECT * FROM {$GLOBALS['db_sp']}.component ORDER BY num ASC"));
+        $sql = "SELECT c.*, d.name AS detail_name FROM {$GLOBALS['db_sp']}.component AS c
+        LEFT JOIN {$GLOBALS['db_sp']}.component_detail AS d 
+        ON c.id = d.component_id 
+        ORDER BY c.num ASC";
+        $smarty->assign("view", $GLOBALS['sp']->GetAll($sql));
         $template = "component/list.tpl";
         break;
 }
@@ -91,14 +102,17 @@ if ($template) {
 }
 
 // ==================== FUNCTIONS ====================
-function Editsm($act)
+function saveComponent($act)
 {
     global $db, $GLOBALS;
 
     $arr = [
         'do' => trim($_POST["do"] ?? ''),
+        'phantrang' => trim($_POST["phantrang"] ?? ''),
         'iconfont' => trim($_POST["iconfont"] ?? ''),
         'nhomcon' => isset($_POST['nhomcon']) ? '1' : '0',
+        'hinhdanhmuc' => isset($_POST['hinhdanhmuc']) ? '1' : '0',
+        'motadanhmuc' => isset($_POST['motadanhmuc']) ? '1' : '0',
         'brand' => isset($_POST['brand']) ? '1' : '0',
         'nhieuhinh' => isset($_POST['nhieuhinh']) ? '1' : '0',
         'masp' => isset($_POST['masp']) ? '1' : '0',
@@ -118,7 +132,6 @@ function Editsm($act)
         'des' => isset($_POST['des']) ? '1' : '0',
         'metatag' => isset($_POST['metatag']) ? '1' : '0',
         'hinhmodule' => isset($_POST['hinhmodule']) ? '1' : '0',
-        'hinhdanhmuc' => isset($_POST['hinhdanhmuc']) ? '1' : '0',
         'motamodule' => isset($_POST['motamodule']) ? '1' : '0',
         'link_out' => isset($_POST['link_out']) ? '1' : '0',
         'num' => $_POST["num"] ?? 0,
@@ -127,77 +140,56 @@ function Editsm($act)
     ];
 
     // Upload ảnh
-    if (!empty($_FILES['img_vn']['name']) && $_FILES['img_vn']['size'] > 0) {
+    if (!empty($_FILES['img_vn']['name'])) {
         $ext = strtolower(strrchr($_FILES['img_vn']['name'], "."));
         $filename = RenameFile('trg-' . time() . $ext);
         copy($_FILES['img_vn']['tmp_name'], "../hinh-anh/trung-gian/" . $filename);
         $arr['img_vn'] = "hinh-anh/trung-gian/" . $filename;
     }
-
+    // Xử lý insert / update
     if ($act === "addsm") {
-        $arr['num'] += 1;
         $id_comp = vaInsert('component', $arr);
-        insertComponentDetails($id_comp);
+        saveComponentDetail($id_comp);
     } else {
-        $id_comp = $_POST["id"];
-        updateComponentDetails($id_comp);
+        $id_comp = (int)($_POST["id"] ?? 0);
         vaUpdate('component', $arr, "id=$id_comp");
-        $db->execute("DELETE FROM {$GLOBALS['db_sp']}.properties_component WHERE comp_id=?", [$id_comp]);
+        saveComponentDetail($id_comp);
     }
 
-    // Thêm properties
+    // Gán thuộc tính
+    $GLOBALS['sp']->execute("DELETE FROM {$GLOBALS['db_sp']}.properties_component WHERE comp_id=?", [$id_comp]);
     if (!empty($_POST["properties"])) {
         foreach ($_POST["properties"] as $prop_id) {
-            $prop = $db->getRow("SELECT * FROM {$GLOBALS['db_sp']}.properties WHERE id=?", [$prop_id]);
+            $prop = $GLOBALS['sp']->getRow("SELECT * FROM {$GLOBALS['db_sp']}.properties WHERE id=?", [$prop_id]);
             if ($prop) {
-                $arrProp = ['properties_id' => $prop_id, 'comp_id' => $id_comp, 'name' => $prop['name_vn']];
-                $exists = $db->getRow("SELECT * FROM {$GLOBALS['db_sp']}.properties_component WHERE properties_id=? AND comp_id=?", [$prop_id, $id_comp]);
-                if (!$exists) vaInsert('properties_component', $arrProp);
+                vaInsert('properties_component', [
+                    'properties_id' => $prop_id,
+                    'comp_id'       => $id_comp,
+                    'name'          => $prop['name_vn']
+                ]);
             }
         }
     }
+    return $id_comp;
 }
 
-function insertComponentDetails($comp_id)
+function saveComponentDetail($comp_id)
 {
-    global $db;
-    $languages = $db->getAll("SELECT * FROM {$GLOBALS['db_sp']}.language WHERE active=1");
-    foreach ($languages as $lang) {
-        $name = trim($_POST["name_" . $lang['id']] ?? '');
-        $unique_key = empty($_POST['unique_key']) ? StripUnicode($name) : trim($_POST['unique_key']);
-        vaInsert('component_detail', [
-            'num' => $_POST["num"] ?? 0,
-            'component_id' => $comp_id,
-            'languageid' => $lang['id'],
-            'code' => $lang['code'],
-            'name' => $name,
-            'unique_key' => $unique_key,
-            'content' => $_POST["content_" . $lang['id']] ?? ''
-        ]);
-    }
-}
 
-function updateComponentDetails($comp_id)
-{
-    global $db;
-    $details = $db->getAll("SELECT * FROM {$GLOBALS['db_sp']}.component_detail WHERE component_id=?", [$comp_id]);
-    if ($details) {
-        foreach ($details as $detail) {
-            $name = trim($_POST["name_" . $detail['languageid']] ?? '');
-            vaUpdate('component_detail', [
-                'name' => $name,
-                'unique_key' => StripUnicode($name),
-                'content' => $_POST["content_" . $detail['languageid']] ?? ''
-            ], "id=" . $detail['id']);
-        }
+    $name = trim($_POST["name"] ?? '');
+    $content = trim($_POST["content"] ?? '');
+
+    $exists = $GLOBALS['sp']->getOne("SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.component_detail WHERE component_id=?", [$comp_id]);
+    if ($exists) {
+        vaUpdate('component_detail', ['name' => $name, 'content' => $content], "component_id=$comp_id");
     } else {
-        insertComponentDetails($comp_id);
+        vaInsert('component_detail', ['component_id' => $comp_id, 'name' => $name, 'content' => $content]);
     }
 }
 
-function DeleteCat($id)
+
+function deleteComponent($id)
 {
-    global $db;
-    $comp = $db->getRow("SELECT * FROM {$GLOBALS['db_sp']}.component WHERE id=?", [$id]);
-    if ($comp) $db->execute("DELETE FROM {$GLOBALS['db_sp']}.component WHERE id=?", [$id]);
+    $GLOBALS['sp']->execute("DELETE FROM {$GLOBALS['db_sp']}.component WHERE id=?", [$id]);
+    $GLOBALS['sp']->execute("DELETE FROM {$GLOBALS['db_sp']}.component_detail WHERE component_id=?", [$id]);
 }

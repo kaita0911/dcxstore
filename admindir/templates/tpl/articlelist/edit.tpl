@@ -106,7 +106,7 @@
                   <input type="file"
                     accept="image/png,image/gif,image/jpeg,image/jpg"
                     name="img_thumb_vn"
-                    id="img_thumb_vn">
+                    id="img_thumb_vn" class="img-thumb-input">
 
                   <!-- Preview ảnh mới -->
                   <p class="previewimg" style="margin-top:8px;">
@@ -115,7 +115,7 @@
                 </div>
               </div>
               {/if}
-
+              {if $tinhnang.nhieuhinh == 1}
               <div class="item">
                 <div class="title">Upload multi images</div>
                 <div class="gallery-upload">
@@ -137,7 +137,7 @@
                   </div>
                 </div>
               </div>
-
+              {/if}
 
               {if $tinhnang.price == 1}
               <div class="item">

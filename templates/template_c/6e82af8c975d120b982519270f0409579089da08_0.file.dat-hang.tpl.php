@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-28 11:15:26
+/* Smarty version 4.3.1, created on 2025-10-31 11:29:06
   from 'D:\htdocs\dcxstore\templates\tpl\cart\dat-hang.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690097be4a2a38_71320168',
+  'unifunc' => 'content_69048f72bd2aa3_89269136',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6e82af8c975d120b982519270f0409579089da08' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\cart\\dat-hang.tpl',
-      1 => 1761032738,
+      1 => 1761905604,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690097be4a2a38_71320168 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69048f72bd2aa3_89269136 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),1=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.number_format.php','function'=>'smarty_modifier_number_format',),));
 ?>
 <title>Xác nhận đặt hàng</title>
@@ -226,5 +226,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
       </div>
     </form>
   </div>
+</div>
+<div id="c-loading">
+  <div id="orderLoading"><img src="<?php echo $_smarty_tpl->tpl_vars['path_url']->value;?>
+/assets/images/loading.svg"></div>
 </div><?php }
 }

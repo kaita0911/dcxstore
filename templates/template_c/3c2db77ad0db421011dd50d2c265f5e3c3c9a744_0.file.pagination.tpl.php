@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 03:17:28
+/* Smarty version 4.3.1, created on 2025-10-31 04:30:36
   from 'D:\htdocs\dcxstore\templates\tpl\service\pagination.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69041c380ec435_69249090',
+  'unifunc' => 'content_69042d5c550a37_61716982',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69041c380ec435_69249090 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69042d5c550a37_61716982 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['totalPages']->value > 1) {?>
 <ul id="viewpage" class="pagination" data-container="viewlist" data-module="<?php echo $_smarty_tpl->tpl_vars['module']->value;?>
 " data-comp="<?php echo $_smarty_tpl->tpl_vars['comp']->value;?>

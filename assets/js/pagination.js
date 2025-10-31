@@ -65,8 +65,8 @@ $(function () {
     const paginationId = parent.attr("id");
     const module = parent.data("module");
     const sub = parent.data("sub");
-    const cate_id = parent.data("id");
-    const comp = parent.data("comp") || "";
+    const cate_id = parent.data("id") || ""; // nếu không có data-id thì thành rỗng
+    const comp = parent.data("comp");
 
     const sort =
       $("#sortSelect").val() ||
@@ -127,7 +127,7 @@ $(function () {
     const sub = $(this).data("sub") || "";
     const cate_id = $(this).data("id") || "";
     const pathname = window.location.pathname; // ví dụ: /san-pham/page/3/sort/price_desc
-
+    console.log(comp);
     const segments = pathname.split("/").filter(Boolean);
     // Lấy page từ URL
     const pageIndex = segments.indexOf("page");

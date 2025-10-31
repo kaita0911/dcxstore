@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 11:19:34
+/* Smarty version 4.3.1, created on 2025-10-31 05:26:04
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\articlelist\edit.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69033bb66e0f49_23851704',
+  'unifunc' => 'content_69043a5cc7fd21_17396418',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4a556caea40d35df5c3b1633eab6fbecdd4c2800' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\articlelist\\edit.tpl',
-      1 => 1761811849,
+      1 => 1761882037,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:articlelist/category_tree.tpl' => 1,
   ),
 ),false)) {
-function content_69033bb66e0f49_23851704 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69043a5cc7fd21_17396418 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="contentmain">
   <div class="main">
     <div class="left_sidebar padding10">
@@ -57,7 +57,7 @@ echo $_smarty_tpl->tpl_vars['page_para']->value;?>
                   <input type="text" name="name" id="title"
                     value="<?php echo htmlspecialchars((string)$_smarty_tpl->tpl_vars['articlelistDetail']->value['name'], ENT_QUOTES, 'UTF-8', true);?>
 "
-                    class="InputText title-input" />
+                    class="InputText title-input" required />
                 </div>
               </div>
               <div class="item">
@@ -144,7 +144,7 @@ echo $_smarty_tpl->tpl_vars['page_para']->value;?>
                   <input type="file"
                     accept="image/png,image/gif,image/jpeg,image/jpg"
                     name="img_thumb_vn"
-                    id="img_thumb_vn">
+                    id="img_thumb_vn" class="img-thumb-input">
 
                   <!-- Preview ảnh mới -->
                   <p class="previewimg" style="margin-top:8px;">
@@ -153,7 +153,7 @@ echo $_smarty_tpl->tpl_vars['page_para']->value;?>
                 </div>
               </div>
               <?php }?>
-
+              <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['nhieuhinh'] == 1) {?>
               <div class="item">
                 <div class="title">Upload multi images</div>
                 <div class="gallery-upload">
@@ -188,7 +188,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                   </div>
                 </div>
               </div>
-
+              <?php }?>
 
               <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['price'] == 1) {?>
               <div class="item">

@@ -50,7 +50,7 @@
         KH Liên hệ
       </a>
       {if $showform.open eq 1}
-      <a href="index.php?do=taovandon">
+      <a href="index.php?do=register_info">
         KH đăng ký Form
       </a>
       {/if}

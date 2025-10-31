@@ -200,7 +200,7 @@
           $("#orderMsg")
             .addClass("show")
             .html('<span><i class="fa fa-check"></i> Xoá thành công!</span>');
-
+          location.reload();
           let row = btn.closest("tr");
           if (!row.length) row = btn.closest(".item");
           if (!row.length) row = btn.closest(".gallery-item");
@@ -241,12 +241,7 @@
       },
       function (res) {
         if (res.success) {
-          $("#orderMsg")
-            .addClass("show")
-            .html(
-              '<span><i class="fa fa-check"></i> Đã xoá các mục được chọn!</span>'
-            );
-
+          location.reload();
           $('input[name="cid[]"]:checked').each(function () {
             const id = $(this).val();
             const row = $('tr[data-id="' + id + '"]');
@@ -257,7 +252,7 @@
             }
           });
 
-          setTimeout(() => $("#orderMsg").removeClass("show"), 2000);
+          //setTimeout(() => $("#orderMsg").removeClass("show"), 2000);
         } else {
           alert(res.message || "Không thể xoá các mục đã chọn!");
         }
@@ -312,6 +307,7 @@
             .html(
               '<span><i class="fa fa-check"></i> ✅ Cập nhật thành công!</span>'
             );
+
           setTimeout(() => $("#orderMsg").removeClass("show"), 1000);
           location.reload();
         } else {
@@ -321,34 +317,35 @@
     );
     //=======upload image đại diện======================
 
-    const input = document.getElementById("img_thumb_vn");
-    if (input) {
+    const inputs = document.querySelectorAll(".img-thumb-input");
+    if (inputs) {
       const preview = document.getElementById("preview-img");
       const current = document.getElementById("current-img");
-
-      input.addEventListener("change", function () {
-        const file = this.files[0];
-        if (!file) {
-          if (preview) preview.style.display = "none";
-          if (current) current.style.display = "block";
-          return;
-        }
-
-        if (!file.type.startsWith("image/")) {
-          alert("Vui lòng chọn đúng định dạng ảnh (JPG, PNG, GIF)!");
-          this.value = "";
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          if (preview) {
-            preview.src = e.target.result;
-            preview.style.display = "block";
+      inputs.forEach((input) => {
+        input.addEventListener("change", function () {
+          const file = this.files[0];
+          if (!file) {
+            if (preview) preview.style.display = "none";
+            if (current) current.style.display = "block";
+            return;
           }
-          if (current) current.style.display = "none";
-        };
-        reader.readAsDataURL(file);
+
+          if (!file.type.startsWith("image/")) {
+            alert("Vui lòng chọn đúng định dạng ảnh (JPG, PNG, GIF)!");
+            this.value = "";
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            if (preview) {
+              preview.src = e.target.result;
+              preview.style.display = "block";
+            }
+            if (current) current.style.display = "none";
+          };
+          reader.readAsDataURL(file);
+        });
       });
     }
 

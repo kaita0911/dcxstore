@@ -6,7 +6,7 @@
          <div class="content-news-main row">
 
             <div id="viewlist" data-ajax-load="1" data-container="viewlist" data-pagination="viewpage" data-module="{$data_url}" data-comp="{$data_comp}"></div>
-            <div id="viewpage" class="pagination" data-container="viewlist" data-module="{$data_url}" data-comp="{$data_comp}"></div>
+            <div id="viewpage" class="pagination" data-container="viewlist" data-module="{$data_url}" data-comp="{$data_comp}" data-id=""></div>
          </div>
 
       </div>

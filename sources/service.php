@@ -25,6 +25,26 @@ switch ($act) {
         $smarty->assign('c_ttl', $menu_name);
 
         break;
+    case "sub":
+
+        $smarty->assign('data_url', $cat1);
+        $smarty->assign('data_comp', $comp_id);
+        $smarty->assign('data_cateid', $cate_id);
+        $smarty->assign('data_sub', $act);
+
+        // --- AJAX Response ---
+        if (isset($_GET['ajax'])) {
+            $html = $smarty->fetch("service/list.tpl");
+            $pagination = $smarty->fetch("/pagination.tpl");
+            echo json_encode([
+                "success" => true,
+                "html" => $html,
+                "pagination" => $pagination
+            ]);
+            exit;
+        }
+
+        break;
 
     default:
         //var_dump($cat1);
@@ -34,7 +54,7 @@ switch ($act) {
         // --- AJAX Response ---
         if (isset($_GET['ajax'])) {
             $html = $smarty->fetch("service/list.tpl");
-            $pagination = $smarty->fetch("service/pagination.tpl");
+            $pagination = $smarty->fetch("pagination.tpl");
             echo json_encode([
                 "success" => true,
                 "html" => $html,
@@ -43,7 +63,7 @@ switch ($act) {
             exit;
         }
         // --- SEO & Tiêu đề ---
-        $menu_name = $menu[$comp_id]['name'] ?? 'Dịch vụ';
+        //$menu_name = $menu[$comp_id]['name'] ?? '';
         $smarty->assign('c_ttl', $menu_name);
 
         break;

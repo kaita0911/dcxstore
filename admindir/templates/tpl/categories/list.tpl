@@ -32,7 +32,9 @@
                   <input type="checkbox" name="all" id="checkAll" />
                 </th>
                 <th class="width-order">Thứ tự</th>
+                {if $tinhnang.hinhdanhmuc == 1}
                 <th class="width-image">Hình ảnh</th>
+                {/if}
                 <th class="width-ttl">Tiêu đề</th>
                 <th class="width-show">Home</th>
                 <th class="width-show">Show</th>

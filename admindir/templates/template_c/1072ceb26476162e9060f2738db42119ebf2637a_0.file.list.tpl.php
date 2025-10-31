@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 03:16:33
+/* Smarty version 4.3.1, created on 2025-10-31 11:28:19
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\articlelist\list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69041c01589947_11042183',
+  'unifunc' => 'content_69048f433636c4_81416222',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1072ceb26476162e9060f2738db42119ebf2637a' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\articlelist\\list.tpl',
-      1 => 1761876401,
+      1 => 1761881933,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:left.tpl' => 1,
   ),
 ),false)) {
-function content_69041c01589947_11042183 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69048f433636c4_81416222 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <div class="contentmain">
@@ -234,7 +234,7 @@ $_smarty_tpl->tpl_vars['item']->do_else = false;
 
                         <td align="center">
                            <div class="flex-btn">
-                              <?php if (in_array($_REQUEST['comp'],array(1,2,3,25,27))) {?>
+                              <?php if (in_array($_REQUEST['comp'],array(1,2,3,25,27,10))) {?>
                               <a class="act-btn btnView" href="<?php echo $_smarty_tpl->tpl_vars['web_base_url']->value;?>
 /<?php echo $_smarty_tpl->tpl_vars['item']->value['details']['unique_key'];?>
 .html" target="_blank" title="Xem nhanh">

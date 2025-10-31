@@ -1,6 +1,7 @@
 <?php
 include_once(__DIR__ . "/../#include/config.php");
-include_once(__DIR__ . "/../functions/sendContactEmail.php");
+include_once(__DIR__ . "/../functions/sendOrderEmails.php");
+
 
 session_start();
 //include_once('../#include/config.php'); // config, db, Smarty...

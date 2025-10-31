@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 10:48:37
+/* Smarty version 4.3.1, created on 2025-10-31 04:36:04
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\categories\list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69033475aec128_51838998',
+  'unifunc' => 'content_69042ea41353d5_11952760',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1035a775a96ae99d472a42f118579f6ab5602aa1' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\categories\\list.tpl',
-      1 => 1761622097,
+      1 => 1761881016,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:categories/category_row_lang.tpl' => 1,
   ),
 ),false)) {
-function content_69033475aec128_51838998 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69042ea41353d5_11952760 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="contentmain">
   <div class="main">
     <div class="left_sidebar padding10">
@@ -60,7 +60,9 @@ function content_69033475aec128_51838998 (Smarty_Internal_Template $_smarty_tpl)
                   <input type="checkbox" name="all" id="checkAll" />
                 </th>
                 <th class="width-order">Thứ tự</th>
+                <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['hinhdanhmuc'] == 1) {?>
                 <th class="width-image">Hình ảnh</th>
+                <?php }?>
                 <th class="width-ttl">Tiêu đề</th>
                 <th class="width-show">Home</th>
                 <th class="width-show">Show</th>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 10:48:38
+/* Smarty version 4.3.1, created on 2025-10-31 04:36:04
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\categories\category_row_lang.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690334760088f8_05040597',
+  'unifunc' => 'content_69042ea43c5890_21911348',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd1a8c35a71fd26b1c9341af3723807fe6db74c4c' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\categories\\category_row_lang.tpl',
-      1 => 1761795262,
+      1 => 1761881057,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:categories/category_row_lang.tpl' => 2,
   ),
 ),false)) {
-function content_690334760088f8_05040597 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69042ea43c5890_21911348 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),));
 ?>
 <tr data-id="<?php echo $_smarty_tpl->tpl_vars['category']->value['id'];?>
@@ -35,14 +35,16 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\librar
             value="<?php echo $_smarty_tpl->tpl_vars['category']->value['num'];?>
 ">
     </td>
+    <?php if ($_smarty_tpl->tpl_vars['tinhnang']->value['hinhdanhmuc'] == 1) {?>
     <td align="center" class="img-table">
-        <?php if ($_smarty_tpl->tpl_vars['category']->value['img_vn'] != '') {?>
+        <?php if ($_smarty_tpl->tpl_vars['category']->value['img_vn']) {?>
         <div class="c-img">
             <img src="../<?php echo $_smarty_tpl->tpl_vars['category']->value['img_vn'];?>
 " alt="img">
         </div>
         <?php }?>
     </td>
+    <?php }?>
     <td align="left" class="main-tabs">
 
         <span class="c-name">

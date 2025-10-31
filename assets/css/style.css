@@ -490,7 +490,7 @@ input[type=month].form-control {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.168627451);
+  background: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
   display: flex;
@@ -500,6 +500,83 @@ input[type=month].form-control {
 #c-loading #orderLoading img {
   position: relative;
   z-index: 1;
+}
+
+/* Popup nền mờ */
+.popup-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-message.show {
+  display: flex;
+}
+
+/* Hộp nội dung */
+.popup-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px 30px;
+  text-align: center;
+  min-width: 500px;
+  max-width: 500px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeInScale 0.3s ease;
+  position: relative;
+}
+
+/* Hiệu ứng fade in scale */
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* Nút đóng */
+#popupClose {
+  background: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 30px;
+  height: 29px;
+  position: absolute;
+  right: -10px;
+  display: flex;
+  top: -10px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+#popupClose:hover {
+  background: #0056b3;
+}
+
+.popup-success #popupText {
+  color: #28a745;
+}
+
+.popup-error #popupText {
+  color: #dc3545;
+}
+
+.error-msg {
+  color: red;
+  font-style: italic;
+  margin-top: 5px;
 }
 
 .pagination {
@@ -540,54 +617,44 @@ input[type=month].form-control {
   gap: 20px;
 }
 
-.popup {
-  display: none;
-  /* Ẩn mặc định */
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* Khi active, fade in */
-.popup.show {
-  display: block;
-  opacity: 1;
-}
-
-/* Popup content */
-.popup-content {
-  background-color: #fff;
-  margin: 15% auto;
+.register-form {
+  max-width: 400px;
+  background: #fff;
   padding: 20px;
-  border-radius: 8px;
-  width: 300px;
-  text-align: center;
-  position: relative;
-  animation: slideDown 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* Close button */
-#close-popup {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 20px;
+.register-form .form-group {
+  margin-bottom: 12px;
+}
+
+.register-form input,
+.register-form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.btn-primary {
+  background: #007bff;
+  border: none;
+  padding: 8px 14px;
+  color: #fff;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-/* Animation slide down */
-@keyframes slideDown {
-  from {
-    transform: translateY(-20px);
-  }
-  to {
-    transform: translateY(0);
-  }
+.msg-box {
+  margin-top: 10px;
+  display: none;
+}
+
+.msg-box .success {
+  color: green;
+}
+
+.msg-box .error {
+  color: red;
 }

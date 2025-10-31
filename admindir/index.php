@@ -46,13 +46,21 @@ $smarty->assign("admin", $adminInfo);
 // -----------------------------
 // 📋 Sinh danh sách menu bên trái
 // -----------------------------
+// $sql = "
+//     SELECT * 
+//     FROM {$GLOBALS['db_sp']}.component 
+//     WHERE active = 1 
+//       AND id NOT IN (8, 23, 14, 15)
+//     ORDER BY num ASC
+// ";
 $sql = "
-    SELECT * 
-    FROM {$GLOBALS['db_sp']}.component 
-    WHERE active = 1 
-      AND id NOT IN (8, 23, 14, 15)
-    ORDER BY num ASC
+  SELECT c.*, d.name
+  FROM {$GLOBALS['db_sp']}.component c
+  LEFT JOIN {$GLOBALS['db_sp']}.component_detail d ON c.id = d.component_id
+  WHERE c.active= 1
+  ORDER BY c.num ASC
 ";
+//$rows = $GLOBALS['sp']->getAll($sql);
 $components = $GLOBALS["sp"]->getAll($sql);
 
 $listMenuLeft = [];
