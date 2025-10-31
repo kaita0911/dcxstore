@@ -27,7 +27,7 @@
                 <div class="info-title">
                   <input type="text" name="name" id="title"
                     value="{$articlelistDetail.name|escape:'html':'UTF-8'}"
-                    class="InputText title-input" />
+                    class="InputText title-input" required />
                 </div>
               </div>
               <div class="item">

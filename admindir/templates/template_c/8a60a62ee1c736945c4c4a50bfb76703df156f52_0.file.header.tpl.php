@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 11:21:00
+/* Smarty version 4.3.1, created on 2025-10-31 03:16:33
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69033c0ca39b60_40672293',
+  'unifunc' => 'content_69041c01460311_61870078',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69033c0ca39b60_40672293 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69041c01460311_61870078 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),));
 ?>
 <!DOCTYPE html>

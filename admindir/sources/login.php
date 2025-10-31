@@ -48,7 +48,7 @@ function login(): array
 		);
 	}
 
-	return ['msg' => 'success', 'page' => 'index.php?do=infos&comp=9'];
+	return ['msg' => 'success', 'page' => 'index.php'];
 }
 
 function forgotPass(): void

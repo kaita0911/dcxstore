@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 11:21:01
+/* Smarty version 4.3.1, created on 2025-10-31 03:16:33
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69033c0d2b4927_92487060',
+  'unifunc' => 'content_69041c01b26b02_58667016',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69033c0d2b4927_92487060 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69041c01b26b02_58667016 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div id="orderMsg"></div>
 <!-- Scripts -->
 <!-- <?php echo '<script'; ?>

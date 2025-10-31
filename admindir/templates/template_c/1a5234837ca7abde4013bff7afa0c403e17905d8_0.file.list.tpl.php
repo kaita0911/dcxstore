@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-29 16:00:00
+/* Smarty version 4.3.1, created on 2025-10-31 03:14:24
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\menu\list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69022bf07c31f2_41451833',
+  'unifunc' => 'content_69041b80b531e0_49419482',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1a5234837ca7abde4013bff7afa0c403e17905d8' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\menu\\list.tpl',
-      1 => 1760758573,
+      1 => 1761876805,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:left.tpl' => 1,
   ),
 ),false)) {
-function content_69022bf07c31f2_41451833 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69041b80b531e0_49419482 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="contentmain">
 
    <div class="main">
@@ -53,7 +53,7 @@ function content_69022bf07c31f2_41451833 (Smarty_Internal_Template $_smarty_tpl)
          <div class="main-content">
             <div class="tbtitle2">
                <form class="form-all" method="post" action="">
-                  <table class="br1" style="border-bottom:0" width="100%" cellspacing="0" cellpadding="0">
+                  <table class="br1">
                      <thead>
                         <tr>
                            <th align="center" class="width-del">
@@ -87,7 +87,7 @@ $_smarty_tpl->tpl_vars['row']->do_else = false;
                            </td>
 
                            <td align="left" class="brbottom">
-                              <?php echo $_smarty_tpl->tpl_vars['row']->value['name_vn'];?>
+                              <?php echo htmlspecialchars((string)$_smarty_tpl->tpl_vars['row']->value['name_lang'], ENT_QUOTES, 'UTF-8', true);?>
 
                            </td>
 
@@ -132,5 +132,58 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
          </div>
       </div>
    </div>
-</div><?php }
+</div>
+
+<?php echo '<script'; ?>
+>
+   document.addEventListener("DOMContentLoaded", function() {
+      const saveOrderBtn = document.getElementById("saveOrderBtn");
+
+      if (saveOrderBtn) {
+         saveOrderBtn.addEventListener("click", function() {
+            const rows = document.querySelectorAll("tbody tr");
+            const ids = [];
+            const nums = [];
+
+            rows.forEach(row => {
+               const id = row.dataset.id;
+               const numInput = row.querySelector(".numInput");
+               if (id && numInput) {
+                  ids.push(id);
+                  nums.push(numInput.value.trim() || 0);
+               }
+            });
+
+            if (ids.length === 0) {
+               alert("Không có dữ liệu để sắp xếp!");
+               return;
+            }
+
+            // Gửi AJAX bằng fetch
+            fetch("index.php?do=menu&act=updateOrder", {
+                  method: "POST",
+                  headers: {
+                     "Content-Type": "application/x-www-form-urlencoded"
+                  },
+                  body: `id[]=${ids.join("&id[]=")}&num[]=${nums.join("&num[]=")}`
+               })
+               .then(response => response.json())
+               .then(data => {
+                  if (data.success) {
+                     alert("✅ Đã lưu thứ tự thành công!");
+                     location.reload(); // refresh để cập nhật lại
+                  } else {
+                     alert("❌ " + (data.message || "Cập nhật thất bại!"));
+                  }
+               })
+               .catch(() => {
+                  alert("⚠️ Lỗi kết nối server! Vui lòng thử lại sau.");
+               });
+         });
+      }
+   });
+<?php echo '</script'; ?>
+>
+
+<?php }
 }

@@ -1,4 +1,5 @@
 @use "sass:map";
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
 // grid
 $grid-gutter-width: 15px !default;
 $container-width: 1200px !default;
@@ -14,7 +15,8 @@ $grid-breakpoints: (
 
 // Spacing
 $spacer: 1rem !default;
-$spacers: () !default;
+$spacers: (
+  ) !default;
 $spacers: map.merge((0: 0,
       5: ($spacer * 0.5),
       10: ($spacer * 1),
@@ -23,7 +25,7 @@ $spacers: map.merge((0: 0,
 );
 
 //font
-$font-primary: "Noto Sans JP", sans-serif;
+$font-primary: "Mulish", sans-serif;
 //$font-secondary: "Noto Sans JP", sans-serif;
 //$font-en: $font-secondary;
 

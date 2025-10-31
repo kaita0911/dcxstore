@@ -1,6 +1,7 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 :root {
-  --font-family-base: Noto Sans JP, sans-serif;
+  --font-family-base: Mulish, sans-serif;
   --font-weight-base: 400;
   --lineheight-base: 1.5;
   --font-size-base: 1.4rem;
@@ -327,7 +328,7 @@ img.alignleft {
 
 .btn {
   display: inline-block;
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Mulish", sans-serif;
   font-weight: 400;
   color: #1E1E1E;
   text-align: center;

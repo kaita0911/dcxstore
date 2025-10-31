@@ -32,7 +32,7 @@ if (!empty($cate_id)) {
 
 switch ($comp_id) {
     case '1':
-        $per_Page = 3; // <-- đặt riêng cho case 1
+        $per_Page = 3;
         $start = ($page - 1) * $per_Page;
         // Xem danh sách bài viết
         $sql = "SELECT a.id, a.comp, a.num, a.unique_key, a.img_thumb_vn,a.dated,
@@ -50,7 +50,7 @@ switch ($comp_id) {
 
         // Tổng số bản ghi
         $countSql = "SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.articlelist as a WHERE a.active = 1 {$wherecomp}";
-        $total = $GLOBALS['sp']->getOne($countSql, [$comp_id]);
+        $total = $GLOBALS['sp']->getOne($countSql);
 
         // --- Tổng số trang ---
         $smarty->assign("totalPages", ceil($total / $per_Page));
@@ -64,7 +64,39 @@ switch ($comp_id) {
         $html = $smarty->fetch("articles/list.tpl");
         $pagination = $smarty->fetch("articles/pagination.tpl");
         break;
+    case '27':
+        $per_Page = 3;
+        $start = ($page - 1) * $per_Page;
+        // Xem danh sách bài viết
+        $sql = "SELECT a.id, a.comp, a.num, a.unique_key, a.img_thumb_vn,a.dated,
+                   d.name AS name_detail, d.unique_key, 
+                   d.short AS short_detail, 
+                   d.content AS content_detail
+            FROM {$GLOBALS['db_sp']}.articlelist AS a
+            LEFT JOIN {$GLOBALS['db_sp']}.articlelist_detail AS d
+            ON a.id = d.articlelist_id AND d.languageid = {$langid}
+            WHERE a.active = 1 {$wherecomp}
+            ORDER BY a.num DESC  LIMIT $start, $per_Page";
 
+        $articles = $GLOBALS["sp"]->getAll($sql);
+        $smarty->assign("view", $articles);
+
+        // Tổng số bản ghi
+        $countSql = "SELECT COUNT(*) FROM {$GLOBALS['db_sp']}.articlelist as a WHERE a.active = 1 {$wherecomp}";
+        $total = $GLOBALS['sp']->getOne($countSql);
+
+        // --- Tổng số trang ---
+        $smarty->assign("totalPages", ceil($total / $per_Page));
+        $smarty->assign("Checkpg", $totalPages > 1 ? 1 : 0);
+        $smarty->assign("currentPage", $page);
+
+        $smarty->assign("CheckNull", $total);
+        $smarty->assign('per_Page', $per_Page);
+        //$smarty->assign('module', $module);
+        $smarty->assign('comp', $comp_id);
+        $html = $smarty->fetch("service/list.tpl");
+        $pagination = $smarty->fetch("service/pagination.tpl");
+        break;
     case '2';
     case '76':
         $per_Page = 12;

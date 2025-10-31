@@ -14,51 +14,36 @@
                      <div class="acti2"> <a class="add" href="javascript:history.back()"><i class="fa fa-mail-reply"></i> Trở về</a></div>
                   </div>
                   <div class="main-content">
-                     <div class="left100">
-                        <ul class="nav nav-tabs">
-                           {foreach $languages as $lang}
-                           <li data-tab="tab_{$lang.id}" class="{if $lang.id == 1}active{/if}">{$lang.name}</li>
-                           {/foreach}
-                        </ul>
-
-                        <div class="tab-content main-tabs">
-                           {foreach $languages as $lang}
-                           <div class="tab-pane {if $lang.id == 1}active{/if}" data-tab="tab_{$lang.id}">
-                              <div class="item">
-                                 <div class="title">Tiêu đề</div>
-                                 <div class="info-title">
-                                    <input type="text" id="title_{$lang.id}" name="name_{$lang.id}" class="InputText title-input">
-                                 </div>
-                              </div>
-                              <div class="item">
-                                 <div class="title">URL</div>
-                                 <div class="info-title"><input type="text" id="slug_{$lang.id}" name="unique_key_{$lang.id}" class="InputText slug-input"></div>
-                              </div>
-                           </div>
-                           {/foreach}
-                        </div>
-                        <div class="item">
-                           <div class="title">Liên kết</div>
-                           <div class="option_link">
-                              <label class="radio-inline"><input type="radio" id="yes2" name="choose" value="1" checked> Loại bài viết</label>
-                              <label class="radio-inline"><input type="radio" id="yes1" name="choose" value="0"> Link</label>
-                           </div>
-                           <select id="menu" name="menu" class="show">
-                              {section name=i loop=$lienket}
-                              <option value="{$lienket[i].id}" {if $lienket[i].id==$edit.comp}selected{/if}>{$lienket[i].name}</option>
-                              {/section}
-                           </select>
-                           <div class="linkngoai hide"><input type="text" id="link" name="link" value="{$edit.link}" class="InputText"></div>
-                        </div>
-                        <div class="item">
-                           <div class="title">Có menu con <input type="checkbox" class="CheckBox" name="menucon" value="menucon" {if $edit.menucon eq 1}checked{/if}></div>
-                        </div>
-                        <div class="item">
-                           <div class="title">Hiển thị <input type="checkbox" class="CheckBox" name="active" value="active" {if $edit.active eq 1 || $smarty.request.act eq 'add' }checked{/if}></div>
+                     <div class="item">
+                        <div class="title">Tiêu đề</div>
+                        <div class="info-title">
+                           <input type="text" id="title" name="name" class="InputText title-input">
                         </div>
                      </div>
+                     <div class="item">
+                        <div class="title">URL</div>
+                        <div class="info-title"><input type="text" id="slug" name="unique_key" class="InputText slug-input"></div>
+                     </div>
+                     <div class="item">
+                        <div class="title">Liên kết</div>
+                        <div class="option_link">
+                           <label class="radio-inline"><input type="radio" id="yes2" name="choose" value="1" checked> Loại bài viết</label>
+                           <label class="radio-inline"><input type="radio" id="yes1" name="choose" value="0"> Link</label>
+                        </div>
+                        <select id="menu" name="menu" class="show">
+                           {section name=i loop=$lienket}
+                           <option value="{$lienket[i].id}" {if $lienket[i].id==$edit.comp}selected{/if}>{$lienket[i].name}</option>
+                           {/section}
+                        </select>
+                        <div class="linkngoai hide"><input type="text" id="link" name="link" value="{$edit.link}" class="InputText"></div>
+                     </div>
+                     <div class="item">
+                        <div class="title">Có menu con <input type="checkbox" class="CheckBox" name="menucon" value="menucon" {if $edit.menucon eq 1}checked{/if}></div>
+                     </div>
+                     <div class="item">
+                        <div class="title">Hiển thị <input type="checkbox" class="CheckBox" name="active" value="active" {if $edit.active eq 1 || $smarty.request.act eq 'add' }checked{/if}></div>
+                     </div>
                   </div>
-
                </div>
             </div>
          </form>

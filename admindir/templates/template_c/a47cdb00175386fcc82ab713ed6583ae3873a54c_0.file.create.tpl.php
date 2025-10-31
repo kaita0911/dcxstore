@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 08:20:01
+/* Smarty version 4.3.1, created on 2025-10-31 03:02:12
   from 'D:\htdocs\dcxstore\admindir\templates\tpl\articlelist\create.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_690311a13af936_17430768',
+  'unifunc' => 'content_690418a4815ab2_66350252',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a47cdb00175386fcc82ab713ed6583ae3873a54c' => 
     array (
       0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\articlelist\\create.tpl',
-      1 => 1761808713,
+      1 => 1761876117,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:articlelist/category_tree.tpl' => 1,
   ),
 ),false)) {
-function content_690311a13af936_17430768 (Smarty_Internal_Template $_smarty_tpl) {
+function content_690418a4815ab2_66350252 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="contentmain">
    <div class="main">
       <div class="left_sidebar padding10">
@@ -51,7 +51,7 @@ function content_690311a13af936_17430768 (Smarty_Internal_Template $_smarty_tpl)
                         <div class="title">Tiêu đề</div>
                         <div class="info-title">
                            <input type="text" id="title" name="name"
-                              class="InputText title-input" />
+                              class="InputText title-input" required />
                         </div>
                      </div>
                      <div class="item">

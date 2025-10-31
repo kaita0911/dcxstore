@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 11:20:26
+/* Smarty version 4.3.1, created on 2025-10-31 03:17:30
   from 'D:\htdocs\dcxstore\templates\tpl\breadcumb.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69033beab9e939_89691748',
+  'unifunc' => 'content_69041c3af03018_72553679',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69033beab9e939_89691748 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69041c3af03018_72553679 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),));
 if (smarty_modifier_count($_smarty_tpl->tpl_vars['breadcrumbs']->value) > 1) {?>
 <nav class="breadcrumb">

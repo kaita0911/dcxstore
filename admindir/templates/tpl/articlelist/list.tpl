@@ -174,23 +174,22 @@
                            </button>
                         </td>
 
-
                         <td align="center">
-                           <div class="flex-btn extra-tabs">
-                              {if $smarty.request.comp == 3 || $smarty.request.comp == 2 || $smarty.request.comp == 1 || $smarty.request.comp == 25}
-                              <a class="act-btn btnView" href="{$web_base_url}/{$item.details.unique_key}.html"
-                                 target="_blank"
-                                 title="Xem nhanh">
+                           <div class="flex-btn">
+                              {if in_array($smarty.request.comp, [1,2,3,25,27])}
+                              <a class="act-btn btnView" href="{$web_base_url}/{$item.details.unique_key}.html" target="_blank" title="Xem nhanh">
                                  <i class="fa fa-eye"></i>
                               </a>
                               {/if}
-                              <a title="Chỉnh sửa" class="act-btn btnEdit" href="index.php?do=articlelist&act=edit&id={$item.id}&comp={$smarty.request.comp}">
+                              <a class="act-btn btnEdit" title="Chỉnh sửa" href="index.php?do=articlelist&act=edit&id={$item.id}&comp={$smarty.request.comp}">
                                  <i class="fa fa-edit"></i>
                               </a>
-                              <button title="Làm mới" type="button" class="act-btn btnUpdateNum" data-id="{$item.id}" data-comp=" {$smarty.request.comp}">
+                              <button class="act-btn btnUpdateNum" title="Làm mới" data-id="{$item.id}" data-comp="{$smarty.request.comp}">
                                  <i class="fa fa-refresh"></i>
                               </button>
-                              <button title="Xoá" type="button" class="act-btn btnDeleteRow" data-id="{$item.id}" data-comp="{$smarty.request.comp}"> <i class="fa fa-trash"></i> </button>
+                              <button class="act-btn btnDeleteRow" title="Xoá" data-id="{$item.id}" data-comp="{$smarty.request.comp}">
+                                 <i class="fa fa-trash"></i>
+                              </button>
                            </div>
                         </td>
                      </tr>

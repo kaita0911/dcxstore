@@ -1,58 +1,37 @@
-<div class="bg-bred ">
-  <div class="container">
-    <div class="breadcrumb">
-      <ul>
-        <li>
-          <a title="Trang chủ" href="<!--{$path_url}-->"><i class="fa fa-home"></i>
-          <!--{$home}-->
-        </a>
-      </li>
-      <!--{insert name="checkbreadcumb" idpr=$detail.articlelist_id}-->
-      <li>
-        <span>
-          <!--{$detail.name}--><!--{$detail.name}-->
-        </span>
-      </li>
-    </ul>
-  </div>
-</div>
-</div>
-<div class="clearfix"></div>
 <div class="main">
    <div class="container">
-     
-     
-
+      <div class="breadcumb">{include file='../breadcumb.tpl'}</div>
       <div class="row">
-         <!--{include file="left.tpl"}-->
+         <!-- Main content -->
          <div class="artseed-ftn-body col-md-9 col-sm-8 col-xs-12">
             <div class="title-page">
-                  <h1><!--{$detail.name}--> </h1>
-               </div>
-            <div class="pagewhite">
-              
-      
+               <h1 itemprop="headline">{$detail.name}</h1>
+            </div>
+
+            <div class="pagewhite" itemprop="articleBody">
                <div class="artseed-detail-content">
-                  <!--{$detail.content}-->
+                  {$detail.content}
                </div>
                <div class="clearfix"></div>
-               <div class="news_related">
-                  <div class="news_title_related">
-                     <h2>##Tinlienquan##</h2>
-                  </div>
-                  <ul>
-                     <!--{section name=i loop=$view}-->
-                     
-                        <!--{insert name="getNewrelated" idpr=$view[i].id}-->
-                     <!--{/section}-->    
-                  </ul>
-               </div>
-               <!--page_news--> 
             </div>
          </div>
-         <!--artseed-ftn-body-->
-        
+         {if $articles_related|@count > 0}
+         <div class="related-articles">
+            <h3>Tin liên quan</h3>
+            <ul>
+               {foreach from=$articles_related item=item}
+               <li>
+                  <a href="{$path_url}/{$lang_prefix}{$item.unique_key}.html" title="{$item.name_detail}">
+                     <img src="{$path_url}/{$item.img_thumb_vn}" alt="{$item.name_detail}" class="img-responsive">
+                     <h3>{$item.name_detail}</h3>
+                     <div class="date">{$item.dated|date_format:"%d/%m/%Y"}</div>
+                  </a>
+               </li>
+               {/foreach}
+            </ul>
+         </div>
+         {/if}
+         <!-- /.artseed-ftn-body -->
       </div>
    </div>
-</div>
 </div>

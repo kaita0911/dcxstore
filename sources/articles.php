@@ -33,8 +33,8 @@ switch ($act) {
 
         // --- AJAX Response ---
         if (isset($_GET['ajax'])) {
-            $html = $smarty->fetch("articles/list_ajax.tpl");
-            $pagination = $smarty->fetch("articles/ajax_pagination.tpl");
+            $html = $smarty->fetch("articles/list.tpl");
+            $pagination = $smarty->fetch("articles/pagination.tpl");
             echo json_encode([
                 "success" => true,
                 "html" => $html,

@@ -1,43 +1,14 @@
-<div class="bg-bred">
-   <div class="container">
-      
-      <div class="breadcrumb">
-         <ul>
-            <li>
-               <a title="Trang chủ" href="<!--{$path_url}-->"><i class="fa fa-home"></i><!--{$home}--></a>
-               
-            </li>
-            <!--{insert name="checkcatbreadcumb" idpr=$seo.categories_id }-->
-         </ul>
-      </div>
-   </div>
-</div>
-<div class="clearfix"></div>
 <div class="main">
    <div class="container">
-      <div class="row">
-         <!--{include file="left.tpl"}-->
-         <div class="col-md-9 col-sm-9 col-xs-12">
-            
-            <div class="page-news">
-               <!--{if $CheckNull eq 0}-->
-               <div class="nodate"> ##No_date## </div>
-               <!--{else}-->
-               <div id="viewlist">
-                  <!--{section name=i loop=$view}-->
-                  <!--{include file="service/list.tpl"}-->
-                  <!--{/section}-->
-               </div>
-               <!--{/if}-->
-               <!--{if $Checkpg eq 1 }-->
-               <div class="clearfix"></div>
-               <div class="pagination" id="viewpage">
-                  <!--{$linkpg}-->
-               </div>
-               <!--{/if}-->
-            </div>
+      <div class="breadcumb">{include file='../breadcumb.tpl'}</div>
+      <h1> {$c_ttl}</h1>
+      <div class="artseed-ftn-body">
+         <div class="content-news-main row">
+
+            <div id="viewlist" data-ajax-load="1" data-container="viewlist" data-pagination="viewpage" data-module="{$data_url}" data-comp="{$data_comp}"></div>
+            <div id="viewpage" class="pagination" data-container="viewlist" data-module="{$data_url}" data-comp="{$data_comp}"></div>
          </div>
-         
+
       </div>
    </div>
 </div>

@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 03:17:23
-  from 'D:\htdocs\dcxstore\templates\tpl\articles\list.tpl' */
+/* Smarty version 4.3.1, created on 2025-10-31 03:17:27
+  from 'D:\htdocs\dcxstore\templates\tpl\service\list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69041c339181e2_50841568',
+  'unifunc' => 'content_69041c37eeafe5_53708853',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '10cef2d519d7993853f26ebd55d210330ba8baf7' => 
+    '83a3bebb4fb4231dddb2dd3c6181d148e03d31bb' => 
     array (
-      0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\articles\\list.tpl',
+      0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\service\\list.tpl',
       1 => 1761118897,
       2 => 'file',
     ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69041c339181e2_50841568 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69041c37eeafe5_53708853 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <div class="f-articles">

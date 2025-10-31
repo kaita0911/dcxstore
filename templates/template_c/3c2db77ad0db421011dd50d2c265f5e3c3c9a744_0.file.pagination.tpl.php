@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 03:17:23
-  from 'D:\htdocs\dcxstore\templates\tpl\articles\pagination.tpl' */
+/* Smarty version 4.3.1, created on 2025-10-31 03:17:28
+  from 'D:\htdocs\dcxstore\templates\tpl\service\pagination.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69041c33aef481_89106262',
+  'unifunc' => 'content_69041c380ec435_69249090',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '2b46d0c87e914856c4697dae8898b2177aec5ccb' => 
+    '3c2db77ad0db421011dd50d2c265f5e3c3c9a744' => 
     array (
-      0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\articles\\pagination.tpl',
+      0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\service\\pagination.tpl',
       1 => 1761213919,
       2 => 'file',
     ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69041c33aef481_89106262 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69041c380ec435_69249090 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['totalPages']->value > 1) {?>
 <ul id="viewpage" class="pagination" data-container="viewlist" data-module="<?php echo $_smarty_tpl->tpl_vars['module']->value;?>
 " data-comp="<?php echo $_smarty_tpl->tpl_vars['comp']->value;?>

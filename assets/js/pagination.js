@@ -10,7 +10,7 @@ $(function () {
     const cate_id = options.cate_id || "";
     const page = options.page || 1;
     const sort = options.sort || "id_desc";
-    console.log(comp);
+    //console.log(comp);
     $.ajax({
       url: baseUrl + "ajax/ajax_module.php",
       data: { module, page, sort, comp, sub, cate_id },

@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-31 02:21:26
-  from 'D:\htdocs\dcxstore\templates\tpl\articles\detail.tpl' */
+/* Smarty version 4.3.1, created on 2025-10-31 03:17:18
+  from 'D:\htdocs\dcxstore\templates\tpl\service\detail.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69040f16354562_50358412',
+  'unifunc' => 'content_69041c2e10d7b4_28827814',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'f85244e6b1d0eea76a97c65bf6d6b53590ee0173' => 
+    'd363d8d403c58faa27a209e3fa7a6bc0197c13e6' => 
     array (
-      0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\articles\\detail.tpl',
+      0 => 'D:\\htdocs\\dcxstore\\templates\\tpl\\service\\detail.tpl',
       1 => 1760932759,
       2 => 'file',
     ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../breadcumb.tpl' => 1,
   ),
 ),false)) {
-function content_69040f16354562_50358412 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69041c2e10d7b4_28827814 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),1=>array('file'=>'D:\\htdocs\\dcxstore\\libraries\\smarty\\libs\\plugins\\modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <div class="main">

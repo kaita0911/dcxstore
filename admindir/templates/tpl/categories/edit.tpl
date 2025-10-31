@@ -35,7 +35,7 @@
                      <div class="item">
                         <div class="title">URL</div>
                         <div class="info-title">
-                           <input type="text" id="slug" name="unique_key" value="{$categoryDetail.unique_key}" class="InputText slug-input" />
+                           <input type="text" id="slug" name="unique_key" value="{$categoryDetail.unique_key}" class="InputText slug-input" required />
                         </div>
                      </div>
 

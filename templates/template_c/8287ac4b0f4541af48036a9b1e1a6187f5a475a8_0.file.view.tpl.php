@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.1, created on 2025-10-30 11:20:26
+/* Smarty version 4.3.1, created on 2025-10-31 03:17:30
   from 'D:\htdocs\dcxstore\templates\tpl\products\view.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.1',
-  'unifunc' => 'content_69033beaa50e18_75240154',
+  'unifunc' => 'content_69041c3addbd58_66943015',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:../breadcumb.tpl' => 1,
   ),
 ),false)) {
-function content_69033beaa50e18_75240154 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69041c3addbd58_66943015 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="main">
    <div class="container">
       <div class="breadcumb"><?php $_smarty_tpl->_subTemplateRender('file:../breadcumb.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);

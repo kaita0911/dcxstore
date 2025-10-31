@@ -1,7 +1,6 @@
-<div class="main  ddd">
+<div class="main">
    <div class="container">
       <div class="breadcumb">{include file='../breadcumb.tpl'}</div>
-      <div class="clearfix"></div>
       <h1> {$c_ttl}</h1>
       <div class="artseed-ftn-body">
          <div class="content-news-main row">

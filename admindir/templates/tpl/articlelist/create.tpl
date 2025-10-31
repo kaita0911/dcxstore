@@ -23,7 +23,7 @@
                         <div class="title">Tiêu đề</div>
                         <div class="info-title">
                            <input type="text" id="title" name="name"
-                              class="InputText title-input" />
+                              class="InputText title-input" required />
                         </div>
                      </div>
                      <div class="item">

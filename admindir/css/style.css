@@ -2184,7 +2184,7 @@ textarea {
 }
 
 #orderMsg.show {
-  z-index: 1;
+  z-index: 122;
   opacity: 1;
   transform: translateY(0);
   background: #eaf9e9;
@@ -2449,6 +2449,8 @@ ul.category-tree ul {
 }
 .menusidebar {
   padding: 10px;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .custom-upload {
@@ -2690,4 +2692,29 @@ input#img_thumb_vn,input#multiimages {
     text-transform: uppercase;
     margin-bottom: 10px;
     font-weight: 600;
+}
+/* ===== CUSTOM SCROLLBAR ===== */
+.menusidebar::-webkit-scrollbar {
+  width: 8px;                 /* Độ dày thanh cuộn */
+}
+
+.menusidebar::-webkit-scrollbar-track {
+  background: #f3f4f6;        /* Nền track */
+  border-radius: 8px;
+}
+
+.menusidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #cfcfcf, #a0a0a0);
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.menusidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #999, #777);
+}
+
+/* ===== SCROLLBAR CHO FIREFOX ===== */
+.menusidebar {
+  scrollbar-width: thin;
+  scrollbar-color: #a0a0a0 #f3f4f6;
 }

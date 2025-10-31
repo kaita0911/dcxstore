@@ -1,14 +1,41 @@
-<div class="contentmain">
+<?php
+/* Smarty version 4.3.1, created on 2025-10-31 03:03:04
+  from 'D:\htdocs\dcxstore\admindir\templates\tpl\menu\edit.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.3.1',
+  'unifunc' => 'content_690418d8c64243_51487756',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'ce8c553a96a55a8a844316e35ad105cdf6408497' => 
+    array (
+      0 => 'D:\\htdocs\\dcxstore\\admindir\\templates\\tpl\\menu\\edit.tpl',
+      1 => 1761876098,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:left.tpl' => 1,
+  ),
+),false)) {
+function content_690418d8c64243_51487756 (Smarty_Internal_Template $_smarty_tpl) {
+?><div class="contentmain">
    <div class="main">
       <div class="left_sidebar padding10">
-         {include file="left.tpl"}
+         <?php $_smarty_tpl->_subTemplateRender("file:left.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
       </div>
       <div class="right_content">
          <form id="formId"
-            action="index.php?do=menu&act={if $smarty.request.act=='add'}addsm{else}editsm{/if}&comp={$smarty.request.comp}"
+            action="index.php?do=menu&act=<?php if ($_REQUEST['act'] == 'add') {?>addsm<?php } else { ?>editsm<?php }?>&comp=<?php echo $_REQUEST['comp'];?>
+"
             method="post"
             enctype="multipart/form-data">
-            <input type="hidden" name="id" value="{$edit.id|default:''}">
+            <input type="hidden" name="id" value="<?php echo (($tmp = $_smarty_tpl->tpl_vars['edit']->value['id'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+">
 
             <div class="divright">
                <div class="acti2">
@@ -31,7 +58,8 @@
                         name="name"
                         id="title"
                         class="InputText title-input"
-                        value="{$menuDetail.name|default:''|escape:'html':'UTF-8'}" required>
+                        value="<?php echo htmlspecialchars((string)(($tmp = $_smarty_tpl->tpl_vars['menuDetail']->value['name'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp), ENT_QUOTES, 'UTF-8', true);?>
+" required>
                   </div>
                </div>
 
@@ -42,7 +70,8 @@
                         name="unique_key"
                         id="slug"
                         class="InputText slug-input"
-                        value="{$menuDetail.unique_key|default:''|escape:'html':'UTF-8'}">
+                        value="<?php echo htmlspecialchars((string)(($tmp = $_smarty_tpl->tpl_vars['menuDetail']->value['unique_key'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp), ENT_QUOTES, 'UTF-8', true);?>
+">
                   </div>
                </div>
                <div class="item">
@@ -51,7 +80,8 @@
                      <input type="text"
                         name="num"
                         class="InputNum num-order"
-                        value="{$edit.num|default:0|escape:'html':'UTF-8'}">
+                        value="<?php echo htmlspecialchars((string)(($tmp = $_smarty_tpl->tpl_vars['edit']->value['num'] ?? null)===null||$tmp==='' ? 0 ?? null : $tmp), ENT_QUOTES, 'UTF-8', true);?>
+">
                   </div>
                </div>
 
@@ -59,28 +89,38 @@
                   <div class="title">Liên kết</div>
                   <div class="option_link">
                      <label>
-                        <input type="radio" name="choose" value="1" {if $edit.choose==1}checked{/if}>
+                        <input type="radio" name="choose" value="1" <?php if ($_smarty_tpl->tpl_vars['edit']->value['choose'] == 1) {?>checked<?php }?>>
                         Loại bài viết
                      </label>
                      <label>
-                        <input type="radio" name="choose" value="0" {if $edit.choose==0}checked{/if}>
+                        <input type="radio" name="choose" value="0" <?php if ($_smarty_tpl->tpl_vars['edit']->value['choose'] == 0) {?>checked<?php }?>>
                         Link
                      </label>
                   </div>
 
                   <select id="menu" name="menu" class="show">
-                     {foreach from=$lienket item=link}
-                     <option value="{$link.id}" {if $link.id==$edit.comp}selected{/if}>
-                        {$link.name|escape}
+                     <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['lienket']->value, 'link');
+$_smarty_tpl->tpl_vars['link']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['link']->value) {
+$_smarty_tpl->tpl_vars['link']->do_else = false;
+?>
+                     <option value="<?php echo $_smarty_tpl->tpl_vars['link']->value['id'];?>
+" <?php if ($_smarty_tpl->tpl_vars['link']->value['id'] == $_smarty_tpl->tpl_vars['edit']->value['comp']) {?>selected<?php }?>>
+                        <?php echo htmlspecialchars((string)$_smarty_tpl->tpl_vars['link']->value['name'], ENT_QUOTES, 'UTF-8', true);?>
+
                      </option>
-                     {/foreach}
+                     <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                   </select>
 
                   <input type="text"
                      id="link"
                      name="link"
                      class="linkngoai hide"
-                     value="{$edit.link_out|default:''|escape:'html':'UTF-8'}">
+                     value="<?php echo htmlspecialchars((string)(($tmp = $_smarty_tpl->tpl_vars['edit']->value['link_out'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp), ENT_QUOTES, 'UTF-8', true);?>
+">
                </div>
 
                <div class="item">
@@ -89,7 +129,7 @@
                         name="menucon"
                         value="menucon"
                         class="CheckBox"
-                        {if $edit.has_sub==1}checked{/if}>
+                        <?php if ($_smarty_tpl->tpl_vars['edit']->value['has_sub'] == 1) {?>checked<?php }?>>
                      Có menucon
                   </label>
                   <label>
@@ -97,7 +137,7 @@
                         name="active"
                         value="active"
                         class="CheckBox"
-                        {if $edit.active==1 || $smarty.request.act=='add' }checked{/if}>
+                        <?php if ($_smarty_tpl->tpl_vars['edit']->value['active'] == 1 || $_REQUEST['act'] == 'add') {?>checked<?php }?>>
                      Show
                   </label>
                </div>
@@ -106,8 +146,9 @@
       </div>
    </div>
 </div>
-{literal}
-<script>
+
+<?php echo '<script'; ?>
+>
    document.addEventListener("DOMContentLoaded", function() {
       const toggleMenuLink = () => {
          const yes1 = document.querySelector("#yes1");
@@ -130,5 +171,7 @@
       });
       toggleMenuLink();
    });
-</script>
-{/literal}
+<?php echo '</script'; ?>
+>
+<?php }
+}
